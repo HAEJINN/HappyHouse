@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ssafy.happyhouse.model.UserDto;
+import com.ssafy.happyhouse.service.AdminService;
 import com.ssafy.happyhouse.service.UserService;
 
 import io.swagger.annotations.Api;
@@ -34,6 +35,9 @@ public class UserController {
 	@Autowired
 	UserService service;
 	
+	@Autowired
+	AdminService adminservice;
+	
 	final String SUCCESS = "SUCCESS";
 	final String FAIL = "FAIL";
 	
@@ -42,18 +46,17 @@ public class UserController {
 	public ResponseEntity<?> login(@RequestBody Map<String, String> map) throws Exception {
 		UserDto user = service.login(map);
 		
-		if(user.getUserid() != null) {
+		if(user.getUserid() != null && adminservice.visituser(user.getUserid())){
 			return new ResponseEntity<UserDto>(user, HttpStatus.OK);
 		} else {
 			return new ResponseEntity(FAIL, HttpStatus.NOT_FOUND);
 		}
 	}
 	
-	@ApiOperation(value = "userid, username 를 받아서 userpwd string 반환, 실패시 FAIL 반환", response = String.class)
+	@ApiOperation(value = "userid, username 를 받아서 userpwd string 반환//json 아님 주의, 실패시 FAIL 반환", response = String.class)
 	@PostMapping(value = "/searchpwd")
 	public ResponseEntity<?> searchpwd(@RequestBody Map<String, String> map) throws Exception {
 		String userpwd = service.searchpwd(map);
-		
 		if(userpwd != null) {
 			return new ResponseEntity<String>(userpwd, HttpStatus.OK);
 		} else {

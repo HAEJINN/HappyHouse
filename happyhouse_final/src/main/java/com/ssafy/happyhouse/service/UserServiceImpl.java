@@ -17,14 +17,11 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public UserDto login(Map<String, String> map) {
 		return mapper.login(map);
-		// id pw
 	}
 	
 	@Override
 	public String searchpwd(Map<String, String> map) {
-		mapper.searchpwd(map);
-		return null;
-		// id name
+		return mapper.searchpwd(map);
 	}
 
 	@Override

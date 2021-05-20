@@ -5,28 +5,28 @@
 <mapper namespace="com.ssafy.happyhouse.model.mapper.UserMapper">
 	<!--  qna 전체 조회 -->
 	<select id="login" parameterType="map" resultType="UserDto">
-		SELECT * from user where userid = #{userid} and userpwd = ${userpwd}
+		SELECT * FROM user WHERE userid = #{userid} and userpwd = #{userpwd}
 	</select>
 	
 	<select id="searchpwd" parameterType="map" resultType="string">
-		SELECT userpwd from user where userid = #{userid} and username = ${username} 
+		SELECT userpwd FROM user WHERE userid = #{userid} and username = #{username} 
 	</select>
 	
 	<insert id="register" parameterType="UserDto">
-		INSERT INTO user VALUSE(#{userid}, #{username}, #{userpwd}, #{email}, #{phonenumber}, #{gender})
+		INSERT INTO user VALUES(#{userid}, #{username}, #{userpwd}, #{email}, #{phonenumber}, #{gender})
 	</insert>
 	
 	<update id="modifyuser" parameterType="UserDto">
-		UPDATE FROM user SET
-		username = ${username}, 
-		userpwd = ${userpwd},
-		email = ${email},
-		phonenumber = ${phonenumber},
-		gender = ${gender}
-		WHERE userid = ${userid}
+		UPDATE user SET
+		username = #{username}, 
+		userpwd = #{userpwd},
+		email = #{email},
+		phonenumber = #{phonenumber},
+		gender = #{gender}
+		WHERE userid = #{userid}
 	</update>
 	
 	<delete id="deleteuser" parameterType="UserDto">
-		DELETE FROM user WHERE userid = ${userid}
+		DELETE FROM user WHERE userid = #{userid}
 	</delete>
 </mapper>

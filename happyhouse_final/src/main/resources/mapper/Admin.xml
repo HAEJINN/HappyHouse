@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssafy.happyhouse.model.mapper.AdminMapper">
+	
+	<insert id="visituser" parameterType="string">
+		INSERT INTO visit VALUES(#{userid}, CURRENT_TIMESTAMP)
+	</insert>
+
+	<select id="todayvisiter" resultType="int">
+		SELECT COUNT(*) FROM visit WHERE DATE_FORMAT(time, '%Y-%m-%d') = CURDATE()
+	</select>
+	
+	<select id="monthvisiter" resultType="int">
+		SELECT COUNT(*) FROM visit WHERE MONTH(time)=MONTH(CURDATE())
+	</select>
+	
+	<select id="manvisitcount" resultType="int">
+		SELECT COUNT(*) FROM user WHERE gender = "남자" 
+	</select>
+	
+	<select id="womanvisitcount" resultType="int">
+		SELECT COUNT(*) FROM user WHERE gender = "여자"  
+	</select>
+	
+	
+</mapper>

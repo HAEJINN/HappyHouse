@@ -15,18 +15,18 @@ public class BaseAddressServiceImpl implements BassAddressService{
 	BaseAddressMapper mapper;
 	
 	@Override
-	public List<String> getCity() {
-		return mapper.getCity();
+	public List<String> getcity() {
+		return mapper.getcity();
 	}
 
 	@Override
-	public List<String> getGugun(Map<String, String> map) {
-		return mapper.getGugun(map);
+	public List<String> getgugun(Map<String, String> map) {
+		return mapper.getgugun(map);
 	}
 
 	@Override
-	public List<String> getDong(Map<String, String> map) {
-		return mapper.getDong(map);
+	public List<String> getdong(Map<String, String> map) {
+		return mapper.getdong(map);
 	}
 
 }

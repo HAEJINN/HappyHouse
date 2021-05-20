@@ -4,9 +4,9 @@ import java.util.List;
 import java.util.Map;
 
 public interface BassAddressService {
-	List<String> getCity();
+	List<String> getcity();
 	
-	List<String> getGugun(Map<String, String> map);
+	List<String> getgugun(Map<String, String> map);
 	
-	List<String> getDong(Map<String, String> map);
+	List<String> getdong(Map<String, String> map);
 }
