@@ -1,9 +1,9 @@
-package com.ssafy.happyhouse.service;
+package com.ssafy.happyhouse.model.mapper;
 
 import java.util.List;
 
 import com.ssafy.happyhouse.model.HouseInfoDto;
 
-public interface AptService {
+public interface AptMapper {
 	List<HouseInfoDto> houseinfolist(String dong);
 }
