@@ -5,5 +5,7 @@ import java.util.List;
 import com.ssafy.happyhouse.model.HouseInfoDto;
 
 public interface AptMapper {
-	List<HouseInfoDto> houseinfolist(String dong);
+	List<HouseInfoDto> aptdonglist(String dong);
+
+	List<HouseInfoDto> aptnamelist(String aptname);
 }

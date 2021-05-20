@@ -14,9 +14,14 @@ public class AptServiceImpl implements AptService{
 	@Autowired
 	AptMapper mapper;
 	
-	@Override
-	public List<HouseInfoDto> houseinfolist(String dong) {
-		return mapper.houseinfolist(dong);
+	public List<HouseInfoDto> aptdonglist(String dong){
+		return mapper.aptdonglist(dong);
+	}
+
+	public List<HouseInfoDto> aptnamelist(String aptname){
+		if(aptname == null)
+			return null;
+		return mapper.aptnamelist(aptname);
 	}
 
 }

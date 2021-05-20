@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssafy.happyhouse.model.mapper.BoardMapper">
+	
+	<select id="search" parameterType="map" resultType="BoardDto">
+		SELECT 
+		<choose>
+			<when test='boardtype.equals("notice")'> 
+				noticeid as boardid,
+				noticetitle as title,
+				noticeuserid as userid,
+				noticetime as time
+			</when>
+			<otherwise>
+				postid as boardid,
+				posttitle as title,
+				postuserid as userid,
+				posttime as time
+			</otherwise>
+		</choose>
+		FROM ${boardtype} limit ${boardnum}, 10
+	</select>
+	
+		<select id="detailboard" parameterType="map" resultType="BoardDto">
+		SELECT 
+		<choose>
+			<when test='boardtype.equals("notice")'> 
+				noticeid as boardid,
+				noticetitle as title,
+				noticeuserid as userid,
+				noticetime as time
+			</when>
+			<otherwise>
+				postid as boardid,
+				posttitle as title,
+				postuserid as userid,
+				posttime as time
+			</otherwise>
+		</choose>
+		FROM ${boardtype}
+		WHERE 
+		<choose>
+			<when test='boardtype.equals("notice")'> 
+				noticeid = ${boardid}
+			</when>
+			<otherwise>
+				postid = ${boardid}
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="registboard" parameterType="BoardDto">
+		INSERT INTO ${boardtype} VALUES
+		(DEFAULT, #{title}, #{userid}, DEFAULT)
+	</insert>
+	
+	<update id="modifyboard" parameterType="BoardDto">
+		UPDATE ${boardtype} SET
+		<choose>
+			<when test='boardtype.equals("notice")'> 
+				noticetitle = #{title},
+				noticeuserid = #{userid},
+				noticetime = CURRENT_TIMESTAMP
+				WHERE noticeid = ${boardid}
+			</when>
+			<otherwise>
+				posttitle = #{title},
+				postuserid = #{userid},
+				posttime = CURRENT_TIMESTAMP
+				WHERE postid = ${boardid}
+			</otherwise>
+		</choose>
+	</update>
+	
+	<delete id="deleteboard" parameterType="BoardDto">
+		DELETE FROM ${boardtype} WHERE
+		<choose>
+			<when test='boardtype.equals("notice")'> 
+				noticeid = ${boardid}
+			</when>
+			<otherwise>
+				postid = ${boardid}
+			</otherwise>
+		</choose>
+	</delete>
+</mapper>

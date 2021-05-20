@@ -4,12 +4,20 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ssafy.happyhouse.model.mapper.AptMapper">
 	
-	<select id="houseinfolist" parameterType= "string" resultType="HouseInfoDto">
+	<select id="aptdonglist" parameterType= "string" resultType="HouseInfoDto">
 		SELECT 
 		i.no, d.dong, d.aptname, d.code, i.buildyear, 
 		i.jibun, i.lat, i.lng, d.dealamount, d.area 
 		FROM housedeal as d, houseinfo as i 
 		WHERE d.aptname = i.aptname AND d.dong LIKE ${dong};
+	</select>
+	
+	<select id="aptnamelist" parameterType= "string" resultType="HouseInfoDto">
+		SELECT 
+		i.no, d.dong, d.aptname, d.code, i.buildyear, 
+		i.jibun, i.lat, i.lng, d.dealamount, d.area 
+		FROM housedeal as d, houseinfo as i 
+		WHERE d.aptname = i.aptname AND d.aptname LIKE CONCAT('%', ${aptname}, '%')
 	</select>
 	
 	
