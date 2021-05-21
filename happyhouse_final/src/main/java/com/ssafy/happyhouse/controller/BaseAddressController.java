@@ -44,8 +44,6 @@ public class BaseAddressController {
 	@ApiOperation(value = "city를 받아서, 구군 리스트를 반환한다.", response = List.class)
 	@PostMapping(value = "/gugun")
 	public ResponseEntity<List<String>> getgugun(@RequestBody Map<String, String> map) throws Exception {
-		System.out.println("test");
-		System.out.println(map);
 		List<String> list = service.getgugun(map);
 		if(list != null && !list.isEmpty()) {
 			return new ResponseEntity<List<String>>(list, HttpStatus.OK);

@@ -1,6 +1,11 @@
 package com.ssafy.happyhouse.model;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
+@ApiModel(value = "보드 정보")
 public class BoardDto {
+	@ApiModelProperty(value = "post, notice boardid")
 	int boardid;
 	String title;
 	String userid;

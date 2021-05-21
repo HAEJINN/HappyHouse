@@ -1,6 +1,11 @@
 package com.ssafy.happyhouse.model;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
+@ApiModel(value = "아파트 정보")
 public class HouseInfoDto{
+	@ApiModelProperty(value = "pk no")
 	int no;
 	String dong;
 	String aptname;
@@ -77,5 +82,6 @@ public class HouseInfoDto{
 				+ buildyear + ", jibun=" + jibun + ", lat=" + lat + ", lng=" + lng + ", dealamount=" + dealamount
 				+ ", area=" + area + "]";
 	}
+	
 	
 }

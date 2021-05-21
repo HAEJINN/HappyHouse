@@ -8,7 +8,7 @@
 		SELECT DISTINCT city FROM baseaddress
 	</select>
 	
-	<select id="getㅎugun" parameterType="map" resultType="string">
+	<select id="getgugun" parameterType="map" resultType="string">
 		SELECT DISTINCT gugun FROM baseaddress WHERE city = #{city}
 	</select>
 	
