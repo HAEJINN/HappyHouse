@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -44,6 +45,18 @@ public class AptController {
 	@PostMapping(value = "/name")
 	public ResponseEntity<?> aptnamelist(@RequestBody String aptname) throws Exception {
 		List<HouseInfoDto> list =service.aptnamelist(aptname);
+		if(list != null && !list.isEmpty()) {
+			return new ResponseEntity<List<HouseInfoDto>>(list, HttpStatus.OK);
+		} else {
+			return new ResponseEntity(FAIL, HttpStatus.NO_CONTENT);
+		}
+	}
+	
+	@ApiOperation(value = "아파트상위 5개 반환, 실패시 FAIL 반환", response = UserDto.class)
+	@GetMapping(value = "/toplist")
+	public ResponseEntity<?> topaptlist() throws Exception {
+		List<HouseInfoDto> list =service.topaptlist();
+		
 		if(list != null && !list.isEmpty()) {
 			return new ResponseEntity<List<HouseInfoDto>>(list, HttpStatus.OK);
 		} else {

@@ -20,5 +20,12 @@
 		WHERE d.aptname = i.aptname AND d.aptname LIKE CONCAT('%', ${aptname}, '%')
 	</select>
 	
+	<select id ="topaptlist" resultType="HouseInfoDto">
+		select aptname, max(CAST(REPLACE(dealamount, ",", "") as unsigned)) as dealamount 
+		from housedeal 
+		group by aptname 
+		order by max(CAST(REPLACE(dealamount, ",", "") as unsigned)) desc 
+		limit 5;
+	</select>
 	
 </mapper>

@@ -23,5 +23,9 @@ public class AptServiceImpl implements AptService{
 			return null;
 		return mapper.aptnamelist(aptname);
 	}
+	
+	public List<HouseInfoDto> topaptlist(){
+		return mapper.topaptlist();
+	}
 
 }
