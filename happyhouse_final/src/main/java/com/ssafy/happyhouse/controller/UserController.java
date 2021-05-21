@@ -85,8 +85,20 @@ public class UserController {
 		}
 	}
 	
+	@ApiOperation(value = "access-token을 받아서 userdto 반환, 실패시 FAIL 반환", response = UserDto.class)
+	@GetMapping(value = "/update")
+	public ResponseEntity<?> getuser() throws Exception {
+		UserDto user = null;
+		try {
+			user = jwtservice.getUserDto();
+		}catch (Exception e) {
+			return new ResponseEntity(FAIL, HttpStatus.NOT_ACCEPTABLE);
+		}
+		return new ResponseEntity<UserDto>(user, HttpStatus.OK);
+	}
+	
 	@ApiOperation(value = "UserDto를 받아서 정보 수정 성공시 SUCCESS 반환, 실패시 FAIL 반환", response = String.class)
-	@PutMapping(value = "/")
+	@PutMapping(value = "/update")
 	public ResponseEntity<?> modify(@RequestBody UserDto user) throws Exception {
 		if(service.modifyuser(user)) {
 			return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);
@@ -95,9 +107,16 @@ public class UserController {
 		}
 	}
 	
-	@ApiOperation(value = "UserDto를 받아서 정보 삭제 성공시 SUCCESS 반환, 실패시 FAIL 반환", response = String.class)
+	@ApiOperation(value = "access-token을 받아서 정보 삭제 성공시 SUCCESS 반환, 실패시 FAIL 반환", response = String.class)
 	@DeleteMapping(value = "/")
-	public ResponseEntity<?> delete(@RequestBody UserDto user) throws Exception {
+	public ResponseEntity<?> delete() throws Exception {
+		UserDto user = null;
+		try {
+			user = jwtservice.getUserDto();
+		}catch (Exception e) {
+			return new ResponseEntity(FAIL, HttpStatus.NOT_ACCEPTABLE);
+		}
+		
 		if(service.deleteuser(user)) {
 			return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);
 		} else {
@@ -105,11 +124,17 @@ public class UserController {
 		}
 	}
 	
-	@ApiOperation(value = "미구현 : userid 가 저장해놓은 aptname, lat lng 반환, 실패시 FAIL 반환", response = String.class)
+	@ApiOperation(value = "access-token을 받아서 유저 즐겨찾기 리스트 반환, 실패시 FAIL 반환", response = String.class)
 	@PostMapping(value = "/favorite")
-	public ResponseEntity<?> userfavorite(@RequestBody Map<String, String> map) throws Exception {
-		//세션받아서 하면될듯? 미구현
-		String userid = "ssafy";
+	public ResponseEntity<?> userfavorite() throws Exception {
+		UserDto user = null;
+		try {
+			user = jwtservice.getUserDto();
+		}catch (Exception e) {
+			return new ResponseEntity(FAIL, HttpStatus.NOT_ACCEPTABLE);
+		}
+
+		String userid = user.getUserid();
 		List<HouseInfoDto> list = service.userfavorite(userid);
 		if(list != null && !list.isEmpty()) {
 			return new ResponseEntity<List<HouseInfoDto>>(list, HttpStatus.OK);
