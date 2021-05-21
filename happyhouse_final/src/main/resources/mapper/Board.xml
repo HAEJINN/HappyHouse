@@ -11,13 +11,15 @@
 				noticeid as boardid,
 				noticetitle as title,
 				noticeuserid as userid,
-				noticetime as time
+				noticetime as time,
+				noticecontent as content
 			</when>
 			<otherwise>
 				postid as boardid,
 				posttitle as title,
 				postuserid as userid,
-				posttime as time
+				posttime as time,
+				postcontent as content
 			</otherwise>
 		</choose>
 		FROM ${boardtype} limit ${boardnum}, 10
@@ -30,13 +32,15 @@
 				noticeid as boardid,
 				noticetitle as title,
 				noticeuserid as userid,
-				noticetime as time
+				noticetime as time,
+				noticecontent as content
 			</when>
 			<otherwise>
 				postid as boardid,
 				posttitle as title,
 				postuserid as userid,
-				posttime as time
+				posttime as time,
+				postcontent as content
 			</otherwise>
 		</choose>
 		FROM ${boardtype}
@@ -53,7 +57,7 @@
 	
 	<insert id="registboard" parameterType="BoardDto">
 		INSERT INTO ${boardtype} VALUES
-		(DEFAULT, #{title}, #{userid}, DEFAULT)
+		(DEFAULT, #{title}, #{userid}, DEFAULT, #{content})
 	</insert>
 	
 	<update id="modifyboard" parameterType="BoardDto">
@@ -63,12 +67,14 @@
 				noticetitle = #{title},
 				noticeuserid = #{userid},
 				noticetime = CURRENT_TIMESTAMP
+				noticecontent = #{content}
 				WHERE noticeid = ${boardid}
 			</when>
 			<otherwise>
 				posttitle = #{title},
 				postuserid = #{userid},
 				posttime = CURRENT_TIMESTAMP
+				postcontent = #{content}
 				WHERE postid = ${boardid}
 			</otherwise>
 		</choose>

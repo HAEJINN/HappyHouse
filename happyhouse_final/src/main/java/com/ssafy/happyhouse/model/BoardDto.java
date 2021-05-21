@@ -5,6 +5,7 @@ public class BoardDto {
 	String title;
 	String userid;
 	String time;
+	String content;
 	public int getNo() {
 		return boardid;
 	}
@@ -29,12 +30,18 @@ public class BoardDto {
 	public void setTimestamp(String timestamp) {
 		this.time = timestamp;
 	}
+	public String getContent() {
+		return content;
+	}
+	public void setContent(String content) {
+		this.content = content;
+	}
 	@Override
 	public String toString() {
-		return "BoardDto [no=" + boardid + ", title=" + title + ", userid=" + userid + ", timestamp=" + time
-				+ ", getNo()=" + getNo() + ", getTitle()=" + getTitle() + ", getUserid()=" + getUserid()
-				+ ", getTimestamp()=" + getTimestamp() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode()
-				+ ", toString()=" + super.toString() + "]";
+		return "BoardDto [boardid=" + boardid + ", title=" + title + ", userid=" + userid + ", time=" + time
+				+ ", content=" + content + ", getNo()=" + getNo() + ", getTitle()=" + getTitle() + ", getUserid()="
+				+ getUserid() + ", getTimestamp()=" + getTimestamp() + ", getContent()=" + getContent()
+				+ ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + ", toString()=" + super.toString()
+				+ "]";
 	}
-	
 }
