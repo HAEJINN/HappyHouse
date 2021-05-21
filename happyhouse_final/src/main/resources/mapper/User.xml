@@ -29,4 +29,11 @@
 	<delete id="deleteuser" parameterType="UserDto">
 		DELETE FROM user WHERE userid = #{userid}
 	</delete>
+	
+	<select id="userfavorite" parameterType="string" resultType="HouseInfoDto">
+		select aptname, lat, lng from houseinfo where aptname in 
+		(select aptname from housedeal where no in 
+		(select houseno from favorite where userid = #{userid}))
+		group by aptname
+	</select>
 </mapper>

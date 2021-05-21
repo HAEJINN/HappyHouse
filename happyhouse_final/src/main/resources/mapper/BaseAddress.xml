@@ -4,15 +4,15 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ssafy.happyhouse.model.mapper.BaseAddressMapper">
 	
-	<select id="getCity" resultType="String">
+	<select id="getcity" resultType="String">
 		SELECT DISTINCT city FROM baseaddress
 	</select>
 	
-	<select id="getGugun" parameterType="map" resultType="string">
+	<select id="getㅎugun" parameterType="map" resultType="string">
 		SELECT DISTINCT gugun FROM baseaddress WHERE city = #{city}
 	</select>
 	
-	<select id="getDong" parameterType="map" resultType="string">
+	<select id="getdong" parameterType="map" resultType="string">
 		SELECT DISTINCT dong FROM baseaddress WHERE city = #{city} and gugun = #{gugun}
 	</select>
 	

@@ -1,7 +1,9 @@
 package com.ssafy.happyhouse.model.mapper;
 
+import java.util.List;
 import java.util.Map;
 
+import com.ssafy.happyhouse.model.HouseInfoDto;
 import com.ssafy.happyhouse.model.UserDto;
 
 public interface UserMapper {
@@ -14,4 +16,6 @@ public interface UserMapper {
 	int modifyuser(UserDto user);
 
 	int deleteuser(UserDto user);
+	
+	List<HouseInfoDto> userfavorite(String userid);
 }

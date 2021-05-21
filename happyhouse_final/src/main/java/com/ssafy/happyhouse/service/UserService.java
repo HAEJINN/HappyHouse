@@ -1,7 +1,9 @@
 package com.ssafy.happyhouse.service;
 
+import java.util.List;
 import java.util.Map;
 
+import com.ssafy.happyhouse.model.HouseInfoDto;
 import com.ssafy.happyhouse.model.UserDto;
 
 public interface UserService {
@@ -14,4 +16,6 @@ public interface UserService {
 	boolean modifyuser(UserDto user);
 
 	boolean deleteuser(UserDto user);
+	
+	List<HouseInfoDto> userfavorite(String userid);
 }

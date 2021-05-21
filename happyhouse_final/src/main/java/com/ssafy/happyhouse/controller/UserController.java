@@ -1,5 +1,6 @@
 package com.ssafy.happyhouse.controller;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ssafy.happyhouse.model.HouseInfoDto;
 import com.ssafy.happyhouse.model.UserDto;
 import com.ssafy.happyhouse.service.AdminService;
 import com.ssafy.happyhouse.service.UserService;
@@ -85,6 +87,19 @@ public class UserController {
 			return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);
 		} else {
 			return new ResponseEntity(FAIL, HttpStatus.NOT_ACCEPTABLE);
+		}
+	}
+	
+	@ApiOperation(value = "미구현 : userid 가 저장해놓은 aptname, lat lng 반환, 실패시 FAIL 반환", response = String.class)
+	@PostMapping(value = "/favorite")
+	public ResponseEntity<?> userfavorite(@RequestBody Map<String, String> map) throws Exception {
+		//세션받아서 하면될듯? 미구현
+		String userid = "ssafy";
+		List<HouseInfoDto> list = service.userfavorite(userid);
+		if(list != null && !list.isEmpty()) {
+			return new ResponseEntity<List<HouseInfoDto>>(list, HttpStatus.OK);
+		} else {
+			return new ResponseEntity(FAIL, HttpStatus.NOT_FOUND);
 		}
 	}
 }
