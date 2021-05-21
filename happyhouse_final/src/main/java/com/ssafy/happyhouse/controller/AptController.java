@@ -34,6 +34,7 @@ public class AptController {
 	@PostMapping(value = "/dong")
 	public ResponseEntity<?> aptdonglist(@RequestBody String dong) throws Exception {
 		dong = dong.replace("\"", "");
+		dong = dong.replace("\'", "");
 		List<HouseInfoDto> list =service.aptdonglist(dong);
 		if(list != null && !list.isEmpty()) {
 			return new ResponseEntity<List<HouseInfoDto>>(list, HttpStatus.OK);
@@ -46,6 +47,7 @@ public class AptController {
 	@PostMapping(value = "/name")
 	public ResponseEntity<?> aptnamelist(@RequestBody String aptname) throws Exception {
 		aptname = aptname.replace("\"", "");
+		aptname = aptname.replace("\'", "");
 		List<HouseInfoDto> list =service.aptnamelist(aptname);
 		if(list != null && !list.isEmpty()) {
 			return new ResponseEntity<List<HouseInfoDto>>(list, HttpStatus.OK);
@@ -66,5 +68,4 @@ public class AptController {
 		}
 	}
 	
-	//todo apt name, lat lng 기준으로 cctv 리스트 등등 편의시설 marker 조회
 }
