@@ -1,11 +1,16 @@
 package com.ssafy.happyhouse.model;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
+@ApiModel(value = "사용자 정보")
 public class UserDto {
 	String userid;
 	String username;
 	String userpwd;
 	String email;
 	String phonenumber;
+	@ApiModelProperty(value = "남자, 여자")
 	String gender;
 	public String getUserid() {
 		return userid;

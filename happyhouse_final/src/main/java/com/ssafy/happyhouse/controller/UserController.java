@@ -1,5 +1,6 @@
 package com.ssafy.happyhouse.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -8,15 +9,18 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ssafy.happyhouse.model.HouseInfoDto;
 import com.ssafy.happyhouse.model.UserDto;
 import com.ssafy.happyhouse.service.AdminService;
+import com.ssafy.happyhouse.service.JwtService;
 import com.ssafy.happyhouse.service.UserService;
 
 import io.swagger.annotations.Api;
@@ -34,19 +38,30 @@ public class UserController {
 	@Autowired
 	AdminService adminservice;
 	
+	@Autowired
+	JwtService jwtservice;
+	
 	final String SUCCESS = "SUCCESS";
 	final String FAIL = "FAIL";
 	
-	@ApiOperation(value = "userid, userpwd 를 받아서 UserDto 반환, 실패시 FAIL 반환", response = UserDto.class)
+	@ApiOperation(value = "userid, userpwd 를 받아서 access-token, SUCCESS 메세지 반환, 실패시 FAIL 반환", response = Map.class)
 	@PostMapping(value = "/login")
 	public ResponseEntity<?> login(@RequestBody Map<String, String> map) throws Exception {
+		Map<String, Object> resultMap = new HashMap<>();
 		UserDto user = service.login(map);
+		HttpStatus status = null;
 		
-		if(user.getUserid() != null && adminservice.visituser(user.getUserid())){
-			return new ResponseEntity<UserDto>(user, HttpStatus.OK);
+		if(user.getUserid() != null){
+			adminservice.visituser(user.getUserid());
+			String token =jwtservice.create("user", user, "access-token");
+			resultMap.put("access-token", token);
+			resultMap.put("message", SUCCESS);
+			status = HttpStatus.ACCEPTED;
 		} else {
-			return new ResponseEntity(FAIL, HttpStatus.NOT_FOUND);
+			resultMap.put("message", FAIL);
+			status = HttpStatus.NOT_FOUND;
 		}
+		return new ResponseEntity<Map<String, Object>>(resultMap, status);
 	}
 	
 	@ApiOperation(value = "userid, username 를 받아서 userpwd string 반환//json 아님 주의, 실패시 FAIL 반환", response = String.class)
