@@ -37,7 +37,7 @@
 		group by aptname
 	</select>
 	
-	<insert id="adduserfavorite" parameterType="map">
-		INSERT INTO user VALUES(#{houseno}, #{userid});
+	<insert id="insertuserfavorite" parameterType="map">
+		INSERT INTO favorite VALUES(#{userid}, ${houseno});
 	</insert>
 </mapper>
