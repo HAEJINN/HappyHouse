@@ -98,11 +98,22 @@ public class UserController {
 		return new ResponseEntity<UserDto>(user, HttpStatus.OK);
 	}
 	
-	@ApiOperation(value = "UserDto를 받아서 정보 수정 성공시 SUCCESS 반환, 실패시 FAIL 반환", response = String.class)
+	@ApiOperation(value = "UserDto를 받아서 정보 수정 성공시 새로운 access-token 반환, 실패시 FAIL 반환", response = String.class)
 	@PutMapping(value = "/update")
 	public ResponseEntity<?> modify(@RequestBody UserDto user) throws Exception {
 		if(service.modifyuser(user)) {
-			return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);
+			HttpStatus status = null;
+			Map<String, Object> resultMap = new HashMap<>();
+			if(user.getUserid() != null){
+				String token =jwtservice.create("user", user, "access-token");
+				resultMap.put("access-token", token);
+				resultMap.put("message", SUCCESS);
+				status = HttpStatus.ACCEPTED;
+			} else {
+				resultMap.put("message", FAIL);
+				status = HttpStatus.NOT_FOUND;
+			}
+			return new ResponseEntity<Map<String, Object>>(resultMap, status);
 		} else {
 			return new ResponseEntity(FAIL, HttpStatus.NOT_ACCEPTABLE);
 		}
