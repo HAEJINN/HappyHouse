@@ -14,7 +14,7 @@
         :opened="infoWinOpen"
         @closeclick="infoWinOpen = false"
       >
-        <div v-html="infovalue.content"></div>
+        <div v-html="infovalue.content" @click="infoclick(infovalue)"></div>
       </GmapInfoWindow>
     </GmapMap>
   </div>
@@ -22,6 +22,7 @@
 
 <script>
 import take from "lodash/take";
+import http from "@/util/http-common";
 
 export default {
   name: "GoogleMap",
@@ -33,7 +34,9 @@ export default {
       },
       zoom: 15,
       markers: [],
+      infoWinOpen: false,
       infovalue: {
+        no: "",
         content: "",
         position: this.center,
       },
@@ -53,8 +56,9 @@ export default {
           lat: parseFloat(this.data[0].lat),
           lng: parseFloat(this.data[0].lng),
         });
-        take(this.data, this.data.length).map(({ aptname, lat, lng }) => {
+        take(this.data, this.data.length).map(({ no, aptname, lat, lng }) => {
           var mar = {
+            houseno: no,
             position: {
               lat: parseFloat(lat),
               lng: parseFloat(lng),
@@ -70,14 +74,42 @@ export default {
   methods: {
     markerclick(item) {
       console.log("markerclick");
-      this.infovalue.content = item.aptname;
-      let position = {
-        lat: item.position.lat,
-        lng: item.position.lng,
+      this.infovalue = {
+        houseno: item.houseno,
+        content: item.aptname,
+        position: {
+          lat: item.position.lat,
+          lng: item.position.lng,
+        },
       };
-      this.setCenter(position);
-      this.infovalue.position = position;
+      this.setCenter(this.infovalue.position);
       this.infoWinOpen = true;
+    },
+    infoclick(content) {
+      if (confirm("즐겨찾기에 추가할까요?")) {
+        //헤더 추가루틴 찾아야함
+        console.log(content);
+        console.log(window.localStorage.getItem("access-token"));
+        http
+          .post(
+            "/user/favorite",
+            {
+              houseno: content.houseno,
+            },
+            {
+              headers: {
+                "access-token": window.localStorage.getItem("access-token"),
+              },
+            }
+          )
+          .then(({ data }) => {
+            console.log(data);
+            console.log("즐겨찾기 등록 성공");
+          })
+          .catch(() => {
+            alert("등록에 실패했습니다.");
+          });
+      }
     },
     clearMarkers() {
       this.markers = [];

@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,6 +27,7 @@ import com.ssafy.happyhouse.service.UserService;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.models.auth.In;
 
 @RestController
 @CrossOrigin("*")
@@ -128,7 +131,7 @@ public class UserController {
 	}
 	
 	@ApiOperation(value = "access-token을 받아서 유저 즐겨찾기 리스트 반환, 실패시 FAIL 반환", response = String.class)
-	@PostMapping(value = "/favorite")
+	@GetMapping(value = "/favorite")
 	public ResponseEntity<?> userfavorite() throws Exception {
 		UserDto user = null;
 		try {
@@ -141,6 +144,28 @@ public class UserController {
 		List<HouseInfoDto> list = service.userfavorite(userid);
 		if(list != null && !list.isEmpty()) {
 			return new ResponseEntity<List<HouseInfoDto>>(list, HttpStatus.OK);
+		} else {
+			return new ResponseEntity(FAIL, HttpStatus.NOT_FOUND);
+		}
+	}
+	
+	@ApiOperation(value = "access-token, houseno를 받아서 유저 즐겨찾기 리스트 등록, 실패시 FAIL 반환", response = String.class)
+	@PostMapping(value = "/favorite")
+	public ResponseEntity<?> insertuserfavorite(@RequestBody String houseno, HttpServletRequest request) throws Exception {
+		UserDto user = null;
+		try {
+			user = jwtservice.getUserDto();
+			System.out.println(user);
+		}catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity(FAIL, HttpStatus.NOT_ACCEPTABLE);
+		}
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("userid", user.getUserid());
+		map.put("houseno", houseno);
+		
+		if(service.insertuserfavorite(map)) {
+			return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);
 		} else {
 			return new ResponseEntity(FAIL, HttpStatus.NOT_FOUND);
 		}

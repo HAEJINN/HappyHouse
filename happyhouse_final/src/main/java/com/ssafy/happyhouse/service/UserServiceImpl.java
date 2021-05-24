@@ -51,5 +51,15 @@ public class UserServiceImpl implements UserService{
 	public List<HouseInfoDto> userfavorite(String userid) {
 		return mapper.userfavorite(userid);
 	}
+
+	@Override
+	public boolean insertuserfavorite(Map<String, String> map) {
+		if(0 < mapper.insertuserfavorite(map)) {
+			return true;
+		}
+		return false;
+	}
+	
+	
 	
 }

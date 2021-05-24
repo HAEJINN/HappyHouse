@@ -18,4 +18,6 @@ public interface UserMapper {
 	int deleteuser(UserDto user);
 	
 	List<HouseInfoDto> userfavorite(String userid);
+	
+	int insertuserfavorite(Map<String, String> map);
 }

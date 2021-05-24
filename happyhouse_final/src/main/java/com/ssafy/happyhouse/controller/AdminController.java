@@ -76,7 +76,7 @@ public class AdminController {
 	public ResponseEntity<?> detailboard(@PathVariable(value = "boardid", required = false) String boardid) throws Exception {
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("boardtype", "post");
-		map.put("boardid", "boardid");
+		map.put("boardid", boardid);
 		BoardDto board = boardservice.detailboard(map);
 		if(board != null) {
 			return new ResponseEntity<BoardDto>(board, HttpStatus.OK);

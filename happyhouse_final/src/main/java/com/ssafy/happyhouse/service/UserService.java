@@ -18,4 +18,6 @@ public interface UserService {
 	boolean deleteuser(UserDto user);
 	
 	List<HouseInfoDto> userfavorite(String userid);
+	
+	boolean insertuserfavorite(Map<String, String> map);
 }
