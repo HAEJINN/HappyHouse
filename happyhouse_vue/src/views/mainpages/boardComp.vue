@@ -19,6 +19,7 @@ export default {
 <style scoped>
 .board_wrap {
   display: flex;
+  flex-direction: row;
   font-size: 1.5em;
 }
 </style>

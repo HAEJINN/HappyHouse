@@ -119,30 +119,10 @@ export default new Vuex.Store({
           alert('????');
         });
     },
-    // async GET_MEMBER_INFO({ commit }, token) {
-    //   let decode = jwt_decode(token);
-
-    //   await findById(
-    //     decode.userid,
-    //     (response) => {
-    //       // if (response.data.message === 'SUCCESS') {
-    //       //   commit('setUserInfo', response.data.userInfo);
-    //       //   // router.push("/");
-    //       //   // router.go(router.currentRoute);
-    //       // } else {
-    //       //   console.log('유저 정보 없음!!');
-    //       // }
-    //       commit('setUserInfo', response.data.userInfo);
-
-    //     },
-    //     (error) => {
-    //       console.log(error);
-    //     }
-    //   );
-    // },
     async GET_MEMBER_INFO(context) {
       await findById((response) => {
-        context.commit('setUserInfo', response);
+        console.log(response.data);
+        context.commit('setUserInfo', response.data);
         // router.push("/");
         // router.go(router.currentRoute);
       });
@@ -152,6 +132,7 @@ export default new Vuex.Store({
       commit('logout');
       localStorage.removeItem('access-token');
       // axios.defaults.headers.common["auth-token"] = undefined;
+      alert('로그아웃 되었습니다');
     },
   },
 });

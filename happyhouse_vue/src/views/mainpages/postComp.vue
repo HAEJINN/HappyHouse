@@ -1,8 +1,8 @@
 <template>
   <div class="post_wrap">
-    <h1>postComp</h1>
+    <h1 class="post_title">게시판</h1>
+    <router-link to="postDetail" class="detail_link">더보기</router-link>
     <post-item v-for="(post, idx) in posts" :key="idx" :post="post" />
-    <router-link to="postDetail">post</router-link>
   </div>
 </template>
 <script>
@@ -22,9 +22,17 @@ export default {
 </script>
 <style scoped>
 .post_wrap {
-  width: 50%;
   border: 1px solid black;
-  padding: 3em;
-  margin: 0 3em;
+  padding: 1em;
+  margin: 0 1em;
+}
+.post_title {
+  text-align: center;
+  font-size: 1.5em;
+}
+.detail_link {
+  position: relative;
+  bottom: 0;
+  right: 0;
 }
 </style>

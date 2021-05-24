@@ -1,6 +1,6 @@
 <template>
   <div class="main_wrap">
-    <h1>RankApt</h1>
+    <h1>Ranking</h1>
     <rank-item v-for="(rank, idx) in ranks" :key="idx" :rank="rank" />
   </div>
 </template>

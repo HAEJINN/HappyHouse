@@ -1,7 +1,7 @@
 <template>
-  <div>
-    <span>{{ rank.aptname }}</span>
-    <span>{{ rank.dealamount }}</span>
+  <div class="items_wrap">
+    <div>{{ rank.aptname }}</div>
+    <div>{{ rank.dealamount }}</div>
   </div>
 </template>
 
@@ -11,3 +11,12 @@ export default {
   props: ['rank'],
 };
 </script>
+<style scoped>
+.items_wrap {
+  display: flex;
+  justify-content: center;
+}
+.items_wrap div {
+  width: 40%;
+}
+</style>

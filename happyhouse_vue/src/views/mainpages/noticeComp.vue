@@ -1,8 +1,8 @@
 <template>
   <div class="notice_wrap">
-    <h1>noticeComp</h1>
+    <h1 class="notice_title">공지사항</h1>
+    <router-link to="noticeDetail" class="detail_link">더보기</router-link>
     <notice-item v-for="(notice, idx) in notices" :key="idx" :notice="notice" />
-    <router-link to="noticeDetail">notice</router-link>
   </div>
 </template>
 <script>
@@ -22,9 +22,17 @@ export default {
 </script>
 <style scoped>
 .notice_wrap {
-  width: 50%;
   border: 1px solid black;
-  padding: 3em;
-  margin: 0 3em;
+  padding: 1em;
+  margin: 0 1em;
+}
+.notice_title {
+  text-align: center;
+  font-size: 1.5em;
+}
+.detail_link {
+  position: relative;
+  bottom: 0;
+  right: 0;
 }
 </style>

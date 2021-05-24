@@ -4,27 +4,27 @@
     <table>
       <tr>
         <th>아이디</th>
-        <td>{{ userid }}</td>
+        <td>{{ userInfo.userid }}</td>
       </tr>
       <tr>
         <th>이름</th>
-        <td>{{ username }}</td>
+        <td>{{ userInfo.username }}</td>
       </tr>
       <tr>
         <th>비밀번호</th>
-        <td>{{ userpwd }}</td>
+        <td>{{ userInfo.userpwd }}</td>
       </tr>
       <tr>
         <th>이메일</th>
-        <td>{{ email }}</td>
+        <td>{{ userInfo.email }}</td>
       </tr>
       <tr>
         <th>전화번호</th>
-        <td>{{ phonenumber }}</td>
+        <td>{{ userInfo.phonenumber }}</td>
       </tr>
       <tr>
         <th>성별</th>
-        <td>{{ gender }}</td>
+        <td>{{ userInfo.gender }}</td>
       </tr>
     </table>
     <div class="text-center">
@@ -35,15 +35,19 @@
   </div>
 </template>
 <script>
+import { mapState } from 'vuex';
 export default {
   name: 'mypage',
-  props: {
-    userid: { type: String },
-    username: { type: String },
-    userpwd: { type: String },
-    email: { type: String },
-    phonenumber: { type: String },
-    gender: { type: String },
+  // props: {
+  //   userid: { type: String },
+  //   username: { type: String },
+  //   userpwd: { type: String },
+  //   email: { type: String },
+  //   phonenumber: { type: String },
+  //   gender: { type: String },
+  // },
+  computed: {
+    ...mapState(['userInfo', 'isLogin']),
   },
 };
 </script>
