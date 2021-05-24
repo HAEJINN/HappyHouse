@@ -86,7 +86,7 @@ public class UserController {
 	}
 	
 	@ApiOperation(value = "access-token을 받아서 userdto 반환, 실패시 FAIL 반환", response = UserDto.class)
-	@GetMapping(value = "/update")
+	@GetMapping(value = "/detail")
 	public ResponseEntity<?> getuser() throws Exception {
 		UserDto user = null;
 		try {
