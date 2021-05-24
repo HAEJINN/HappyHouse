@@ -28,7 +28,6 @@ public class PosServiceImpl implements PosService{
 		return resultlist;
 	}
 
-	//내일할거, 1거리 안으로 안나옴 ?
 	@Override
 	public List<PosDto> cctvlist(PosDto midpos) {
 		List<PosDto> list = mapper.cctvlist();

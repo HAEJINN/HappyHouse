@@ -22,7 +22,6 @@ export default {
     GoogleMap,
   },
   created() {
-    console.log("created load flist");
     http
       .get("/user/favorite", {
         headers: {

@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -150,7 +151,7 @@ public class UserController {
 	
 	@ApiOperation(value = "access-token, houseno를 받아서 유저 즐겨찾기 리스트 등록, 실패시 FAIL 반환", response = String.class)
 	@PostMapping(value = "/favorite")
-	public ResponseEntity<?> insertuserfavorite(@RequestBody String houseno, HttpServletRequest request) throws Exception {
+	public ResponseEntity<?> insertuserfavorite(@RequestBody String houseno) throws Exception {
 		UserDto user = null;
 		try {
 			user = jwtservice.getUserDto();
@@ -163,6 +164,24 @@ public class UserController {
 		map.put("houseno", houseno);
 		
 		if(service.insertuserfavorite(map)) {
+			return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);
+		} else {
+			return new ResponseEntity(FAIL, HttpStatus.NOT_FOUND);
+		}
+	}
+	
+	@ApiOperation(value = "access-token, houseno를 받아서 유저 즐겨찾기 리스트 에서 삭제, 실패시 FAIL 반환", response = String.class)
+	@DeleteMapping(value = "/favorite")
+	public ResponseEntity<?> deleteuserfavorite() throws Exception {
+		UserDto user = null;
+		try {
+			user = jwtservice.getUserDto();
+		}catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity(FAIL, HttpStatus.NOT_ACCEPTABLE);
+		}
+		
+		if(service.deletuserfavorite(user.getUserid())) {
 			return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);
 		} else {
 			return new ResponseEntity(FAIL, HttpStatus.NOT_FOUND);

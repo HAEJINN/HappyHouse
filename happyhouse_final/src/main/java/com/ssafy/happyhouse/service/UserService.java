@@ -20,4 +20,6 @@ public interface UserService {
 	List<HouseInfoDto> userfavorite(String userid);
 	
 	boolean insertuserfavorite(Map<String, String> map);
+	
+	boolean deletuserfavorite(String userid);
 }

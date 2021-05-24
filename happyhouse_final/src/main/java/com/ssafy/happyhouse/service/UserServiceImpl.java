@@ -59,6 +59,14 @@ public class UserServiceImpl implements UserService{
 		}
 		return false;
 	}
+
+	@Override
+	public boolean deletuserfavorite(String userid) {
+		if(0 < mapper.deletuserfavorite(userid)){
+			return true;
+		}
+		return false;
+	}
 	
 	
 	

@@ -40,4 +40,8 @@
 	<insert id="insertuserfavorite" parameterType="map">
 		INSERT INTO favorite VALUES(#{userid}, ${houseno});
 	</insert>
+	
+	<delete id="deletuserfavorite" parameterType="String">
+		DELETE FROM favorite WHERE userid = #{userid}
+	</delete>
 </mapper>
