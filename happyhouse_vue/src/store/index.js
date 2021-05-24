@@ -9,7 +9,9 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     notices: [],
+    notice: null,
     posts: [],
+    post: null,
     ranks: [],
     results: [],
     isLogin: false, // 로그인 여부
@@ -30,6 +32,12 @@ export default new Vuex.Store({
     },
     userInfo(state) {
       return state.userInfo;
+    },
+    notice(state) {
+      return state.notice;
+    },
+    post(state) {
+      return state.post;
     },
   },
   mutations: {
@@ -55,6 +63,12 @@ export default new Vuex.Store({
     logout(state) {
       state.isLogin = false;
       state.userInfo = null;
+    },
+    setN(state, payload) {
+      state.notice = payload;
+    },
+    setP(state, payload) {
+      state.post = payload;
     },
   },
   actions: {
@@ -130,12 +144,35 @@ export default new Vuex.Store({
         // router.go(router.currentRoute);
       });
     },
-
     LOGOUT({ commit }) {
       commit('logout');
       localStorage.removeItem('access-token');
       // axios.defaults.headers.common["auth-token"] = undefined;
       alert('로그아웃 되었습니다');
+    },
+    searchN(context, data) {
+      console.log(data);
+      http
+        .get(`/admin/board/detail/${data}`)
+        .then(({ data }) => {
+          console.log('notice');
+          context.commit('setN', data);
+        })
+        .catch(() => {
+          alert('공지사항 로드 실패');
+        });
+    },
+    searchP(context, data) {
+      console.log(data);
+      http
+        .get(`/board/detail/${data}`)
+        .then(({ data }) => {
+          console.log('post');
+          context.commit('setP', data);
+        })
+        .catch(() => {
+          alert('게시물 로드 실패');
+        });
     },
   },
 });

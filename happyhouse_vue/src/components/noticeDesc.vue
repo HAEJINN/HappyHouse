@@ -1,24 +1,21 @@
 <template>
-  <h1>?</h1>
+  <div v-if="notice">
+    <h1>{{ notice.title }}</h1>
+    <p>{{ notice.userid }}</p>
+    <p>{{ notice.timestamp }}</p>
+    <p>{{ notice.content }}</p>
+    <button v-if="userInfo.userid == 'admin'">수정</button>
+  </div>
 </template>
 <script>
-//import http from '@/util/http-common';
+import { mapGetters } from 'vuex';
 export default {
   name: 'NoticeDesc',
-
-  //   created() {
-  //     http
-  //       .get(`/admin/board/detail/${this.$route.query.no}`)
-  //       .then(({ data }) => {
-  //         console.log(data);
-  //         if (data === 'SUCCESS') {
-  //           alert('성공');
-  //         }
-  //       })
-  //       .catch(() => {
-  //         alert('실패');
-  //       });
-  //   },
+  computed: {
+    ...mapGetters(['userInfo', 'notice']),
+  },
+  created() {
+    this.$store.dispatch('searchN', this.$route.query.no);
+  },
 };
-console.log(this.$route.query.no);
 </script>

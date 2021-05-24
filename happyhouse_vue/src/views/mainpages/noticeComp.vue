@@ -9,7 +9,6 @@
           <th>글제목</th>
           <th>작성자</th>
           <th>작성시간</th>
-          <th>내용</th>
         </tr>
       </thead>
       <tbody>

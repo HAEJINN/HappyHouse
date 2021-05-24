@@ -25,7 +25,6 @@
         </tr>
       </tbody>
     </table>
-    <post-desc />
   </div>
 </template>
 <script>

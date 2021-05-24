@@ -2,6 +2,7 @@
 <template>
   <div>
     <h1>공지사항</h1>
+    <button v-if="userInfo.userid == 'admin'" @click="writePost">글작성</button>
     <table>
       <thead>
         <tr>
@@ -24,23 +25,21 @@
         </tr>
       </tbody>
     </table>
-    <notice-desc />
   </div>
 </template>
 <script>
 import { mapGetters } from 'vuex';
-import NoticeDesc from '@/components/noticeDesc.vue';
+
 export default {
   name: 'NoticeDetail',
-  components: {
-    NoticeDesc,
-  },
-
   computed: {
-    ...mapGetters(['notices']),
+    ...mapGetters(['userInfo', 'notices']),
   },
   created() {
     this.$store.dispatch('getNotices');
+  },
+  methods: {
+    writePost() {},
   },
 };
 </script>

@@ -6,7 +6,6 @@
     </td>
     <td>{{ post.userid }}</td>
     <td>{{ post.timestamp }}</td>
-    <td>{{ post.content }}</td>
   </tr>
 </template>
 

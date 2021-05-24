@@ -78,6 +78,11 @@ const routes = [
         name: 'notice-desc',
         component: () => import('@/components/noticeDesc.vue'),
       },
+      {
+        path: 'postDesc',
+        name: 'post-desc',
+        component: () => import('@/components/postDesc.vue'),
+      },
     ],
   },
 ];
