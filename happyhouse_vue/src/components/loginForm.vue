@@ -5,18 +5,26 @@
       <div class="inputs">
         <div>
           <label for="userid">아이디</label>
-          <input type="text" id="userid" name="userid" ref="userid" v-model="userid" />
+          <input type="text" id="userid" name="userid" ref="userid" v-model="user.userid" />
         </div>
         <div>
           <label for="userpwd">비밀번호</label>
-          <input type="text" id="userpwd" name="userpwd" ref="userpwd" v-model="userpwd" />
+          <input
+            type="password"
+            id="userpwd"
+            name="userpwd"
+            ref="userpwd"
+            @keyup.enter="confirm"
+            v-model="user.userpwd"
+          />
         </div>
       </div>
-      <button @click="login" class="login_btn">로그인</button>
+      <button @click="confirm" class="login_btn">로그인</button>
     </div>
   </div>
 </template>
 <script>
+import { login } from '@/api/user.js';
 // import http from '@/util/http-common';
 export default {
   name: 'registForm',
@@ -25,33 +33,35 @@ export default {
   },
   data() {
     return {
-      userid: '',
-      userpwd: '',
+      user: {
+        userid: null,
+        userpwd: null,
+      },
+      isLoginError: false,
     };
   },
   methods: {
-    login() {
-      //   http
-      //     .post('/api/board', {
-      //       userid: this.userid,
-      //       userpwd: this.userpwd,
-      //     })
-      //     .then(({ data }) => {
-      //       console.log(data);
-      //       let msg = '로그인 처리시 문제가 발생했습니다.';
-      //       if (data === 'SUCCESS') {
-      //         msg = '로그인이 완료되었습니다.';
-      //       }
-      //       alert(msg);
-      //       this.mvList();
-      //     })
-      //     .catch(() => {
-      //       alert('로그인 처리시 에러가 발생했습니다.');
-      //     });
-      this.mvMain();
-    },
-    mvMain() {
-      this.$router.push('/happyhouse/main');
+    confirm() {
+      localStorage.setItem('access-token', '');
+      login(
+        this.user,
+        (response) => {
+          if (response.data.message === 'SUCCESS') {
+            let token = response.data['access-token'];
+            this.$store.commit('setIsLogined', true);
+            localStorage.setItem('access-token', token);
+
+            this.$store.dispatch('GET_MEMBER_INFO', token);
+            this.$router.push('/happyhouse/main');
+          } else {
+            this.isLoginError = true;
+          }
+        },
+        (error) => {
+          console.error(error);
+          alert('아이디 또는 비밀번호가 일치하지 않습니다.');
+        }
+      );
     },
   },
 };

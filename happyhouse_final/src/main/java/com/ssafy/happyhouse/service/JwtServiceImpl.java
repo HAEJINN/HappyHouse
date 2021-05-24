@@ -75,6 +75,8 @@ public class JwtServiceImpl implements JwtService {
 	}
 	
 	public UserDto getUserDto() {
+		UserDto test = (UserDto)this.get();
+		System.out.println(test);
 		return (UserDto)this.get();
 	}
 

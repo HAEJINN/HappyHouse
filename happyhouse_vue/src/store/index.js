@@ -1,6 +1,8 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import http from '@/util/http-common';
+// import jwt_decode from 'jwt-decode';
+import { findById } from '@/api/user.js';
 
 Vue.use(Vuex);
 
@@ -10,6 +12,8 @@ export default new Vuex.Store({
     posts: [],
     ranks: [],
     results: [],
+    isLogin: false, // 로그인 여부
+    userInfo: null,
   },
   getters: {
     notices(state) {
@@ -23,7 +27,7 @@ export default new Vuex.Store({
     },
     results(state) {
       return state.results;
-    }
+    },
   },
   mutations: {
     setNotices(state, payload) {
@@ -35,9 +39,20 @@ export default new Vuex.Store({
     setRanks(state, payload) {
       state.ranks = payload;
     },
-    setResult(state, payload){
+    setResult(state, payload) {
       state.results = payload;
-    }
+    },
+    setIsLogined(state, isLogin) {
+      state.isLogin = isLogin;
+    },
+    setUserInfo(state, userInfo) {
+      state.isLogin = true;
+      state.userInfo = userInfo;
+    },
+    logout(state) {
+      state.isLogin = false;
+      state.userInfo = null;
+    },
   },
   actions: {
     getNotices(context) {
@@ -70,39 +85,73 @@ export default new Vuex.Store({
           // alert('에러발생');
         });
     },
-    loadResult(context, data){
+    loadResult(context, data) {
       http
-      .post('/apt/dong', data)
-      .then(({data})=> {
-        console.log(data);
-        context.commit("setResult", data);
-      })
-      .catch(() => {
-        alert("????");
-      });
+        .post('/apt/dong', data)
+        .then(({ data }) => {
+          console.log(data);
+          context.commit('setResult', data);
+        })
+        .catch(() => {
+          alert('????');
+        });
     },
-    loadResultbyApt(context, data){
+    loadResultbyApt(context, data) {
       console.log(data);
       http
-      .post('/apt/name', data)
-      .then(({data})=> {
-        console.log(data);
-        context.commit("setResult", data);
-      })
-      .catch(() => {
-        alert("????");
+        .post('/apt/name', data)
+        .then(({ data }) => {
+          console.log(data);
+          context.commit('setResult', data);
+        })
+        .catch(() => {
+          alert('????');
+        });
+    },
+    loadResultbyDong(context, data) {
+      http
+        .post('/apt/dong', data)
+        .then(({ data }) => {
+          console.log(data);
+          context.commit('setResult', data);
+        })
+        .catch(() => {
+          alert('????');
+        });
+    },
+    // async GET_MEMBER_INFO({ commit }, token) {
+    //   let decode = jwt_decode(token);
+
+    //   await findById(
+    //     decode.userid,
+    //     (response) => {
+    //       // if (response.data.message === 'SUCCESS') {
+    //       //   commit('setUserInfo', response.data.userInfo);
+    //       //   // router.push("/");
+    //       //   // router.go(router.currentRoute);
+    //       // } else {
+    //       //   console.log('유저 정보 없음!!');
+    //       // }
+    //       commit('setUserInfo', response.data.userInfo);
+
+    //     },
+    //     (error) => {
+    //       console.log(error);
+    //     }
+    //   );
+    // },
+    async GET_MEMBER_INFO(context) {
+      await findById((response) => {
+        context.commit('setUserInfo', response);
+        // router.push("/");
+        // router.go(router.currentRoute);
       });
     },
-    loadResultbyDong(context, data){
-      http
-      .post('/apt/dong', data)
-      .then(({data})=> {
-        console.log(data);
-        context.commit("setResult", data);
-      })
-      .catch(() => {
-        alert("????");
-      });
-    }
+
+    LOGOUT({ commit }) {
+      commit('logout');
+      localStorage.removeItem('access-token');
+      // axios.defaults.headers.common["auth-token"] = undefined;
+    },
   },
 });
