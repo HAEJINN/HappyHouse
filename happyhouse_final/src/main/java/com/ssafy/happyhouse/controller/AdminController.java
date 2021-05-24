@@ -75,7 +75,7 @@ public class AdminController {
 	@GetMapping(value = {"/board/detail/{boardid}"})
 	public ResponseEntity<?> detailboard(@PathVariable(value = "boardid", required = false) String boardid) throws Exception {
 		Map<String, String> map = new HashMap<String, String>();
-		map.put("boardtype", "post");
+		map.put("boardtype", "notice");
 		map.put("boardid", boardid);
 		BoardDto board = boardservice.detailboard(map);
 		if(board != null) {
