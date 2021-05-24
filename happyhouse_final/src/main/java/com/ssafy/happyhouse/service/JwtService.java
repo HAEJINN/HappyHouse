@@ -10,6 +10,5 @@ public interface JwtService {
 	Map<String, Object> get();
 	boolean isUsable(String jwt);
 	public UserDto getUserDto();
-	Map<String, Object> testget(String token);
 	
 }

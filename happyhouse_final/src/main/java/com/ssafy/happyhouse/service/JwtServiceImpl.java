@@ -70,26 +70,19 @@ public class JwtServiceImpl implements JwtService {
 			throw new UnauthorizedException();
 		}
 		Map<String, Object> value = claims.getBody();
-		logger.info("value : {}", value);
 		return value;
 	}
 	
 	public UserDto getUserDto() {
-		UserDto test = (UserDto)this.get();
-		System.out.println(test);
-		return (UserDto)this.get();
+		Map<String, String> usermap = (Map<String, String>)this.get().get("user");
+		UserDto user = new UserDto();
+		user.setUserid(usermap.get("userid"));
+		user.setUsername(usermap.get("username"));
+		user.setUserpwd(usermap.get("userpwd"));
+		user.setEmail(usermap.get("email"));
+		user.setPhonenumber(usermap.get("phonenumber"));
+		user.setGender(usermap.get("gender"));
+		return user;
 	}
 
-	public Map<String, Object> testget(String token) {
-		
-		Jws<Claims> claims = null;
-		try {
-			claims = Jwts.parser().setSigningKey(TK.getBytes("UTF-8")).parseClaimsJws(token);
-		} catch (Exception e) {
-			throw new UnauthorizedException();
-		}
-		Map<String, Object> value = claims.getBody();
-		logger.info("value : {}", value);
-		return value;
-	}
 }

@@ -9,6 +9,6 @@
 	</select>
 	
 	<select id="cctvlist" resultType="PosDto">
-		select * from cctv limit 1, 2;
+		select * from cctv;
 	</select>
 </mapper>
