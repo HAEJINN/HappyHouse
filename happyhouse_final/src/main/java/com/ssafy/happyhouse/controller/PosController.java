@@ -1,21 +1,16 @@
 package com.ssafy.happyhouse.controller;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ssafy.happyhouse.model.BoardDto;
 import com.ssafy.happyhouse.model.PosDto;
 import com.ssafy.happyhouse.service.PosService;
 
@@ -34,7 +29,7 @@ public class PosController {
 	final String SUCCESS = "SUCCESS";
 	final String FAIL = "FAIL";
 	
-	@ApiOperation(value = "중심좌표 받음, 1km 이내 cctv list 반환, 실패시 FAIL 반환", response = List.class)
+	@ApiOperation(value = "중심좌표 받음, 1km 이내 cctv좌표 list 반환, 실패시 FAIL 반환", response = List.class)
 	@PostMapping(value = "/cctv")
 	public ResponseEntity<?> cctvlist(@RequestBody PosDto pos) throws Exception {
 		List<PosDto> list = service.cctvlist(pos);
@@ -46,7 +41,7 @@ public class PosController {
 		}
 	}
 	
-	@ApiOperation(value = "중심좌표 받음, 1km 이내 편의점 list 반환, 실패시 FAIL 반환", response = List.class)
+	@ApiOperation(value = "중심좌표 받음, 1km 이내 편의점좌표 list 반환, 실패시 FAIL 반환", response = List.class)
 	@PostMapping(value = "/conven")
 	public ResponseEntity<?> convenlist(@RequestBody PosDto pos) throws Exception {
 		List<PosDto> list = service.convenlist(pos);

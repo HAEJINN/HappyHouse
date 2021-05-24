@@ -33,8 +33,6 @@ public class AptController {
 	@ApiOperation(value = "dong 에 맞는 아파트리스트 반환, 실패시 FAIL 반환", response = UserDto.class)
 	@PostMapping(value = "/dong")
 	public ResponseEntity<?> aptdonglist(@RequestBody String dong) throws Exception {
-		dong = dong.replace("\"", "");
-		dong = dong.replace("\'", "");
 		List<HouseInfoDto> list =service.aptdonglist(dong);
 		if(list != null && !list.isEmpty()) {
 			return new ResponseEntity<List<HouseInfoDto>>(list, HttpStatus.OK);
@@ -46,8 +44,6 @@ public class AptController {
 	@ApiOperation(value = "aptname 에 맞는 아파트리스트 반환, 실패시 FAIL 반환", response = UserDto.class)
 	@PostMapping(value = "/name")
 	public ResponseEntity<?> aptnamelist(@RequestBody String aptname) throws Exception {
-		aptname = aptname.replace("\"", "");
-		aptname = aptname.replace("\'", "");
 		List<HouseInfoDto> list =service.aptnamelist(aptname);
 		if(list != null && !list.isEmpty()) {
 			return new ResponseEntity<List<HouseInfoDto>>(list, HttpStatus.OK);

@@ -10,7 +10,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 public class WebConfiguration implements WebMvcConfigurer {
 
 	private static final String[] EXCLUDE_PATHS = { "/user/confirm/**", "/error/**" };
-
+	//private static final String[] INCLUDE_PATHS = { "/user/confirm/**", "/error/**" };
 //	@Autowired
 //	JwtInterceptor jwtInterceptor;
 //
