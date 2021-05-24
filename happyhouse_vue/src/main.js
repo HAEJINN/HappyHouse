@@ -1,7 +1,7 @@
-import Vue from 'vue';
-import App from './App.vue';
-import store from './store';
-import router from './router';
+import Vue from "vue";
+import App from "./App.vue";
+import store from "./store";
+import router from "./router";
 
 Vue.config.productionTip = false;
 
@@ -9,10 +9,19 @@ new Vue({
   router,
   store,
   async beforeCreate() {
-    let token = localStorage.getItem('access-token');
+    let token = localStorage.getItem("access-token");
     if (store.state.userInfo == null && token) {
-      await store.dispatch('GET_MEMBER_INFO', token);
+      await store.dispatch("GET_MEMBER_INFO", token);
     }
   },
   render: (h) => h(App),
-}).$mount('#app');
+}).$mount("#app");
+
+import * as VueGoogleMaps from "vue2-google-maps";
+
+Vue.use(VueGoogleMaps, {
+  load: {
+    key: "AIzaSyDJhCuscXPRq8z1m3yBFo0WosSf3Hcpzm0",
+    libraries: "places",
+  },
+});
