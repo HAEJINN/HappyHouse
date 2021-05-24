@@ -9,6 +9,12 @@
         @click="markerclick(m)"
       />
       <!-- :icon="{url: require('@/assets/LogoMakr-4pVzaR.png'),}" -->
+      <GmapMarker :key="'cctv' + index" v-for="(m, index) in cctvmarkers" :position="m.position" />
+      <GmapMarker
+        :key="'conven' + index"
+        v-for="(m, index) in convenmarkers"
+        :position="m.position"
+      />
       <GmapInfoWindow
         :position="infovalue.position"
         :opened="infoWinOpen"
@@ -34,6 +40,8 @@ export default {
       },
       zoom: 15,
       markers: [],
+      cctvmarkers: [],
+      convenmarkers: [],
       infoWinOpen: false,
       infovalue: {
         no: "",
@@ -46,12 +54,18 @@ export default {
     data() {
       return this.$store.state.results;
     },
+    cctvs() {
+      return this.$store.state.cctvs;
+    },
+    convens() {
+      return this.$store.state.convens;
+    },
   },
   watch: {
     data() {
-      // 마커 추가
+      // 집 마커 추가
+      this.clearMarkers();
       if (this.data.length > 0) {
-        this.clearMarkers();
         this.setCenter({
           lat: parseFloat(this.data[0].lat),
           lng: parseFloat(this.data[0].lng),
@@ -65,8 +79,34 @@ export default {
             },
             aptname: aptname,
           };
-
           this.markers.push(mar);
+        });
+      }
+    },
+    cctvs() {
+      //cctv 마커 추가
+      if (this.cctvs.length > 0) {
+        take(this.cctvs, this.cctvs.length).map(({ lat, lng }) => {
+          var mar = {
+            position: {
+              lat: parseFloat(lat),
+              lng: parseFloat(lng),
+            },
+          };
+          this.cctvmarkers.push(mar);
+        });
+      }
+    },
+    convens() {
+      if (this.convens.length > 0) {
+        take(this.convens, this.convens.length).map(({ lat, lng }) => {
+          var mar = {
+            position: {
+              lat: parseFloat(lat),
+              lng: parseFloat(lng),
+            },
+          };
+          this.convenmarkers.push(mar);
         });
       }
     },
@@ -86,9 +126,7 @@ export default {
       this.infoWinOpen = true;
     },
     infoclick(content) {
-      if (confirm("즐겨찾기에 추가할까요?")) {
-        console.log(content);
-        console.log(window.localStorage.getItem("access-token"));
+      if (content.houseno != undefined && confirm("즐겨찾기에 추가할까요?")) {
         http
           .post("/user/favorite", content.houseno, {
             headers: {
@@ -105,6 +143,8 @@ export default {
     },
     clearMarkers() {
       this.markers = [];
+      this.cctvmarkers = [];
+      this.convenmarkers = [];
     },
     setCenter(position) {
       this.center = position;
