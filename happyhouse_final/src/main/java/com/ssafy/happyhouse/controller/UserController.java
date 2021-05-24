@@ -92,6 +92,7 @@ public class UserController {
 		try {
 			user = jwtservice.getUserDto();
 		}catch (Exception e) {
+			e.printStackTrace();
 			return new ResponseEntity(FAIL, HttpStatus.NOT_ACCEPTABLE);
 		}
 		return new ResponseEntity<UserDto>(user, HttpStatus.OK);
@@ -113,6 +114,7 @@ public class UserController {
 		UserDto user = null;
 		try {
 			user = jwtservice.getUserDto();
+			System.out.println(user);
 		}catch (Exception e) {
 			return new ResponseEntity(FAIL, HttpStatus.NOT_ACCEPTABLE);
 		}
