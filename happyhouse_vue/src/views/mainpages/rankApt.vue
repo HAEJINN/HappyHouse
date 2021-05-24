@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="main_wrap">
     <h1>RankApt</h1>
     <rank-item v-for="(rank, idx) in ranks" :key="idx" :rank="rank" />
   </div>
@@ -19,3 +19,12 @@ export default {
   },
 };
 </script>
+<style scoped>
+.main_wrap {
+  width: 100%;
+  padding: 3em;
+  border: 1px solid black;
+  font-size: 1.5em;
+  text-align: center;
+}
+</style>
