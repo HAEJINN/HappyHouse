@@ -36,10 +36,10 @@ public class BoardController {
 	final String FAIL = "FAIL";
 	
 	@ApiOperation(value = "post board list 반환, 실패시 FAIL 반환", response = List.class)
-	@GetMapping(value = {"/", "/{boardnum}"})
-	public ResponseEntity<?> boardlist(@PathVariable(value = "boardnum", required = false) String boardnum) throws Exception {
+	@GetMapping(value = {"/", "/{boardid}"})
+	public ResponseEntity<?> boardlist(@PathVariable(value = "boardid", required = false) String boardid) throws Exception {
 		Map<String, String> map = new HashMap<String, String>();
-		map.put("boardnum", boardnum);
+		map.put("boardnum", boardid);
 		map.put("boardtype", "post");
 		List<BoardDto> list = service.search(map);
 		if(list != null && !list.isEmpty()) {
@@ -88,10 +88,12 @@ public class BoardController {
 	}
 	
 	@ApiOperation(value = "post board접근 삭제, 실패시 FAIL 반환", response = String.class)
-	@DeleteMapping(value = "/")
-	public ResponseEntity<?> deleteboard(@RequestBody Map<String, String> map) throws Exception {
+	@DeleteMapping(value = "/delete/{boardid}")
+	public ResponseEntity<?> deleteboard(@PathVariable(value = "boardid") String boardid) throws Exception {
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("boardid", boardid);
 		map.put("boardtype", "post");
-		
+		System.out.println(map);
 		if(service.deleteboard(map)) {
 			return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);
 		} else {

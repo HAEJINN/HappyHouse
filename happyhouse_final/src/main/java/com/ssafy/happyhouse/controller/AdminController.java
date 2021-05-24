@@ -58,10 +58,10 @@ public class AdminController {
 	}
 	
 	@ApiOperation(value = "notice board list 반환, 실패시 FAIL 반환", response = List.class)
-	@GetMapping(value = {"/board", "/board/{boardnum}"})
-	public ResponseEntity<?> boardlist(@PathVariable(value = "boardnum", required = false) String boardnum) throws Exception {
+	@GetMapping(value = {"/board", "/board/{boardid}"})
+	public ResponseEntity<?> boardlist(@PathVariable(value = "boardid", required = false) String boardid) throws Exception {
 		Map<String, String> map = new HashMap<String, String>();
-		map.put("boardnum", boardnum);
+		map.put("boardnum", boardid);
 		map.put("boardtype", "notice");
 		List<BoardDto> list = boardservice.search(map);
 		if(list != null && !list.isEmpty()) {
@@ -110,8 +110,10 @@ public class AdminController {
 	}
 	
 	@ApiOperation(value = "notice board접근 삭제, 실패시 FAIL 반환", response = String.class)
-	@DeleteMapping(value = "/board")
-	public ResponseEntity<?> deleteboard(@RequestBody Map<String, String> map) throws Exception {
+	@DeleteMapping(value = "/delete/{boardid}")
+	public ResponseEntity<?> deleteboard(@PathVariable(value = "boardid") String boardid) throws Exception {
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("boardid", boardid);
 		map.put("boardtype", "notice");
 		
 		if(boardservice.deleteboard(map)) {
