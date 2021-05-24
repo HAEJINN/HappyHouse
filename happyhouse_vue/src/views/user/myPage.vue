@@ -35,27 +35,31 @@
   </div>
 </template>
 <script>
-import { mapState } from 'vuex';
-import http from '@/util/http-common';
+import { mapState } from "vuex";
+import http from "@/util/http-common";
 export default {
-  name: 'mypage',
+  name: "mypage",
   computed: {
-    ...mapState(['userInfo', 'isLogin']),
+    ...mapState(["userInfo", "isLogin"]),
   },
   methods: {
     deleteUser() {
-      console.log('지우기');
+      console.log("지우기");
       http
-        .delete('/user/delete')
+        .delete("/user/delete", {
+          headers: {
+            "access-token": window.localStorage.getItem("access-token"),
+          },
+        })
         .then(({ data }) => {
           console.log(data);
-          if (data === 'SUCCESS') {
-            alert('삭제성공');
-            this.$router.push('/');
+          if (data === "SUCCESS") {
+            alert("삭제성공");
+            this.$router.push("/");
           }
         })
         .catch(() => {
-          alert('삭제실패');
+          alert("삭제실패");
         });
     },
   },

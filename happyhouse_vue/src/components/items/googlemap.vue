@@ -11,9 +11,13 @@
         @click="markerclick(m)"
       />
       <!-- :icon="{url: require('@/assets/LogoMakr-4pVzaR.png'),}" -->
-      <gmap-info-window :position="infovalue.position">
+      <GmapInfoWindow
+        :position="infovalue.position"
+        :opened="infoWinOpen"
+        @closeclick="infoWinOpen = false"
+      >
         <div v-html="infovalue.content"></div>
-      </gmap-info-window>
+      </GmapInfoWindow>
     </GmapMap>
   </div>
 </template>
@@ -43,35 +47,6 @@ const sample = [
   { lat: 37.50664, lng: 127.03158, price: "₩64" },
   { lat: 37.5024767, lng: 127.0399139, price: "₩49" },
   { lat: 37.5013577, lng: 127.0357776, price: "₩40" },
-  { lat: 37.5024315, lng: 127.0387326, price: "₩36" },
-  { lat: 37.500582, lng: 127.041064, price: "₩151" },
-  { lat: 37.506508, lng: 127.03227, price: "₩56" },
-  { lat: 37.505964, lng: 127.031195, price: "₩64" },
-  { lat: 37.5059947, lng: 127.0296956, price: "₩50" },
-  { lat: 37.502935, lng: 127.039946, price: "₩37" },
-  { lat: 37.50271, lng: 127.040521, price: "₩37" },
-  { lat: 37.50161, lng: 127.04103, price: "₩43" },
-  { lat: 37.49901, lng: 127.02851, price: "₩96" },
-  { lat: 37.497393, lng: 127.029029, price: "₩42" },
-  { lat: 37.505412, lng: 127.025293, price: "₩28" },
-  { lat: 37.5008366, lng: 127.0389705, price: "₩41" },
-  { lat: 37.503903, lng: 127.0350934, price: "₩57" },
-  { lat: 37.4988, lng: 127.034, price: "₩42" },
-  { lat: 37.50406, lng: 127.0273, price: "₩17" },
-  { lat: 37.495657, lng: 127.0351384, price: "₩15" },
-  { lat: 37.5012302, lng: 127.0422585, price: "₩42" },
-  { lat: 37.494725, lng: 127.035201, price: "₩14" },
-  { lat: 37.500849, lng: 127.039129, price: "₩62" },
-  { lat: 37.49232, lng: 127.031682, price: "₩14" },
-  { lat: 37.502704, lng: 127.039724, price: "₩42" },
-  { lat: 37.500988, lng: 127.039632, price: "₩34" },
-  { lat: 37.496069, lng: 127.02963, price: "₩33" },
-  { lat: 37.4958567, lng: 127.0299851, price: "₩42" },
-  { lat: 37.499953, lng: 127.031842, price: "₩37" },
-  { lat: 37.501198, lng: 127.040513, price: "₩37" },
-  { lat: 37.50329, lng: 127.03675, price: "₩24" },
-  { lat: 37.5000614, lng: 127.0247841, price: "₩22" },
-  { lat: 37.50271, lng: 127.03991, price: "₩33" },
 ];
 export default {
   name: "App",
@@ -95,16 +70,12 @@ export default {
     // 마커 추가
     addMarkers() {
       take(shuffle(this.data), 20).map(({ price, lat, lng }, i) => {
-        const el = document.createElement("div");
-        el.textContent = price;
-        el.setAttribute("data-marker-index", i);
-
         var mar = {
           position: {
             lat: lat,
             lng: lng,
           },
-          price: "test",
+          price: price + i * 100,
         };
         this.markers.push(mar);
       });
@@ -119,11 +90,11 @@ export default {
       this.setCenter(position);
       this.infovalue.position = position;
       this.infoWinOpen = true;
+      console.log(this.infoWinOpen);
     },
     clearMarkers() {
       this.markers = [];
     },
-    infoWindowClose() {},
     setCenter(position) {
       this.center = position;
     },
