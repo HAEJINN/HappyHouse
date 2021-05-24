@@ -30,28 +30,34 @@
     <div class="text-center">
       <router-link to="/happyhouse/main"><button>메인</button></router-link>
       <router-link to="/update"><button>수정</button></router-link>
-      <router-link to="/delete"><button>삭제</button></router-link>
+      <button @click="deleteUser">탈퇴</button>
     </div>
   </div>
 </template>
 <script>
 import { mapState } from 'vuex';
+import http from '@/util/http-common';
 export default {
   name: 'mypage',
   computed: {
     ...mapState(['userInfo', 'isLogin']),
   },
-
-  // created() {
-  //   console.log('수정?');
-  //   this.$store.dispatch('GET_MEMBER_INFO');
-  //   // console.log(this.userInfo);
-  //   // this.userid = this.userInfo.userid;
-  //   // this.username = this.userInfo.username;
-  //   // this.userpwd = this.userInfo.userpwd;
-  //   // this.email = this.userInfo.email;
-  //   // this.phonenumber = this.userInfo.phonenumber;
-  //   // this.gender = this.userInfo.gender;
-  // },
+  methods: {
+    deleteUser() {
+      console.log('지우기');
+      http
+        .delete('/user/delete')
+        .then(({ data }) => {
+          console.log(data);
+          if (data === 'SUCCESS') {
+            alert('삭제성공');
+            this.$router.push('/');
+          }
+        })
+        .catch(() => {
+          alert('삭제실패');
+        });
+    },
+  },
 };
 </script>

@@ -7,7 +7,7 @@
       <h1 v-else>회원가입</h1>
       <div>
         <label for="userid">아이디</label>
-        <input v-if="isLogin" v-model="userid" disabled />
+        <input v-if="type == 'update'" v-model="userid" disabled />
         <input v-else type="text" id="userid" name="userid" v-model="userid" />
       </div>
       <div>
@@ -119,12 +119,15 @@ export default {
         .then(({ data }) => {
           console.log(data);
           let msg = '수정 처리시 문제가 발생했습니다.';
-          if (data === 'SUCCESS') {
+          if (data.message === 'SUCCESS') {
             msg = '수정이 완료되었습니다.';
+            let token = data['access-token'];
+            localStorage.setItem('access-token', token);
+            this.$store.dispatch('GET_MEMBER_INFO');
           }
           alert(msg);
-          this.$store.dispatch('GET_MEMBER_INFO');
-          this.$router.push('/happyhouse/main');
+
+          this.$router.push('/happyhouse/myPage');
         })
         .catch(() => {
           alert('수정 처리시 에러가 발생했습니다.');

@@ -91,36 +91,24 @@ public class UserController {
 		UserDto user = null;
 		try {
 			user = jwtservice.getUserDto();
-			System.out.println(user);
 		}catch (Exception e) {
 			return new ResponseEntity(FAIL, HttpStatus.NOT_ACCEPTABLE);
 		}
 		return new ResponseEntity<UserDto>(user, HttpStatus.OK);
 	}
 	
-	@ApiOperation(value = "UserDto를 받아서 정보 수정 성공시 새로운 access-token 반환, 실패시 FAIL 반환", response = String.class)
+	@ApiOperation(value = "UserDto를 받아서 정보 수정 성공시 SUCCESS 반환, 실패시 FAIL 반환", response = String.class)
 	@PutMapping(value = "/update")
 	public ResponseEntity<?> modify(@RequestBody UserDto user) throws Exception {
 		if(service.modifyuser(user)) {
-			HttpStatus status = null;
-			Map<String, Object> resultMap = new HashMap<>();
-			if(user.getUserid() != null){
-				String token =jwtservice.create("user", user, "access-token");
-				resultMap.put("access-token", token);
-				resultMap.put("message", SUCCESS);
-				status = HttpStatus.ACCEPTED;
-			} else {
-				resultMap.put("message", FAIL);
-				status = HttpStatus.NOT_FOUND;
-			}
-			return new ResponseEntity<Map<String, Object>>(resultMap, status);
+			return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);
 		} else {
 			return new ResponseEntity(FAIL, HttpStatus.NOT_ACCEPTABLE);
 		}
 	}
 	
 	@ApiOperation(value = "access-token을 받아서 정보 삭제 성공시 SUCCESS 반환, 실패시 FAIL 반환", response = String.class)
-	@DeleteMapping(value = "/")
+	@DeleteMapping(value = "/delete")
 	public ResponseEntity<?> delete() throws Exception {
 		UserDto user = null;
 		try {
