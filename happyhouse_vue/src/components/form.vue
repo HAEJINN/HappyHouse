@@ -1,58 +1,60 @@
 <template>
-  <div>
-    <h1>회원가입</h1>
-    <div>
-      <label for="userid">아이디</label>
-      <input type="text" id="userid" name="userid" v-model="userid" />
+  <div class="regist_wrap">
+    <div class="regist_form">
+      <h1>회원가입</h1>
+      <div>
+        <label for="userid">아이디</label>
+        <input type="text" id="userid" name="userid" v-model="userid" />
+      </div>
+      <div>
+        <label for="username">이름</label>
+        <input type="text" id="username" name="username" v-model="username" />
+      </div>
+      <div>
+        <label for="userpwd">비밀번호</label>
+        <input type="text" id="userpwd" name="userpwd" v-model="userpwd" />
+      </div>
+      <div>
+        <label for="email">이메일</label>
+        <input type="text" id="email" name="email" v-model="email" />
+      </div>
+      <div>
+        <label for="phonenumber">전화번호</label>
+        <input
+          type="text"
+          id="phonenumber"
+          name="phonenumber"
+          ref="phonenumber"
+          v-model="phonenumber"
+        />
+      </div>
+      <div>
+        <label for="gender">성별</label>
+        <select name="gender" id="gender" v-model="gender">
+          <option v-for="(type, idx) in types" :key="idx">{{ type }}</option>
+        </select>
+      </div>
+      <button v-if="type == 'update'" @click="update" class="regist_btn">수정</button>
+      <button v-else @click="regist" class="regist_btn">가입</button>
     </div>
-    <div>
-      <label for="username">이름</label>
-      <input type="text" id="username" name="username" v-model="username" />
-    </div>
-    <div>
-      <label for="userpwd">비밀번호</label>
-      <input type="text" id="userpwd" name="userpwd" v-model="userpwd" />
-    </div>
-    <div>
-      <label for="email">이메일</label>
-      <input type="text" id="email" name="email" v-model="email" />
-    </div>
-    <div>
-      <label for="phonenumber">전화번호</label>
-      <input
-        type="text"
-        id="phonenumber"
-        name="phonenumber"
-        ref="phonenumber"
-        v-model="phonenumber"
-      />
-    </div>
-    <div>
-      <label for="gender">성별</label>
-      <select name="gender" id="gender" v-model="gender">
-        <option v-for="(type, idx) in types" :key="idx">{{ type }}</option>
-      </select>
-    </div>
-    <button v-if="type == 'update'" @click="update">수정</button>
-    <button v-else @click="regist">가입</button>
   </div>
 </template>
 <script>
 // import http from '@/util/http-common';
 export default {
-  name: "registForm",
+  name: 'registForm',
   props: {
     type: { type: String },
   },
   data() {
     return {
-      types: ["남자", "여자"],
-      userid: "",
-      username: "",
-      userpwd: "",
-      email: "",
-      phonenumber: "",
-      gender: "",
+      types: ['남자', '여자'],
+      userid: '',
+      username: '',
+      userpwd: '',
+      email: '',
+      phonenumber: '',
+      gender: '',
     };
   },
   // created() {
@@ -117,8 +119,63 @@ export default {
       this.mvMain();
     },
     mvMain() {
-      this.$router.push("/happyhouse/main");
+      this.$router.push('/happyhouse/main');
     },
   },
 };
 </script>
+<style lang="postcss" scoped>
+.regist_wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
+}
+.regist_form {
+  display: flex;
+  position: absolute;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 30%;
+  height: 65%;
+  border-radius: 2em;
+  overflow: hidden;
+  color: #ffffff;
+  font-size: 1.3em;
+}
+.regist_form::after {
+  display: block;
+  position: absolute;
+  content: '';
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-color: #404040;
+  opacity: 0.85;
+  z-index: -1;
+}
+.regist_form div {
+  margin-bottom: 1.5em;
+}
+.regist_form div label {
+  margin-right: 1em;
+}
+.regist_form div input {
+  width: 200px;
+  height: 2.5em;
+}
+.regist_form div select {
+  width: 200px;
+  font-size: 1.02em;
+  height: 1.5em;
+}
+.regist_btn {
+  width: 20%;
+  font-size: 1.05em;
+  height: 1.8em;
+  margin-bottom: 1em;
+}
+</style>

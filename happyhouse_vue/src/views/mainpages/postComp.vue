@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="post_wrap">
     <h1>postComp</h1>
     <post-item v-for="(post, idx) in posts" :key="idx" :post="post" />
     <router-link to="postDetail">post</router-link>
@@ -20,3 +20,11 @@ export default {
   },
 };
 </script>
+<style scoped>
+.post_wrap {
+  width: 50%;
+  border: 1px solid black;
+  padding: 3em;
+  margin: 0 3em;
+}
+</style>
