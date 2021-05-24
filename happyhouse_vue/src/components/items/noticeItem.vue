@@ -1,13 +1,13 @@
 <template>
-  <div class="notice_item">
-    <div>{{ notice.id }}</div>
-    <div>
-      <router-link :to="`/noticeDetail?id=${notice.id}`">{{ notice.title }}</router-link>
-    </div>
-    <div>{{ notice.userid }}</div>
-    <div>{{ notice.content }}</div>
-    <div>{{ notice.timestamp }}</div>
-  </div>
+  <tr>
+    <td>{{ notice.no }}</td>
+    <td>
+      <router-link :to="`/noticeDetail?no=${notice.no}`">{{ notice.title }}</router-link>
+    </td>
+    <td>{{ notice.userid }}</td>
+    <td>{{ notice.timestamp }}</td>
+    <td>{{ notice.content }}</td>
+  </tr>
 </template>
 
 <script>
@@ -16,13 +16,4 @@ export default {
   props: ['notice'],
 };
 </script>
-<style scoped>
-.notice_item {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
-}
-.notice_item div {
-  margin: 0 0.5em;
-}
-</style>
+<style scoped></style>

@@ -2,7 +2,20 @@
   <div class="post_wrap">
     <h1 class="post_title">게시판</h1>
     <router-link to="postDetail" class="detail_link">더보기</router-link>
-    <post-item v-for="(post, idx) in posts" :key="idx" :post="post" />
+    <table>
+      <thead>
+        <tr>
+          <th>글번호</th>
+          <th>글제목</th>
+          <th>작성자</th>
+          <th>작성시간</th>
+          <th>내용</th>
+        </tr>
+      </thead>
+      <tbody>
+        <post-item v-for="(post, idx) in posts" :key="idx" :post="post" />
+      </tbody>
+    </table>
   </div>
 </template>
 <script>
