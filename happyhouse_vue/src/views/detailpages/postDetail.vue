@@ -39,7 +39,9 @@ export default {
     this.$store.dispatch('getPosts');
   },
   methods: {
-    writePost() {},
+    writePost() {
+      this.$router.push('/happyhouse/postForm');
+    },
   },
 };
 </script>

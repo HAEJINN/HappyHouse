@@ -83,6 +83,16 @@ const routes = [
         name: 'post-desc',
         component: () => import('@/components/postDesc.vue'),
       },
+      {
+        path: 'postForm',
+        name: 'post-form',
+        component: () => import('@/components/postForm.vue'),
+      },
+      {
+        path: 'updatePost',
+        name: 'update-post',
+        component: () => import('@/components/updatePost.vue'),
+      },
     ],
   },
 ];

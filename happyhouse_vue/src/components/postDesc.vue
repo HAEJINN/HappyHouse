@@ -4,7 +4,8 @@
     <p>{{ post.userid }}</p>
     <p>{{ post.timestamp }}</p>
     <p>{{ post.content }}</p>
-    <button v-if="userInfo.userid == post.userid">수정</button>
+    <button v-if="userInfo.userid == post.userid" @click="modify">수정</button>
+    <button v-if="userInfo.userid == post.userid" @click="deleteP">삭제</button>
   </div>
 </template>
 <script>
@@ -16,6 +17,14 @@ export default {
   },
   created() {
     this.$store.dispatch('searchP', this.$route.query.no);
+  },
+  methods: {
+    modify() {
+      this.$router.push('/happyhouse/updatePost');
+    },
+    deleteP() {
+      this.$store.dispatch('deleteP', this.$route.query.no);
+    },
   },
 };
 </script>
