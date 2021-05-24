@@ -28,6 +28,9 @@ export default new Vuex.Store({
     results(state) {
       return state.results;
     },
+    userInfo(state) {
+      return state.userInfo;
+    },
   },
   mutations: {
     setNotices(state, payload) {
@@ -121,7 +124,7 @@ export default new Vuex.Store({
     },
     async GET_MEMBER_INFO(context) {
       await findById((response) => {
-        console.log(response.data);
+        //.log(response.data);
         context.commit('setUserInfo', response.data);
         // router.push("/");
         // router.go(router.currentRoute);

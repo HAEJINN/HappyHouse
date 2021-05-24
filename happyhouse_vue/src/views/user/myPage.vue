@@ -29,8 +29,8 @@
     </table>
     <div class="text-center">
       <router-link to="/happyhouse/main"><button>메인</button></router-link>
-      <router-link :to="'/update?userid=' + userid"><button>수정</button></router-link>
-      <router-link :to="'/delete?userid=' + userid"><button>삭제</button></router-link>
+      <router-link to="/update"><button>수정</button></router-link>
+      <router-link to="/delete"><button>삭제</button></router-link>
     </div>
   </div>
 </template>
@@ -38,16 +38,20 @@
 import { mapState } from 'vuex';
 export default {
   name: 'mypage',
-  // props: {
-  //   userid: { type: String },
-  //   username: { type: String },
-  //   userpwd: { type: String },
-  //   email: { type: String },
-  //   phonenumber: { type: String },
-  //   gender: { type: String },
-  // },
   computed: {
     ...mapState(['userInfo', 'isLogin']),
   },
+
+  // created() {
+  //   console.log('수정?');
+  //   this.$store.dispatch('GET_MEMBER_INFO');
+  //   // console.log(this.userInfo);
+  //   // this.userid = this.userInfo.userid;
+  //   // this.username = this.userInfo.username;
+  //   // this.userpwd = this.userInfo.userpwd;
+  //   // this.email = this.userInfo.email;
+  //   // this.phonenumber = this.userInfo.phonenumber;
+  //   // this.gender = this.userInfo.gender;
+  // },
 };
 </script>

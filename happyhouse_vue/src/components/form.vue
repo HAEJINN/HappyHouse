@@ -1,10 +1,14 @@
 <template>
   <div class="regist_wrap">
     <div class="regist_form">
-      <h1>회원가입</h1>
+      <!-- <h1 v-if="isLogin">정보 수정</h1> -->
+      <h1 v-if="type == 'update'">정보 수정</h1>
+
+      <h1 v-else>회원가입</h1>
       <div>
         <label for="userid">아이디</label>
-        <input type="text" id="userid" name="userid" v-model="userid" />
+        <input v-if="isLogin" v-model="userid" disabled />
+        <input v-else type="text" id="userid" name="userid" v-model="userid" />
       </div>
       <div>
         <label for="username">이름</label>
@@ -12,7 +16,7 @@
       </div>
       <div>
         <label for="userpwd">비밀번호</label>
-        <input type="text" id="userpwd" name="userpwd" v-model="userpwd" />
+        <input type="password" id="userpwd" name="userpwd" v-model="userpwd" />
       </div>
       <div>
         <label for="email">이메일</label>
@@ -34,17 +38,22 @@
           <option v-for="(type, idx) in types" :key="idx">{{ type }}</option>
         </select>
       </div>
-      <button v-if="type == 'update'" @click="update" class="regist_btn">수정</button>
+      <button v-if="type == 'update'" @click="modify" class="regist_btn">수정</button>
       <button v-else @click="regist" class="regist_btn">가입</button>
     </div>
   </div>
 </template>
 <script>
-// import http from '@/util/http-common';
+import http from '@/util/http-common';
+import { mapState } from 'vuex';
+
 export default {
   name: 'registForm',
   props: {
     type: { type: String },
+  },
+  computed: {
+    ...mapState(['userInfo', 'isLogin']),
   },
   data() {
     return {
@@ -57,69 +66,73 @@ export default {
       gender: '',
     };
   },
-  // created() {
-  //   if (this.type === 'update') {
-  //     http.get(`/${this.$route.params.isbn}`).then(({ data }) => {
-  //       this.userid = data.userid;
-  //       this.username = data.username;
-  //       this.userpwd = data.userpwd;
-  //       this.email = data.email;
-  //       this.phonenumber = data.phonenumber;
-  //       this.gender = data.gender;
-  //     });
-  //   }
-  // },
+  created() {
+    if (this.type === 'update') {
+      this.$store.dispatch('GET_MEMBER_INFO');
+      // console.log(this.userInfo);
+      // http.get('/user/detail').then(({ response }) => {
+      this.userid = this.userInfo.userid;
+      this.username = this.userInfo.username;
+      this.userpwd = this.userInfo.userpwd;
+      this.email = this.userInfo.email;
+      this.phonenumber = this.userInfo.phonenumber;
+      this.gender = this.userInfo.gender;
+      // console.log(response);
+      // });
+    }
+  },
   methods: {
     regist() {
-      //   http
-      //     .post('/api/board', {
-      //       userid: this.userid,
-      //       username: this.username,
-      //       userpwd: this.userpwd,
-      //       email: this.email,
-      //       phonenumber: this.phonenumber,
-      //       gender: this.gender,
-      //     })
-      //     .then(({ data }) => {
-      //       console.log(data);
-      //       let msg = '등록 처리시 문제가 발생했습니다.';
-      //       if (data === 'SUCCESS') {
-      //         msg = '등록이 완료되었습니다.';
-      //       }
-      //       alert(msg);
-      //       this.mvMain();
-      //     })
-      //     .catch(() => {
-      //       alert('등록 처리시 에러가 발생했습니다.');
-      //     });
-      this.mvMain();
+      http
+        .post('/user/', {
+          userid: this.userid,
+          username: this.username,
+          userpwd: this.userpwd,
+          email: this.email,
+          phonenumber: this.phonenumber,
+          gender: this.gender,
+        })
+        .then(({ data }) => {
+          console.log(data);
+          let msg = '가입시 문제가 발생했습니다.';
+          if (data === 'SUCCESS') {
+            msg = '가입이 완료되었습니다.';
+          }
+          alert(msg);
+          this.mvMain();
+        })
+        .catch(() => {
+          alert('가입시 에러가 발생했습니다.');
+          this.mvMain();
+        });
     },
     modify() {
-      // http
-      //   .put('/api/board', {
-      //    userid: this.userid,
-      //       username: this.username,
-      //       userpwd: this.userpwd,
-      //       email: this.email,
-      //       phonenumber: this.phonenumber,
-      //       gender: this.gender,
-      //   })
-      //   .then(({ data }) => {
-      //     console.log(data);
-      //     let msg = '수정 처리시 문제가 발생했습니다.';
-      //     if (data.state === 'succ') {
-      //       msg = '수정이 완료되었습니다.';
-      //     }
-      //     alert(msg);
-      //     this.mvMain();
-      //   })
-      //   .catch(() => {
-      //     alert('수정 처리시 에러가 발생했습니다.');
-      //   });
-      this.mvMain();
+      http
+        .put('/user/update', {
+          userid: this.userid,
+          username: this.username,
+          userpwd: this.userpwd,
+          email: this.email,
+          phonenumber: this.phonenumber,
+          gender: this.gender,
+        })
+        .then(({ data }) => {
+          console.log(data);
+          let msg = '수정 처리시 문제가 발생했습니다.';
+          if (data === 'SUCCESS') {
+            msg = '수정이 완료되었습니다.';
+          }
+          alert(msg);
+          this.$store.dispatch('GET_MEMBER_INFO');
+          this.$router.push('/happyhouse/main');
+        })
+        .catch(() => {
+          alert('수정 처리시 에러가 발생했습니다.');
+          this.$router.push('/happyhouse/myPage');
+        });
     },
     mvMain() {
-      this.$router.push('/happyhouse/main');
+      this.$router.push('/');
     },
   },
 };

@@ -91,6 +91,7 @@ public class UserController {
 		UserDto user = null;
 		try {
 			user = jwtservice.getUserDto();
+			System.out.println(user);
 		}catch (Exception e) {
 			return new ResponseEntity(FAIL, HttpStatus.NOT_ACCEPTABLE);
 		}

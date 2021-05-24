@@ -24,6 +24,11 @@ const routes = [
     component: Regist,
   },
   {
+    path: '/update',
+    name: 'Update',
+    component: () => import('@/views/user/update.vue'),
+  },
+  {
     path: '/resultComp',
     name: 'result-comp',
     component: () => import('@/views/aptpages/resultComp.vue'),
@@ -68,10 +73,8 @@ const routes = [
         name: 'news-detail',
         component: () => import('@/views/detailpages/newsDetail.vue'),
       },
-      
     ],
   },
- 
 ];
 
 const router = new VueRouter({

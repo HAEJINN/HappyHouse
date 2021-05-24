@@ -1,12 +1,12 @@
 <template>
   <div class="nav_wrap">
-    <span>{{ userInfo.userid }}님 환영합니다</span>
+    <span v-if="isLogin">{{ userInfo.userid }}님 환영합니다</span>
     <div class="nav_item">
       <router-link to="/happyhouse/main" class="nav_link">메인</router-link>
       <router-link to="/happyhouse/searchApt" class="nav_link">아파트정보</router-link>
       <router-link to="/happyhouse/favoriteApt" class="nav_link">즐겨찾기</router-link>
       <router-link to="/happyhouse/myPage" class="nav_link">내정보</router-link>
-      <button @click.prevent="onClickLogout" class="nav_link" v-if="userInfo">로그아웃</button>
+      <button @click.prevent="onClickLogout" class="nav_link" v-if="isLogin">로그아웃</button>
     </div>
   </div>
 </template>
