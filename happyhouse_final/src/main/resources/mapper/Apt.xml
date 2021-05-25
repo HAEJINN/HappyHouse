@@ -25,7 +25,12 @@
 		from housedeal 
 		group by aptname 
 		order by max(CAST(REPLACE(dealamount, ",", "") as unsigned)) desc 
-		limit 5;
+		limit 5
+	</select>
+	
+	
+	<select id ="newslist" resultType="NewsDto">
+		select * from news order by rand() limit 5
 	</select>
 	
 </mapper>

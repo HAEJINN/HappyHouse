@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ssafy.happyhouse.model.HouseInfoDto;
+import com.ssafy.happyhouse.model.NewsDto;
 import com.ssafy.happyhouse.model.UserDto;
 import com.ssafy.happyhouse.service.AptService;
 
@@ -30,7 +31,7 @@ public class AptController {
 	final String SUCCESS = "SUCCESS";
 	final String FAIL = "FAIL";
 	
-	@ApiOperation(value = "dong 에 맞는 아파트리스트 반환, 실패시 FAIL 반환", response = UserDto.class)
+	@ApiOperation(value = "dong 에 맞는 아파트리스트 반환, 실패시 FAIL 반환", response = HouseInfoDto.class)
 	@PostMapping(value = "/dong")
 	public ResponseEntity<?> aptdonglist(@RequestBody String dong) throws Exception {
 		List<HouseInfoDto> list =service.aptdonglist(dong);
@@ -41,7 +42,7 @@ public class AptController {
 		}
 	}
 	
-	@ApiOperation(value = "aptname 에 맞는 아파트리스트 반환, 실패시 FAIL 반환", response = UserDto.class)
+	@ApiOperation(value = "aptname 에 맞는 아파트리스트 반환, 실패시 FAIL 반환", response = HouseInfoDto.class)
 	@PostMapping(value = "/name")
 	public ResponseEntity<?> aptnamelist(@RequestBody String aptname) throws Exception {
 		List<HouseInfoDto> list =service.aptnamelist(aptname);
@@ -52,13 +53,25 @@ public class AptController {
 		}
 	}
 	
-	@ApiOperation(value = "아파트상위 5개 반환, 실패시 FAIL 반환", response = UserDto.class)
+	@ApiOperation(value = "아파트상위 5개 반환, 실패시 FAIL 반환", response = HouseInfoDto.class)
 	@GetMapping(value = "/toplist")
 	public ResponseEntity<?> topaptlist() throws Exception {
 		List<HouseInfoDto> list =service.topaptlist();
 		
 		if(list != null && !list.isEmpty()) {
 			return new ResponseEntity<List<HouseInfoDto>>(list, HttpStatus.OK);
+		} else {
+			return new ResponseEntity(FAIL, HttpStatus.NO_CONTENT);
+		}
+	}
+	
+	@ApiOperation(value = "뉴스 5개 반환, 실패시 FAIL 반환", response = NewsDto.class)
+	@GetMapping(value = "/news")
+	public ResponseEntity<?> newslist() throws Exception {
+		List<NewsDto> list =service.newslist();
+		
+		if(list != null && !list.isEmpty()) {
+			return new ResponseEntity<List<NewsDto>>(list, HttpStatus.OK);
 		} else {
 			return new ResponseEntity(FAIL, HttpStatus.NO_CONTENT);
 		}
