@@ -1,6 +1,7 @@
 <!-- 메인 중단 컨텐츠 -->
 <template>
   <div>
+    <div class="space"></div>
     <rank-apt></rank-apt>
     <board-comp></board-comp>
     <news-comp></news-comp>
@@ -20,3 +21,11 @@ export default {
   },
 };
 </script>
+<style scoped>
+.space {
+  width: 80%;
+  height: 100px;
+  margin: 0 auto;
+  border-bottom: 1px solid black;
+}
+</style>

@@ -23,8 +23,9 @@ export default {
 .main_wrap {
   width: 100%;
   padding: 3em;
-  border: 1px solid black;
+  margin: 50px 0;
   font-size: 1.5em;
   text-align: center;
+  background-color: blanchedalmond;
 }
 </style>

@@ -35,9 +35,10 @@ export default {
 </script>
 <style scoped>
 .post_wrap {
-  border: 1px solid black;
+  background-color: blanchedalmond;
   padding: 1em;
-  margin: 0 1em;
+  margin-bottom: 50px;
+  margin-left: 5px;
 }
 .post_title {
   text-align: center;

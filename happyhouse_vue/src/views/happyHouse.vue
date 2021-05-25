@@ -2,6 +2,7 @@
 <template>
   <div class="main_wrap">
     <navi-comp></navi-comp>
+    <!-- <div class="space"></div> -->
     <div class="main_content">
       <router-view />
     </div>
@@ -22,15 +23,34 @@ export default {
 </script>
 <style scoped>
 .main_wrap {
+  position: relative;
   height: 100%;
   width: 100%;
-  background-color: lavender;
+}
+.main_wrap::after {
+  display: block;
+  position: absolute;
+  content: '';
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  opacity: 0.85;
+  z-index: -1;
+  background-image: url('../assets/bg.jpg');
+  background-size: cover;
+}
+.space {
+  width: 100%;
+  height: 30px;
 }
 .main_content {
   display: flex;
   justify-content: center;
   background-color: #ffffff;
   width: 80%;
-  margin: 0 auto;
+  margin: 50px auto;
+  border: none;
+  border-radius: 15px;
 }
 </style>

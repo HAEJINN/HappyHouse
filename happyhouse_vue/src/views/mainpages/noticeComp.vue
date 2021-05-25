@@ -35,9 +35,10 @@ export default {
 </script>
 <style scoped>
 .notice_wrap {
-  border: 1px solid black;
+  background-color: blanchedalmond;
   padding: 1em;
-  margin: 0 1em;
+  margin-bottom: 50px;
+  margin-right: 5px;
 }
 .notice_title {
   text-align: center;
