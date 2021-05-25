@@ -11,19 +11,19 @@
       <h1 class="navi-title">MENU</h1>
       <ul class="navi-list">
         <li>
-          <router-link to="/happyhouse/main" class="nav_link">메인</router-link>
+          <div class="nav_link" @click="go_next_page('/happyhouse/main')">메인</div>
         </li>
         <li>
-          <router-link to="/happyhouse/searchApt" class="nav_link">아파트정보</router-link>
+          <div class="nav_link" @click="go_next_page('/happyhouse/searchApt')">아파트정보</div>
         </li>
         <li v-if="userInfo.userid == 'admin'">
-          <router-link to="/happyhouse/dashboard" class="nav_link">사이트통계</router-link>
+          <div class="nav_link" @click="go_next_page('/happyhouse/dashboard')">사이트통계</div>
         </li>
         <li v-if="userInfo.userid != 'admin'">
-          <router-link to="/happyhouse/favoriteApt" class="nav_link">즐겨찾기</router-link>
+          <div class="nav_link" @click="go_next_page('/happyhouse/favoriteApt')">즐겨찾기</div>
         </li>
         <li v-if="userInfo.userid != 'admin'">
-          <router-link to="/happyhouse/myPage" class="nav_link">내정보</router-link>
+          <div class="nav_link" @click="go_next_page('/happyhouse/myPage')">내정보</div>
         </li>
         <li>
           <button @click.prevent="onClickLogout" v-if="isLogin">로그아웃</button>
@@ -33,33 +33,37 @@
   </div>
 </template>
 <script>
-import { mapState } from 'vuex';
+import { mapState } from "vuex";
 export default {
-  name: 'navi',
+  name: "navi",
   computed: {
-    ...mapState(['userInfo', 'isLogin']),
+    ...mapState(["userInfo", "isLogin"]),
   },
   methods: {
     onClickLogout() {
       this.$store
-        .dispatch('LOGOUT')
+        .dispatch("LOGOUT")
         .then(() => {
           // this.$router.push({ name: "" });
-          if (this.$route.path !== '/') this.$router.replace('/');
+          if (this.$route.path !== "/") this.$router.replace("/");
         })
         .catch(() => {
-          console.log('로그아웃 문제!!!');
+          console.log("로그아웃 문제!!!");
         });
     },
     open_menu() {
-      const navi = document.querySelector('.navi');
-      navi.classList.add('navi-visible');
-      navi.classList.remove('navi-invisible');
+      const navi = document.querySelector(".navi");
+      navi.classList.add("navi-visible");
+      navi.classList.remove("navi-invisible");
     },
     close_menu() {
-      const navi = document.querySelector('.navi');
-      navi.classList.add('navi-invisible');
-      navi.classList.remove('navi-visible');
+      const navi = document.querySelector(".navi");
+      navi.classList.add("navi-invisible");
+      navi.classList.remove("navi-visible");
+    },
+    go_next_page(pagelink) {
+      this.close_menu();
+      this.$router.push(pagelink);
     },
   },
 };
@@ -98,7 +102,7 @@ export default {
 }
 
 .menu-a::before {
-  content: '';
+  content: "";
   display: block;
   width: 100%;
   height: 100%;
@@ -138,7 +142,7 @@ export default {
 .close-btn {
   display: block;
   position: absolute;
-  background-image: url('../assets/close-b.png');
+  background-image: url("../assets/close-b.png");
   background-size: cover;
   background-position: center center;
   width: 3em;
@@ -149,7 +153,7 @@ export default {
 }
 
 .close-btn:hover {
-  background-image: url('../assets/close-p.png');
+  background-image: url("../assets/close-p.png");
 }
 
 .navi-title {
