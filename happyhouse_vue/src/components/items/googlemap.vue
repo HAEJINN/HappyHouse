@@ -219,10 +219,6 @@ export default {
       this.center = position;
       this.zoom = 18;
     },
-    test() {
-      console.log(this.cafemarkers);
-      console.log(this.pharmarkers);
-    },
   },
 };
 </script>
