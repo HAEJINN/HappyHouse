@@ -11,6 +11,11 @@ import GoogleMap from "@/components/items/googlemap.vue";
 
 export default {
   name: "favoriteApt",
+  data() {
+    return {
+      flistlength: 0,
+    };
+  },
   computed: {
     flist() {
       return this.$store.state.flist;
@@ -18,7 +23,10 @@ export default {
   },
   watch: {
     flist() {
-      this.$store.dispatch("loadflist");
+      if (this.flist.length != this.flistlength) {
+        this.flistlength = this.$store.state.flist.length;
+        this.$store.dispatch("loadflist");
+      }
     },
   },
   components: {
