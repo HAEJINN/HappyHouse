@@ -44,7 +44,7 @@ public class AdminController {
 	@ApiOperation(value = "dashboard 값 한번에 반환, 실패시 FAIL 반환", response = UserDto.class)
 	@GetMapping(value = "/static")
 	public ResponseEntity<?> dashboardstatic() throws Exception {
-		Map<String, Integer> map = new HashMap<String, Integer>();
+		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("todayvisituser", adminservice.todayvisiter());
 		map.put("weekvisiterlist", adminservice.weekvisiterlist());
 		map.put("monthvisituser", adminservice.monthvisiter());
@@ -52,7 +52,7 @@ public class AdminController {
 		map.put("womanvisitcount", adminservice.womanvisitcount());
 		
 		if(map.size() >= 4){
-			return new ResponseEntity<Map<String, Integer>>(map, HttpStatus.OK);
+			return new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
 		} else {
 			return new ResponseEntity(FAIL, HttpStatus.NOT_FOUND);
 		}

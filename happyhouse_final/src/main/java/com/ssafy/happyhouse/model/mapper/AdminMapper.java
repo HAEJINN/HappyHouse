@@ -1,9 +1,11 @@
 package com.ssafy.happyhouse.model.mapper;
 
+import java.util.List;
+
 public interface AdminMapper {
 	int visituser(String userid);
 	
-	int weekvisiterlist();
+	List<Integer> weekvisiterlist();
 	
 	int todayvisiter();
 	
