@@ -15,6 +15,7 @@ export default {
 .items_wrap {
   display: flex;
   justify-content: center;
+  text-align: center;
 }
 .items_wrap div:first-child {
   width: 20%;
