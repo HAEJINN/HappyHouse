@@ -11,4 +11,12 @@
 	<select id="cctvlist" resultType="PosDto">
 		select * from cctv;
 	</select>
+	
+	<select id="cafelist" resultType="PosDto">
+		select * from cafe;
+	</select>
+	
+	<select id="pharlist" resultType="PosDto">
+		select * from phar;
+	</select>
 </mapper>

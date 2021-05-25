@@ -8,4 +8,8 @@ public interface PosService {
 	List<PosDto> convenlist(PosDto midpos);
 
 	List<PosDto> cctvlist(PosDto midpos);
+
+	List<PosDto> cafelist(PosDto midpos);
+
+	List<PosDto> pharlist(PosDto midpos);
 }

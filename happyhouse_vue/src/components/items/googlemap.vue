@@ -8,8 +8,6 @@
         @click="markerclick(m)"
         :icon="{ url: require('@/assets/marker.png') }"
       />
-      <!-- :icon="{url: require('@/assets/LogoMakr-4pVzaR.png'),}" -->
-      <!-- :visible="false" -->
       <GmapMarker
         :key="'cctv' + index"
         v-for="(m, index) in cctvmarkers"
@@ -24,6 +22,20 @@
         :icon="{ url: require('@/assets/store.png') }"
         :visible="convenVisible"
       />
+      <GmapMarker
+        :key="'cafe' + index"
+        v-for="(m, index) in cafemarkers"
+        :position="m.position"
+        :icon="{ url: require('@/assets/cctv.png') }"
+        :visible="cafeVisible"
+      />
+      <GmapMarker
+        :key="'phar' + index"
+        v-for="(m, index) in pharmarkers"
+        :position="m.position"
+        :icon="{ url: require('@/assets/store.png') }"
+        :visible="pharVisible"
+      />
       <GmapInfoWindow
         :position="infovalue.position"
         :opened="infoWinOpen"
@@ -34,6 +46,9 @@
     </GmapMap>
     <input type="checkbox" v-model="cctvVisible" />cctv
     <input type="checkbox" v-model="convenVisible" /> conven
+    <input type="checkbox" v-model="cafeVisible" />cafe
+    <input type="checkbox" v-model="pharVisible" /> pharmacy
+    <button @click="test()">test</button>
   </div>
 </template>
 
@@ -54,8 +69,12 @@ export default {
       markers: [],
       cctvmarkers: [],
       convenmarkers: [],
-      cctvVisible: true,
-      convenVisible: true,
+      cafemarkers: [],
+      pharmarkers: [],
+      cctvVisible: false,
+      convenVisible: false,
+      cafeVisible: false,
+      pharVisible: false,
       infoWinOpen: false,
       infovalue: {
         no: "",
@@ -74,6 +93,12 @@ export default {
     },
     convens() {
       return this.$store.state.convens;
+    },
+    cafes() {
+      return this.$store.state.cafes;
+    },
+    phars() {
+      return this.$store.state.phars;
     },
   },
   watch: {
@@ -125,6 +150,32 @@ export default {
         });
       }
     },
+    cafes() {
+      if (this.cafes.length > 0) {
+        take(this.cafes, this.cafes.length).map(({ lat, lng }) => {
+          var mar = {
+            position: {
+              lat: parseFloat(lat),
+              lng: parseFloat(lng),
+            },
+          };
+          this.cafemarkers.push(mar);
+        });
+      }
+    },
+    phars() {
+      if (this.phars.length > 0) {
+        take(this.phars, this.phars.length).map(({ lat, lng }) => {
+          var mar = {
+            position: {
+              lat: parseFloat(lat),
+              lng: parseFloat(lng),
+            },
+          };
+          this.pharmarkers.push(mar);
+        });
+      }
+    },
   },
   methods: {
     markerclick(item) {
@@ -161,10 +212,16 @@ export default {
       this.markers = [];
       this.cctvmarkers = [];
       this.convenmarkers = [];
+      this.cafemarkers = [];
+      this.pharmarkers = [];
     },
     setCenter(position) {
       this.center = position;
       this.zoom = 18;
+    },
+    test() {
+      console.log(this.cafemarkers);
+      console.log(this.pharmarkers);
     },
   },
 };

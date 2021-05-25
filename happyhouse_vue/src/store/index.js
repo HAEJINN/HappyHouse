@@ -18,6 +18,8 @@ export default new Vuex.Store({
     news: [],
     cctvs: [],
     convens: [],
+    cafes: [],
+    phars: [],
     flist: [],
     statics: {},
     isLogin: false, // 로그인 여부
@@ -44,6 +46,12 @@ export default new Vuex.Store({
     },
     convens(state) {
       return state.convens;
+    },
+    cafes(state) {
+      return state.cafes;
+    },
+    phars(state) {
+      return state.phars;
     },
     userInfo(state) {
       return state.userInfo;
@@ -80,8 +88,14 @@ export default new Vuex.Store({
     setCctvs(state, payload) {
       state.cctvs = payload;
     },
-    setConven(state, payload) {
+    setConvens(state, payload) {
       state.convens = payload;
+    },
+    setCafes(state, payload) {
+      state.cafes = payload;
+    },
+    setPhars(state, payload) {
+      state.phars = payload;
     },
     setIsLogined(state, isLogin) {
       state.isLogin = isLogin;
@@ -152,7 +166,6 @@ export default new Vuex.Store({
       http
         .post("/apt/dong", data)
         .then(({ data }) => {
-          console.log(data);
           context.commit("setResult", data);
         })
         .catch(() => {
@@ -164,7 +177,6 @@ export default new Vuex.Store({
       http
         .post("/apt/name", data)
         .then(({ data }) => {
-          console.log(data);
           context.commit("setResult", data);
         })
         .catch(() => {
@@ -175,7 +187,6 @@ export default new Vuex.Store({
       http
         .post("/apt/dong", data)
         .then(({ data }) => {
-          console.log(data);
           context.commit("setResult", data);
         })
         .catch(() => {
@@ -277,16 +288,44 @@ export default new Vuex.Store({
           lng: favorite.lng,
         })
         .then(({ data }) => {
-          context.commit("setConven", data);
+          context.commit("setConvens", data);
         })
         .catch(() => {
           alert("get conven list error");
         });
     },
+    loadCafes(context, favorite) {
+      http
+        .post("/pos/cafe", {
+          lat: favorite.lat,
+          lng: favorite.lng,
+        })
+        .then(({ data }) => {
+          context.commit("setCafes", data);
+        })
+        .catch(() => {
+          alert("get cafe list error");
+        });
+    },
+    loadPhars(context, favorite) {
+      http
+        .post("/pos/phar", {
+          lat: favorite.lat,
+          lng: favorite.lng,
+        })
+        .then(({ data }) => {
+          context.commit("setPhars", data);
+        })
+        .catch(() => {
+          alert("get phar list error");
+        });
+    },
     clearMapData(context) {
       context.commit("setResult", []);
       context.commit("setCctvs", []);
-      context.commit("setConven", []);
+      context.commit("setConvens", []);
+      context.commit("setCafes", []);
+      context.commit("setPhars", []);
     },
     loadflist(context) {
       http
@@ -307,7 +346,6 @@ export default new Vuex.Store({
         .get("/admin/static")
         .then(({ data }) => {
           context.commit("setstatics", data);
-          console.log(data);
         })
         .catch(() => {
           alert("static load error");

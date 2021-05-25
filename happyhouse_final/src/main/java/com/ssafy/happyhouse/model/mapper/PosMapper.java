@@ -8,4 +8,8 @@ public interface PosMapper {
 	List<PosDto> convenlist();
 	
 	List<PosDto> cctvlist();
+	
+	List<PosDto> cafelist();
+	
+	List<PosDto> pharlist();
 }

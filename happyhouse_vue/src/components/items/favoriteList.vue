@@ -19,6 +19,8 @@ export default {
       this.$store.dispatch("clearMapData");
       this.$store.dispatch("loadCctvs", this.favorite);
       this.$store.dispatch("loadConvens", this.favorite);
+      this.$store.dispatch("loadCafes", this.favorite);
+      this.$store.dispatch("loadPhars", this.favorite);
       this.$store.dispatch("setSingleApt", this.favorite);
     },
     deletefavorite() {
