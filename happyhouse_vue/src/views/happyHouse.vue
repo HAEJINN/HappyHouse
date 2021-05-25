@@ -49,7 +49,7 @@ export default {
   justify-content: center;
   background-color: #ffffff;
   width: 80%;
-  margin: 50px auto;
+  margin: 10px auto 50px;
   border: none;
   border-radius: 15px;
 }

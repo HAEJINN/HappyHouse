@@ -1,7 +1,7 @@
 <!-- 메인 중단 컨텐츠 -->
 <template>
   <div>
-    <div class="space"></div>
+    <div class="space"><span>HAPPY HOUSE</span></div>
     <rank-apt></rank-apt>
     <board-comp></board-comp>
     <news-comp></news-comp>
@@ -23,9 +23,16 @@ export default {
 </script>
 <style scoped>
 .space {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
   width: 80%;
   height: 100px;
   margin: 0 auto;
   border-bottom: 1px solid black;
+}
+.space span {
+  display: block;
+  font-size: 3em;
 }
 </style>

@@ -1,45 +1,35 @@
 <template>
   <div class="nav_wrap">
-    <div v-if="userInfo">{{ userInfo.userid }}님 환영합니다</div>
-    <div class="nav_item" v-if="userInfo">
-      <router-link to="/happyhouse/main" class="nav_link">메인</router-link>
-      <router-link to="/happyhouse/searchApt" class="nav_link">아파트정보</router-link>
-      <router-link v-if="userInfo.userid == 'admin'" to="/happyhouse/dashboard" class="nav_link"
-        >사이트통계</router-link
-      >
-      <router-link v-if="userInfo.userid != 'admin'" to="/happyhouse/favoriteApt" class="nav_link"
-        >즐겨찾기</router-link
-      >
-      <router-link v-if="userInfo.userid != 'admin'" to="/happyhouse/myPage" class="nav_link"
-        >내정보</router-link
-      >
-      <button @click.prevent="onClickLogout" class="nav_link" v-if="isLogin">로그아웃</button>
+    <div class="user_div">
+      <div v-if="userInfo">{{ userInfo.userid }}님 환영합니다</div>
     </div>
-
-    <!-- <div class="menu-btn" >
+    <div class="menu-btn" @click="open_menu">
       <a class="menu-a" href="#"> <span class="menu-text">menu</span></a>
     </div>
     <nav class="navi">
-      <div class="close-btn"></div>
+      <div class="close-btn" @click="close_menu"></div>
       <h1 class="navi-title">MENU</h1>
       <ul class="navi-list">
         <li>
-          <a href="#">Home</a>
+          <router-link to="/happyhouse/main" class="nav_link">메인</router-link>
         </li>
         <li>
-          <a href="#">Ipsum veroeros</a>
+          <router-link to="/happyhouse/searchApt" class="nav_link">아파트정보</router-link>
+        </li>
+        <li v-if="userInfo.userid == 'admin'">
+          <router-link to="/happyhouse/dashboard" class="nav_link">사이트통계</router-link>
+        </li>
+        <li v-if="userInfo.userid != 'admin'">
+          <router-link to="/happyhouse/favoriteApt" class="nav_link">즐겨찾기</router-link>
+        </li>
+        <li v-if="userInfo.userid != 'admin'">
+          <router-link to="/happyhouse/myPage" class="nav_link">내정보</router-link>
         </li>
         <li>
-          <a href="#">Tempus etiam</a>
-        </li>
-        <li>
-          <a href="#">Consequat dolor</a>
-        </li>
-        <li>
-          <a href="#">Elements</a>
+          <button @click.prevent="onClickLogout" v-if="isLogin">로그아웃</button>
         </li>
       </ul>
-    </nav> -->
+    </nav>
   </div>
 </template>
 <script>
@@ -61,49 +51,33 @@ export default {
           console.log('로그아웃 문제!!!');
         });
     },
+    open_menu() {
+      const navi = document.querySelector('.navi');
+      navi.classList.add('navi-visible');
+      navi.classList.remove('navi-invisible');
+    },
+    close_menu() {
+      const navi = document.querySelector('.navi');
+      navi.classList.add('navi-invisible');
+      navi.classList.remove('navi-visible');
+    },
   },
 };
-
-// var navi = document.querySelector('.navi');
-// var menuBtn = document.querySelector('.menu-btn');
-// var closeBtn = document.querySelector('.close-btn');
-
-// menuBtn.addEventListener('click', function () {
-//   navi.classList.add('navi-visible');
-//   navi.classList.remove('navi-invisible');
-// });
-
-// closeBtn.addEventListener('click', function () {
-//   navi.classList.add('navi-invisible');
-//   navi.classList.remove('navi-visible');
-// });
 </script>
 <style scoped>
 .nav_wrap {
-  position: absolute;
-  top: 0;
-  left: 0;
   width: 100%;
   display: flex;
   justify-content: flex-end;
   height: 8%;
-  padding: 2.5em 0;
+  padding: 15px 0;
 }
-.nav_item {
+.user_div {
   display: flex;
-  justify-content: space-around;
-  align-items: center;
-  width: 27%;
-  font-size: 1.3em;
+  margin-right: 80px;
+  font-size: 1.5em;
 }
-.nav_link {
-  text-decoration: none;
-  color: inherit;
-}
-.nav_link:hover {
-  font-weight: bold;
-}
-/* .menu-btn {
+.menu-btn {
   position: fixed;
   top: 15px;
   right: 15px;
@@ -143,13 +117,14 @@ export default {
   position: fixed;
   top: 0;
   right: -26.5em;
-  width: 20em;
-  height: 100vh;
+  width: 15em;
+  /* height: 40vh; */
   background-color: #585858;
   color: #ffffff;
   z-index: 10;
-  padding: 2.5em;
-  transition: right 1000ms;
+  padding: 1em 2.5em;
+  transition: right 500ms;
+  text-align: center;
 }
 
 .navi-visible {
@@ -181,28 +156,36 @@ export default {
   font-size: 1.5em;
   font-weight: 400;
   letter-spacing: 0.2em;
-  margin-bottom: 1.5em;
+  margin-bottom: 1em;
 }
 
 .navi-list {
   font-size: 1em;
   font-weight: 300;
+  padding: 0;
 }
 
+.navi-list li {
+  list-style: none;
+  padding: 1em;
+}
 .navi-list li:hover {
   color: #db97d6;
 }
 
-.navi-list li::after {
+/* .navi-list li::after {
   content: '';
   display: block;
   width: 100%;
   height: 1px;
   border-bottom: 1px solid #7d7d7d;
   margin: 1em 0;
+} */
+.nav_link {
+  text-decoration: none;
+  font-size: 1.5em;
 }
-
 .navi-list li:last-child::after {
   display: none;
-} */
+}
 </style>

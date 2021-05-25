@@ -16,7 +16,13 @@ export default {
   display: flex;
   justify-content: center;
 }
-.items_wrap div {
-  width: 40%;
+.items_wrap div:first-child {
+  width: 20%;
+  margin-bottom: 0.5em;
+}
+.items_wrap div:last-child {
+  width: 20%;
+  margin-bottom: 0.5em;
+  text-align: center;
 }
 </style>

@@ -1,7 +1,8 @@
 <template>
-  <div class="main_wrap">
-    <h1>Ranking</h1>
+  <div>
+    <h1 class="main_title">최근 실 거래가 상위 아파트</h1>
     <rank-item v-for="(rank, idx) in ranks" :key="idx" :rank="rank" />
+    <div class="space"></div>
   </div>
 </template>
 <script>
@@ -22,10 +23,12 @@ export default {
 <style scoped>
 .main_wrap {
   width: 100%;
-  padding: 3em;
+  padding: 1em 0 2em;
   margin: 50px 0;
-  font-size: 1.5em;
+  font-size: 1.3em;
+  /* background-color: blanchedalmond; */
+}
+.main_title {
   text-align: center;
-  background-color: blanchedalmond;
 }
 </style>

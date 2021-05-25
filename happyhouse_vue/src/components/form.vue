@@ -5,24 +5,24 @@
       <h1 v-if="type == 'update'">정보 수정</h1>
 
       <h1 v-else>회원가입</h1>
-      <div>
+      <div class="input_wrap">
         <label for="userid">아이디</label>
         <input v-if="type == 'update'" v-model="userid" disabled />
         <input v-else type="text" id="userid" name="userid" v-model="userid" />
       </div>
-      <div>
+      <div class="input_wrap">
         <label for="username">이름</label>
         <input type="text" id="username" name="username" v-model="username" />
       </div>
-      <div>
+      <div class="input_wrap">
         <label for="userpwd">비밀번호</label>
         <input type="password" id="userpwd" name="userpwd" v-model="userpwd" />
       </div>
-      <div>
+      <div class="input_wrap">
         <label for="email">이메일</label>
         <input type="text" id="email" name="email" v-model="email" />
       </div>
-      <div>
+      <div class="input_wrap">
         <label for="phonenumber">전화번호</label>
         <input
           type="text"
@@ -32,7 +32,7 @@
           v-model="phonenumber"
         />
       </div>
-      <div>
+      <div class="input_wrap">
         <label for="gender">성별</label>
         <select name="gender" id="gender" v-model="gender">
           <option v-for="(type, idx) in types" :key="idx">{{ type }}</option>
@@ -180,11 +180,9 @@ export default {
   margin-right: 1em;
 }
 .regist_form div input {
-  width: 200px;
   height: 2.5em;
 }
 .regist_form div select {
-  width: 200px;
   font-size: 1.02em;
   height: 1.5em;
 }
@@ -192,6 +190,20 @@ export default {
   width: 20%;
   font-size: 1.05em;
   height: 1.8em;
-  margin-bottom: 1em;
+  margin: 0.5em 0 1em 0;
+}
+.input_wrap {
+  display: flex;
+  width: 55%;
+  margin: 0 auto;
+}
+.input_wrap label {
+  display: block;
+  width: 30%;
+}
+.input_wrap input,
+.input_wrap select {
+  display: block;
+  width: 70%;
 }
 </style>

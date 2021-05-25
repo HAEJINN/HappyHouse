@@ -3,11 +3,11 @@
     <div class="login_form">
       <h1 class="login_title">로그인</h1>
       <div class="inputs">
-        <div>
+        <div class="input_wrap">
           <label for="userid">아이디</label>
           <input type="text" id="userid" name="userid" ref="userid" v-model="user.userid" />
         </div>
-        <div>
+        <div class="input_wrap">
           <label for="userpwd">비밀번호</label>
           <input
             type="password"
@@ -116,7 +116,6 @@ export default {
 }
 .login_form div input {
   margin-bottom: 1.5em;
-  width: 200px;
   height: 2.5em;
 }
 .login_btn {
@@ -132,5 +131,18 @@ export default {
 .login_btn:hover {
   cursor: pointer;
   transform: scale(1.05);
+}
+.input_wrap {
+  display: flex;
+  width: 60%;
+  margin: 0 auto;
+}
+.input_wrap label {
+  display: block;
+  width: 30%;
+}
+.input_wrap input {
+  display: block;
+  width: 70%;
 }
 </style>
