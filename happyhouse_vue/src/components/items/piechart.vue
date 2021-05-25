@@ -36,6 +36,16 @@ export default {
             ],
             type: pie(),
           },
+          legend: {
+            position: "right",
+            equally: true,
+            item: {
+              tile: {
+                width: 100,
+                height: 50,
+              },
+            },
+          },
           color: {
             pattern: ["#1f77b4", "#aec7e8"], // color code
           },
@@ -54,4 +64,8 @@ export default {
 };
 </script>
 
-<style lang=""></style>
+<style>
+.bb-legend-item > text {
+  font-size: 30px;
+}
+</style>

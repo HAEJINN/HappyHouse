@@ -41,6 +41,9 @@ export default {
               "방문자 수": "black",
             },
           },
+          legend: {
+            position: "right",
+          },
           axis: {
             x: {
               type: "timeseries",
