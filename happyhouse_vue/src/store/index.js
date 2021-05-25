@@ -16,6 +16,7 @@ export default new Vuex.Store({
     results: [],
     cctvs: [],
     convens: [],
+    flist: [],
     isLogin: false, // 로그인 여부
     userInfo: null,
   },
@@ -46,6 +47,9 @@ export default new Vuex.Store({
     },
     post(state) {
       return state.post;
+    },
+    flist(state) {
+      return state.flist;
     },
   },
   mutations: {
@@ -83,6 +87,9 @@ export default new Vuex.Store({
     },
     setP(state, payload) {
       state.post = payload;
+    },
+    setFlist(state, payload) {
+      state.flist = payload;
     },
   },
   actions: {
@@ -240,6 +247,37 @@ export default new Vuex.Store({
       context.commit("setResult", []);
       context.commit("setCctvs", []);
       context.commit("setConven", []);
+    },
+    loadflist(context) {
+      http
+        .get("/user/favorite", {
+          headers: {
+            "access-token": window.localStorage.getItem("access-token"),
+          },
+        })
+        .then(({ data }) => {
+          context.commit("setFlist", data);
+        })
+        .catch(() => {
+          alert("????");
+        });
+    },
+    deletefavorite(context, no) {
+      http
+        .delete(`/user/favorite/${no}`, {
+          headers: {
+            "access-token": window.localStorage.getItem("access-token"),
+          },
+        })
+        .then(({ data }) => {
+          if (data === "SUCCESS") {
+            context.commit("setFlist", []);
+            console.log("즐겨찾기 삭제성공");
+          }
+        })
+        .catch(() => {
+          console.log("즐겨찾기 삭제실패");
+        });
     },
   },
 });
