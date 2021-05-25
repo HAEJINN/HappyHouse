@@ -12,5 +12,6 @@
   align-items: center;
   padding-bottom: 50px;
   font-size: 1.2em;
+  color: white;
 }
 </style>

@@ -6,25 +6,29 @@
     <p>{{ notice.content }}</p>
     <button v-if="userInfo.userid == 'admin'" @click="modify">수정</button>
     <button v-if="userInfo.userid == 'admin'" @click="deleteN">삭제</button>
+    <button @click="mvlist">목록</button>
   </div>
 </template>
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters } from 'vuex';
 export default {
-  name: "NoticeDesc",
+  name: 'NoticeDesc',
   computed: {
-    ...mapGetters(["userInfo", "notice"]),
+    ...mapGetters(['userInfo', 'notice']),
   },
   created() {
-    this.$store.dispatch("searchN", this.$route.query.no);
+    this.$store.dispatch('searchN', this.$route.query.no);
   },
   methods: {
     modify() {
-      this.$router.push("/happyhouse/updateNotice");
+      this.$router.push('/happyhouse/updateNotice');
     },
     deleteN() {
-      this.$store.dispatch("deleteN", this.$route.query.no);
-      this.$router.push("/happyhouse/noticeDetail");
+      this.$store.dispatch('deleteN', this.$route.query.no);
+      this.$router.push('/happyhouse/noticeDetail');
+    },
+    mvlist() {
+      this.$router.push('/happyhouse/noticeDetail');
     },
   },
 };
