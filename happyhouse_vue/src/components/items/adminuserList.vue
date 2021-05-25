@@ -1,10 +1,27 @@
 <template lang="">
   <div>
-    <h1>{{ user.userid }}</h1>
-    <h1>{{ user.username }}</h1>
-    <h1>{{ user.email }}</h1>
-    <h1>{{ user.phonenumber }}</h1>
-    <h1>{{ user.gender }}</h1>
+    <table>
+      <tr>
+        <th>아이디</th>
+        <td>{{ user.userid }}</td>
+      </tr>
+      <tr>
+        <th>이름</th>
+        <td>{{ user.username }}</td>
+      </tr>
+      <tr>
+        <th>이메일</th>
+        <td>{{ user.email }}</td>
+      </tr>
+      <tr>
+        <th>전화번호</th>
+        <td>{{ user.phonenumber }}</td>
+      </tr>
+      <tr>
+        <th>성별</th>
+        <td>{{ user.gender }}</td>
+      </tr>
+    </table>
     <button @click="deleteuser(user.userid)">유저 삭제</button>
   </div>
 </template>

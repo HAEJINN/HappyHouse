@@ -19,6 +19,9 @@
         <li v-if="userInfo.userid == 'admin'">
           <div class="nav_link" @click="go_next_page('/happyhouse/dashboard')">사이트통계</div>
         </li>
+        <li v-if="userInfo.userid == 'admin'">
+          <div class="nav_link" @click="go_next_page('/happyhouse/userControll')">사용자관리</div>
+        </li>
         <li v-if="userInfo.userid != 'admin'">
           <div class="nav_link" @click="go_next_page('/happyhouse/favoriteApt')">즐겨찾기</div>
         </li>
