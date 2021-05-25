@@ -3,6 +3,7 @@
   <div class="main_wrap">
     <div></div>
     <div class="main_cover">
+      <vue-typer class="main_title" text="HAPPY HOUSE"></vue-typer>
       <h1 class="main_title">HAPPY HOUSE</h1>
       <div class="main_btns">
         <router-link to="/login" class="login_btn">로그인</router-link>
@@ -28,12 +29,12 @@ export default {};
 .main_wrap::after {
   display: block;
   position: absolute;
-  content: '';
+  content: "";
   width: 100%;
   height: 100%;
   top: 0;
   left: 0;
-  background-image: url('../../src/assets/main_house.jpg');
+  background-image: url("../../src/assets/main_house.jpg");
   background-size: cover;
   opacity: 0.8;
   z-index: -100;
@@ -55,7 +56,7 @@ export default {};
 .main_cover::after {
   display: block;
   position: absolute;
-  content: '';
+  content: "";
   width: 100%;
   height: 100%;
   top: 0;

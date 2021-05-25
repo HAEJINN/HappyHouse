@@ -2,8 +2,10 @@ import Vue from "vue";
 import App from "./App.vue";
 import store from "./store";
 import router from "./router";
+import VueTyperPlugin from "vue-typer";
 
 Vue.config.productionTip = false;
+Vue.use(VueTyperPlugin);
 
 new Vue({
   router,
