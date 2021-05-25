@@ -12,4 +12,8 @@ public interface PosService {
 	List<PosDto> cafelist(PosDto midpos);
 
 	List<PosDto> pharlist(PosDto midpos);
+	
+	List<PosDto> buslist(PosDto midpos);
+
+	List<PosDto> trainlist(PosDto midpos);
 }

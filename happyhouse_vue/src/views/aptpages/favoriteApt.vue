@@ -2,15 +2,15 @@
   <div>
     <h1>즐겨찾기 매물 비교</h1>
     <favorite-list v-for="(favorite, idx) in flist" :key="idx" :favorite="favorite" />
-    <google-map />
+    <google-map type="favorite" />
   </div>
 </template>
 <script>
-import FavoriteList from '@/components/items/favoriteList.vue';
-import GoogleMap from '@/components/items/googlemap.vue';
+import FavoriteList from "@/components/items/favoriteList.vue";
+import GoogleMap from "@/components/items/googlemap.vue";
 
 export default {
-  name: 'favoriteApt',
+  name: "favoriteApt",
   data() {
     return {
       flistlength: 0,
@@ -23,10 +23,9 @@ export default {
   },
   watch: {
     flist() {
-      console.log(this.flist);
       if (this.flist.length != this.flistlength) {
         this.flistlength = this.$store.state.flist.length;
-        this.$store.dispatch('loadflist');
+        this.$store.dispatch("loadflist");
       }
     },
   },
@@ -35,8 +34,8 @@ export default {
     GoogleMap,
   },
   created() {
-    this.$store.dispatch('clearMapData');
-    this.$store.dispatch('loadflist');
+    this.$store.dispatch("clearMapData");
+    this.$store.dispatch("loadflist");
   },
 };
 </script>

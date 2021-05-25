@@ -21,6 +21,8 @@ export default {
       this.$store.dispatch("loadConvens", this.favorite);
       this.$store.dispatch("loadCafes", this.favorite);
       this.$store.dispatch("loadPhars", this.favorite);
+      this.$store.dispatch("loadBuss", this.favorite);
+      this.$store.dispatch("loadTrains", this.favorite);
       this.$store.dispatch("setSingleApt", this.favorite);
     },
     deletefavorite() {

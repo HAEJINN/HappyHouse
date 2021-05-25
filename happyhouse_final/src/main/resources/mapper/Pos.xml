@@ -19,4 +19,12 @@
 	<select id="pharlist" resultType="PosDto">
 		select * from phar;
 	</select>
+	
+	<select id="buslist" resultType="PosDto">
+		select * from bus;
+	</select>
+	
+	<select id="trainlist" resultType="PosDto">
+		select * from train;
+	</select>
 </mapper>

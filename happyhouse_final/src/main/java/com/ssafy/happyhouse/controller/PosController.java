@@ -74,4 +74,26 @@ public class PosController {
 			return new ResponseEntity(FAIL, HttpStatus.NOT_FOUND);
 		}
 	}
+	
+	@ApiOperation(value = "중심좌표 받음, 1km 이내 버스좌표 list 반환, 실패시 FAIL 반환", response = List.class)
+	@PostMapping(value = "/bus")
+	public ResponseEntity<?> buslist(@RequestBody PosDto pos) throws Exception {
+		List<PosDto> list = service.buslist(pos);
+		if(list != null && !list.isEmpty()) {
+			return new ResponseEntity<List<PosDto>>(list, HttpStatus.OK);
+		} else {
+			return new ResponseEntity(FAIL, HttpStatus.NOT_FOUND);
+		}
+	}
+	
+	@ApiOperation(value = "중심좌표 받음, 1km 이내 열차좌표 list 반환, 실패시 FAIL 반환", response = List.class)
+	@PostMapping(value = "/train")
+	public ResponseEntity<?> trainlist(@RequestBody PosDto pos) throws Exception {
+		List<PosDto> list = service.trainlist(pos);
+		if(list != null && !list.isEmpty()) {
+			return new ResponseEntity<List<PosDto>>(list, HttpStatus.OK);
+		} else {
+			return new ResponseEntity(FAIL, HttpStatus.NOT_FOUND);
+		}
+	}
 }

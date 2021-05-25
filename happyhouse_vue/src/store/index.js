@@ -20,6 +20,8 @@ export default new Vuex.Store({
     convens: [],
     cafes: [],
     phars: [],
+    buss: [],
+    trains: [],
     flist: [],
     statics: {},
     isLogin: false, // 로그인 여부
@@ -52,6 +54,12 @@ export default new Vuex.Store({
     },
     phars(state) {
       return state.phars;
+    },
+    buss(state) {
+      return state.buss;
+    },
+    trains(state) {
+      return state.trains;
     },
     userInfo(state) {
       return state.userInfo;
@@ -96,6 +104,12 @@ export default new Vuex.Store({
     },
     setPhars(state, payload) {
       state.phars = payload;
+    },
+    setBuss(state, payload) {
+      state.buss = payload;
+    },
+    setTrains(state, payload) {
+      state.trains = payload;
     },
     setIsLogined(state, isLogin) {
       state.isLogin = isLogin;
@@ -318,6 +332,32 @@ export default new Vuex.Store({
         })
         .catch(() => {
           alert("get phar list error");
+        });
+    },
+    loadBuss(context, favorite) {
+      http
+        .post("/pos/bus", {
+          lat: favorite.lat,
+          lng: favorite.lng,
+        })
+        .then(({ data }) => {
+          context.commit("setBuss", data);
+        })
+        .catch(() => {
+          alert("get bus list error");
+        });
+    },
+    loadTrains(context, favorite) {
+      http
+        .post("/pos/train", {
+          lat: favorite.lat,
+          lng: favorite.lng,
+        })
+        .then(({ data }) => {
+          context.commit("setTrains", data);
+        })
+        .catch(() => {
+          alert("get train list error");
         });
     },
     clearMapData(context) {

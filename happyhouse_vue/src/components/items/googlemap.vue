@@ -36,6 +36,20 @@
         :icon="{ url: require('@/assets/store.png') }"
         :visible="pharVisible"
       />
+      <GmapMarker
+        :key="'bus' + index"
+        v-for="(m, index) in busmarkers"
+        :position="m.position"
+        :icon="{ url: require('@/assets/cctv.png') }"
+        :visible="busVisible"
+      />
+      <GmapMarker
+        :key="'train' + index"
+        v-for="(m, index) in trainmarkers"
+        :position="m.position"
+        :icon="{ url: require('@/assets/store.png') }"
+        :visible="trainVisible"
+      />
       <GmapInfoWindow
         :position="infovalue.position"
         :opened="infoWinOpen"
@@ -44,11 +58,14 @@
         <div v-html="infovalue.content" @click="infoclick(infovalue)"></div>
       </GmapInfoWindow>
     </GmapMap>
-    <input type="checkbox" v-model="cctvVisible" />cctv
-    <input type="checkbox" v-model="convenVisible" /> conven
-    <input type="checkbox" v-model="cafeVisible" />cafe
-    <input type="checkbox" v-model="pharVisible" /> pharmacy
-    <button @click="test()">test</button>
+    <div v-if="type == 'favorite'">
+      <input type="checkbox" v-model="cctvVisible" />cctv
+      <input type="checkbox" v-model="convenVisible" /> conven
+      <input type="checkbox" v-model="cafeVisible" />cafe
+      <input type="checkbox" v-model="pharVisible" /> pharmacy
+      <input type="checkbox" v-model="busVisible" />bus
+      <input type="checkbox" v-model="trainVisible" /> train
+    </div>
   </div>
 </template>
 
@@ -59,6 +76,7 @@ import { mapGetters } from "vuex";
 
 export default {
   name: "GoogleMap",
+  props: ["type"],
   data() {
     return {
       center: {
@@ -71,10 +89,14 @@ export default {
       convenmarkers: [],
       cafemarkers: [],
       pharmarkers: [],
+      busmarkers: [],
+      trainmarkers: [],
       cctvVisible: false,
       convenVisible: false,
       cafeVisible: false,
       pharVisible: false,
+      busVisible: false,
+      trainVisible: false,
       infoWinOpen: false,
       infovalue: {
         no: "",
@@ -99,6 +121,12 @@ export default {
     },
     phars() {
       return this.$store.state.phars;
+    },
+    buss() {
+      return this.$store.state.buss;
+    },
+    trains() {
+      return this.$store.state.trains;
     },
   },
   watch: {
@@ -176,6 +204,32 @@ export default {
         });
       }
     },
+    buss() {
+      if (this.buss.length > 0) {
+        take(this.buss, this.buss.length).map(({ lat, lng }) => {
+          var mar = {
+            position: {
+              lat: parseFloat(lat),
+              lng: parseFloat(lng),
+            },
+          };
+          this.busmarkers.push(mar);
+        });
+      }
+    },
+    trains() {
+      if (this.trains.length > 0) {
+        take(this.trains, this.trains.length).map(({ lat, lng }) => {
+          var mar = {
+            position: {
+              lat: parseFloat(lat),
+              lng: parseFloat(lng),
+            },
+          };
+          this.trainmarkers.push(mar);
+        });
+      }
+    },
   },
   methods: {
     markerclick(item) {
@@ -214,6 +268,8 @@ export default {
       this.convenmarkers = [];
       this.cafemarkers = [];
       this.pharmarkers = [];
+      this.busmarkers = [];
+      this.trainmarkers = [];
     },
     setCenter(position) {
       this.center = position;

@@ -64,4 +64,28 @@ public class PosServiceImpl implements PosService {
 		return resultlist;
 	}
 
+	@Override
+	public List<PosDto> buslist(PosDto midpos) {
+		List<PosDto> list = mapper.buslist();
+		List<PosDto> resultlist = new ArrayList<PosDto>();
+		for (PosDto pos : list) {
+			if (1 >= util.distanceInKilometerByHaversine(midpos, pos)) {
+				resultlist.add(pos);
+			}
+		}
+		return resultlist;
+	}
+
+	@Override
+	public List<PosDto> trainlist(PosDto midpos) {
+		List<PosDto> list = mapper.trainlist();
+		List<PosDto> resultlist = new ArrayList<PosDto>();
+		for (PosDto pos : list) {
+			if (1 >= util.distanceInKilometerByHaversine(midpos, pos)) {
+				resultlist.add(pos);
+			}
+		}
+		return resultlist;
+	}
+
 }
