@@ -9,6 +9,8 @@
   },
   "dependencies": {
     "axios": "^0.21.1",
+    "billboard": "^1.0.0",
+    "billboard.js": "^3.0.3",
     "core-js": "^3.6.5",
     "ignore-warnings": "^0.2.1",
     "node-sass": "^6.0.0",

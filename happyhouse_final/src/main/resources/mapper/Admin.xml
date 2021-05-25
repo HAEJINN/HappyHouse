@@ -8,10 +8,10 @@
 		INSERT INTO visit VALUES(#{userid}, CURRENT_TIMESTAMP)
 	</insert>
 
-	<select id="weekvisiterlist" resultType="int">
-		SELECT count(*) 
+	<select id="weekvisiterlist" resultType="VisitDto">
+		SELECT DATE_FORMAT(time,'%Y-%m-%d') as time,count(*) as cnt
 		FROM visit 
-		WHERE time BETWEEN DATE_ADD(NOW(),INTERVAL -1 WEEK ) 
+		WHERE time BETWEEN DATE_ADD(NOW(),INTERVAL -6 DAY ) 
 		AND NOW() group by day(time) 
 		order by day(time);
 	</select>

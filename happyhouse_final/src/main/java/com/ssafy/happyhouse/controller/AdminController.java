@@ -48,8 +48,8 @@ public class AdminController {
 		map.put("todayvisituser", adminservice.todayvisiter());
 		map.put("weekvisiterlist", adminservice.weekvisiterlist());
 		map.put("monthvisituser", adminservice.monthvisiter());
-		map.put("manvisitcount", adminservice.manvisitcount());
-		map.put("womanvisitcount", adminservice.womanvisitcount());
+		map.put("manusercount", adminservice.manvisitcount());
+		map.put("womanusercount", adminservice.womanvisitcount());
 		
 		if(map.size() >= 4){
 			return new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);

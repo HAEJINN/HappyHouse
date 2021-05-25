@@ -1,9 +1,9 @@
-import Vue from 'vue';
-import Vuex from 'vuex';
-import http from '@/util/http-common';
-import VueRouter from 'vue-router';
+import Vue from "vue";
+import Vuex from "vuex";
+import http from "@/util/http-common";
+import VueRouter from "vue-router";
 // import jwt_decode from 'jwt-decode';
-import { findById } from '@/api/user.js';
+import { findById } from "@/api/user.js";
 
 Vue.use(Vuex);
 Vue.use(VueRouter);
@@ -19,6 +19,7 @@ export default new Vuex.Store({
     cctvs: [],
     convens: [],
     flist: [],
+    statics: {},
     isLogin: false, // 로그인 여부
     userInfo: null,
   },
@@ -55,6 +56,9 @@ export default new Vuex.Store({
     },
     flist(state) {
       return state.flist;
+    },
+    statics(state) {
+      return state.statics;
     },
   },
   mutations: {
@@ -99,13 +103,16 @@ export default new Vuex.Store({
     setFlist(state, payload) {
       state.flist = payload;
     },
+    setstatics(state, payload) {
+      state.statics = payload;
+    },
   },
   actions: {
     getNotices(context) {
       http
-        .get('/admin/board')
+        .get("/admin/board")
         .then(({ data }) => {
-          context.commit('setNotices', data);
+          context.commit("setNotices", data);
         })
         .catch(() => {
           // alert('에러발생');
@@ -113,9 +120,9 @@ export default new Vuex.Store({
     },
     getPosts(context) {
       http
-        .get('/board/')
+        .get("/board/")
         .then(({ data }) => {
-          context.commit('setPosts', data);
+          context.commit("setPosts", data);
         })
         .catch(() => {
           // alert('에러발생');
@@ -123,9 +130,9 @@ export default new Vuex.Store({
     },
     getRanks(context) {
       http
-        .get('/apt/toplist')
+        .get("/apt/toplist")
         .then(({ data }) => {
-          context.commit('setRanks', data);
+          context.commit("setRanks", data);
         })
         .catch(() => {
           // alert('에러발생');
@@ -133,9 +140,9 @@ export default new Vuex.Store({
     },
     getNews(context) {
       http
-        .get('/apt/news')
+        .get("/apt/news")
         .then(({ data }) => {
-          context.commit('setNews', data);
+          context.commit("setNews", data);
         })
         .catch(() => {
           // alert('에러발생');
@@ -143,62 +150,62 @@ export default new Vuex.Store({
     },
     loadResult(context, data) {
       http
-        .post('/apt/dong', data)
+        .post("/apt/dong", data)
         .then(({ data }) => {
           console.log(data);
-          context.commit('setResult', data);
+          context.commit("setResult", data);
         })
         .catch(() => {
-          alert('????');
+          alert("????");
         });
     },
     loadResultbyApt(context, data) {
       console.log(data);
       http
-        .post('/apt/name', data)
+        .post("/apt/name", data)
         .then(({ data }) => {
           console.log(data);
-          context.commit('setResult', data);
+          context.commit("setResult", data);
         })
         .catch(() => {
-          alert('????');
+          alert("????");
         });
     },
     loadResultbyDong(context, data) {
       http
-        .post('/apt/dong', data)
+        .post("/apt/dong", data)
         .then(({ data }) => {
           console.log(data);
-          context.commit('setResult', data);
+          context.commit("setResult", data);
         })
         .catch(() => {
-          alert('????');
+          alert("????");
         });
     },
     async GET_MEMBER_INFO(context) {
       await findById((response) => {
         //.log(response.data);
-        context.commit('setUserInfo', response.data);
+        context.commit("setUserInfo", response.data);
         // router.push("/");
         // router.go(router.currentRoute);
       });
     },
     LOGOUT({ commit }) {
-      commit('logout');
-      localStorage.removeItem('access-token');
+      commit("logout");
+      localStorage.removeItem("access-token");
       // axios.defaults.headers.common["auth-token"] = undefined;
-      alert('로그아웃 되었습니다');
+      alert("로그아웃 되었습니다");
     },
     searchN(context, data) {
       console.log(data);
       http
         .get(`/admin/board/detail/${data}`)
         .then(({ data }) => {
-          console.log('notice');
-          context.commit('setN', data);
+          console.log("notice");
+          context.commit("setN", data);
         })
         .catch(() => {
-          alert('공지사항 로드 실패');
+          alert("공지사항 로드 실패");
         });
     },
     searchP(context, data) {
@@ -206,24 +213,24 @@ export default new Vuex.Store({
       http
         .get(`/board/detail/${data}`)
         .then(({ data }) => {
-          console.log('post');
-          context.commit('setP', data);
+          console.log("post");
+          context.commit("setP", data);
         })
         .catch(() => {
-          alert('게시물 로드 실패');
+          alert("게시물 로드 실패");
         });
     },
     async deleteP(context, data) {
       await http
         .delete(`/board/delete/${data}`)
         .then(({ data }) => {
-          if (data === 'SUCCESS') {
-            alert('삭제성공');
+          if (data === "SUCCESS") {
+            alert("삭제성공");
             //this.$router.push('/happyhouse/postDetail');
           }
         })
         .catch(() => {
-          alert('삭제실패');
+          alert("삭제실패");
           //this.$router.push('/happyhouse/postDetail');
         });
     },
@@ -231,18 +238,18 @@ export default new Vuex.Store({
       await http
         .delete(`/admin/delete/${data}`)
         .then(({ data }) => {
-          if (data === 'SUCCESS') {
-            alert('삭제성공');
+          if (data === "SUCCESS") {
+            alert("삭제성공");
             // this.$router.push('/happyhouse/noticeDetail');
           }
         })
         .catch(() => {
-          alert('삭제실패');
+          alert("삭제실패");
           //this.$router.push('/happyhouse/noticeDetail');
         });
     },
     setSingleApt(context, favorite) {
-      context.commit('setResult', [
+      context.commit("setResult", [
         {
           aptname: favorite.aptname,
           lat: favorite.lat,
@@ -252,64 +259,75 @@ export default new Vuex.Store({
     },
     loadCctvs(context, favorite) {
       http
-        .post('/pos/cctv', {
+        .post("/pos/cctv", {
           lat: favorite.lat,
           lng: favorite.lng,
         })
         .then(({ data }) => {
-          context.commit('setCctvs', data);
+          context.commit("setCctvs", data);
         })
         .catch(() => {
-          alert('get cctv list error');
+          alert("get cctv list error");
         });
     },
     loadConvens(context, favorite) {
       http
-        .post('/pos/conven', {
+        .post("/pos/conven", {
           lat: favorite.lat,
           lng: favorite.lng,
         })
         .then(({ data }) => {
-          context.commit('setConven', data);
+          context.commit("setConven", data);
         })
         .catch(() => {
-          alert('get conven list error');
+          alert("get conven list error");
         });
     },
     clearMapData(context) {
-      context.commit('setResult', []);
-      context.commit('setCctvs', []);
-      context.commit('setConven', []);
+      context.commit("setResult", []);
+      context.commit("setCctvs", []);
+      context.commit("setConven", []);
     },
     loadflist(context) {
       http
-        .get('/user/favorite', {
+        .get("/user/favorite", {
           headers: {
-            'access-token': window.localStorage.getItem('access-token'),
+            "access-token": window.localStorage.getItem("access-token"),
           },
         })
         .then(({ data }) => {
-          context.commit('setFlist', data);
+          context.commit("setFlist", data);
         })
         .catch(() => {
-          alert('????');
+          alert("????");
+        });
+    },
+    loadstatics(context) {
+      http
+        .get("/admin/static")
+        .then(({ data }) => {
+          context.commit("setstatics", data);
+          console.log(data);
+        })
+        .catch(() => {
+          alert("static load error");
         });
     },
     deletefavorite(context, no) {
       http
         .delete(`/user/favorite/${no}`, {
           headers: {
-            'access-token': window.localStorage.getItem('access-token'),
+            "access-token": window.localStorage.getItem("access-token"),
           },
         })
         .then(({ data }) => {
-          if (data === 'SUCCESS') {
-            context.commit('setFlist', []);
-            console.log('즐겨찾기 삭제성공');
+          if (data === "SUCCESS") {
+            context.commit("setFlist", []);
+            console.log("즐겨찾기 삭제성공");
           }
         })
         .catch(() => {
-          console.log('즐겨찾기 삭제실패');
+          console.log("즐겨찾기 삭제실패");
         });
     },
   },

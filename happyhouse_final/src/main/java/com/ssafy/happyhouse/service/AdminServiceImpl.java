@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.ssafy.happyhouse.model.VisitDto;
 import com.ssafy.happyhouse.model.mapper.AdminMapper;
 
 @Service
@@ -21,7 +22,7 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public List<Integer> weekvisiterlist() {
+	public List<VisitDto> weekvisiterlist() {
 		return mapper.weekvisiterlist();
 	}
 	
