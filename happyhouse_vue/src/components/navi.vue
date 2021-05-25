@@ -3,6 +3,7 @@
     <div class="user_div">
       <vue-typer
         class="userhello"
+        erase-style="clear"
         v-if="userInfo"
         :text="userInfo.userid + ' 님 환영합니다'"
       ></vue-typer>

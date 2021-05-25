@@ -3,7 +3,7 @@
   <div class="main_wrap">
     <div></div>
     <div class="main_cover">
-      <vue-typer class="main_title" text="HAPPY HOUSE"></vue-typer>
+      <vue-typer class="main_title" text="HAPPY HOUSE" erase-style="clear"></vue-typer>
       <h1 class="main_title">HAPPY HOUSE</h1>
       <div class="main_btns">
         <router-link to="/login" class="login_btn">로그인</router-link>
