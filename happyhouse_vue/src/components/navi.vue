@@ -1,11 +1,18 @@
 <template>
   <div class="nav_wrap">
     <span v-if="userInfo">{{ userInfo.userid }}님 환영합니다</span>
-    <div class="nav_item">
+    <div class="nav_item" v-if="userInfo">
       <router-link to="/happyhouse/main" class="nav_link">메인</router-link>
       <router-link to="/happyhouse/searchApt" class="nav_link">아파트정보</router-link>
-      <router-link to="/happyhouse/favoriteApt" class="nav_link">즐겨찾기</router-link>
-      <router-link to="/happyhouse/myPage" class="nav_link">내정보</router-link>
+      <router-link v-if="userInfo.userid == 'admin'" to="/happyhouse/dashboard" class="nav_link"
+        >사이트통계</router-link
+      >
+      <router-link v-if="userInfo.userid != 'admin'" to="/happyhouse/favoriteApt" class="nav_link"
+        >즐겨찾기</router-link
+      >
+      <router-link v-if="userInfo.userid != 'admin'" to="/happyhouse/myPage" class="nav_link"
+        >내정보</router-link
+      >
       <button @click.prevent="onClickLogout" class="nav_link" v-if="isLogin">로그아웃</button>
     </div>
   </div>

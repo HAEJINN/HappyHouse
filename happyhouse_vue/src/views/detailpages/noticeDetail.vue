@@ -39,7 +39,9 @@ export default {
     this.$store.dispatch('getNotices');
   },
   methods: {
-    writePost() {},
+    writePost() {
+      this.$router.push('/happyhouse/noticeForm');
+    },
   },
 };
 </script>

@@ -4,7 +4,8 @@
     <p>{{ notice.userid }}</p>
     <p>{{ notice.timestamp }}</p>
     <p>{{ notice.content }}</p>
-    <button v-if="userInfo.userid == 'admin'">수정</button>
+    <button v-if="userInfo.userid == 'admin'" @click="modify">수정</button>
+    <button v-if="userInfo.userid == 'admin'" @click="deleteP">삭제</button>
   </div>
 </template>
 <script>
@@ -16,6 +17,14 @@ export default {
   },
   created() {
     this.$store.dispatch('searchN', this.$route.query.no);
+  },
+  methods: {
+    modify() {
+      this.$router.push('/happyhouse/updateNotice');
+    },
+    deleteP() {
+      // this.$store.dispatch('deleteN', this.$route.query.no);
+    },
   },
 };
 </script>

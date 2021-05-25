@@ -69,9 +69,9 @@ const routes = [
         component: () => import('@/views/detailpages/postDetail.vue'),
       },
       {
-        path: 'newsDetail',
-        name: 'news-detail',
-        component: () => import('@/views/detailpages/newsDetail.vue'),
+        path: 'dashBoard',
+        name: 'dash-board',
+        component: () => import('@/views/dashBoard.vue'),
       },
       {
         path: 'noticeDesc',
@@ -92,6 +92,16 @@ const routes = [
         path: 'updatePost',
         name: 'update-post',
         component: () => import('@/components/updatePost.vue'),
+      },
+      {
+        path: 'noticeForm',
+        name: 'notice-form',
+        component: () => import('@/components/noticeForm.vue'),
+      },
+      {
+        path: 'updateNotice',
+        name: 'update-notice',
+        component: () => import('@/components/updateNotice.vue'),
       },
     ],
   },

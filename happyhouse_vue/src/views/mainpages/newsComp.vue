@@ -2,7 +2,6 @@
 <template>
   <div class="news_wrap">
     <h1>newsComp</h1>
-    <router-link to="newsDetail">news</router-link>
   </div>
 </template>
 <style scoped>
