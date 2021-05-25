@@ -9,22 +9,22 @@
   </div>
 </template>
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters } from "vuex";
 export default {
-  name: 'PostDesc',
+  name: "PostDesc",
   computed: {
-    ...mapGetters(['userInfo', 'post']),
+    ...mapGetters(["userInfo", "post"]),
   },
   created() {
-    this.$store.dispatch('searchP', this.$route.query.no);
+    this.$store.dispatch("searchP", this.$route.query.no);
   },
   methods: {
     modify() {
-      this.$router.push('/happyhouse/updatePost');
+      this.$router.push("/happyhouse/updatePost");
     },
-    async deleteP() {
-      await this.$store.dispatch('deleteP', this.$route.query.no);
-      this.$router.push('/happyhouse/postDetail');
+    deleteP() {
+      this.$store.dispatch("deleteP", this.$route.query.no);
+      this.$router.push("/happyhouse/postDetail");
     },
   },
 };
