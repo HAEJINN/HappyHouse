@@ -1,6 +1,5 @@
 <template>
   <div id="googlemap">
-    <button @click="clearMarkers">clear</button>
     <GmapMap ref="mapRef" :center="center" :zoom="zoom" style="width: 70vw; height: 70vh">
       <GmapMarker
         :key="index"
@@ -16,12 +15,14 @@
         v-for="(m, index) in cctvmarkers"
         :position="m.position"
         :icon="{ url: require('@/assets/cctv.png') }"
+        :visible="cctvVisible"
       />
       <GmapMarker
         :key="'conven' + index"
         v-for="(m, index) in convenmarkers"
         :position="m.position"
         :icon="{ url: require('@/assets/store.png') }"
+        :visible="convenVisible"
       />
       <GmapInfoWindow
         :position="infovalue.position"
@@ -31,16 +32,18 @@
         <div v-html="infovalue.content" @click="infoclick(infovalue)"></div>
       </GmapInfoWindow>
     </GmapMap>
+    <input type="checkbox" v-model="cctvVisible" />cctv
+    <input type="checkbox" v-model="convenVisible" /> conven
   </div>
 </template>
 
 <script>
-import take from 'lodash/take';
-import http from '@/util/http-common';
-import { mapGetters } from 'vuex';
+import take from "lodash/take";
+import http from "@/util/http-common";
+import { mapGetters } from "vuex";
 
 export default {
-  name: 'GoogleMap',
+  name: "GoogleMap",
   data() {
     return {
       center: {
@@ -51,16 +54,18 @@ export default {
       markers: [],
       cctvmarkers: [],
       convenmarkers: [],
+      cctvVisible: true,
+      convenVisible: true,
       infoWinOpen: false,
       infovalue: {
-        no: '',
-        content: '',
+        no: "",
+        content: "",
         position: this.center,
       },
     };
   },
   computed: {
-    ...mapGetters(['userInfo']),
+    ...mapGetters(["userInfo"]),
     data() {
       return this.$store.state.results;
     },
@@ -123,7 +128,6 @@ export default {
   },
   methods: {
     markerclick(item) {
-      console.log('markerclick');
       this.infovalue = {
         houseno: item.houseno,
         content: item.aptname,
@@ -136,19 +140,19 @@ export default {
       this.infoWinOpen = true;
     },
     infoclick(content) {
-      if (this.userInfo.userid != 'admin') {
-        if (content.houseno != undefined && confirm('즐겨찾기에 추가할까요?')) {
+      if (this.userInfo.userid != "admin") {
+        if (content.houseno != undefined && confirm("즐겨찾기에 추가할까요?")) {
           http
-            .post('/user/favorite', content.houseno, {
+            .post("/user/favorite", content.houseno, {
               headers: {
-                'access-token': window.localStorage.getItem('access-token'),
+                "access-token": window.localStorage.getItem("access-token"),
               },
             })
             .then(() => {
-              alert('즐겨찾기 등록 성공');
+              alert("즐겨찾기 등록 성공");
             })
             .catch(() => {
-              alert('등록에 실패했습니다.');
+              alert("등록에 실패했습니다.");
             });
         }
       }
