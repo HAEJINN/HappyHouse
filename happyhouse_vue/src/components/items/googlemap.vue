@@ -7,13 +7,20 @@
         v-for="(m, index) in markers"
         :position="m.position"
         @click="markerclick(m)"
+        :icon="{ url: require('@/assets/marker.png') }"
       />
       <!-- :icon="{url: require('@/assets/LogoMakr-4pVzaR.png'),}" -->
-      <GmapMarker :key="'cctv' + index" v-for="(m, index) in cctvmarkers" :position="m.position" />
+      <GmapMarker
+        :key="'cctv' + index"
+        v-for="(m, index) in cctvmarkers"
+        :position="m.position"
+        :icon="{ url: require('@/assets/cctv.png') }"
+      />
       <GmapMarker
         :key="'conven' + index"
         v-for="(m, index) in convenmarkers"
         :position="m.position"
+        :icon="{ url: require('@/assets/store.png') }"
       />
       <GmapInfoWindow
         :position="infovalue.position"
@@ -27,11 +34,11 @@
 </template>
 
 <script>
-import take from "lodash/take";
-import http from "@/util/http-common";
+import take from 'lodash/take';
+import http from '@/util/http-common';
 
 export default {
-  name: "GoogleMap",
+  name: 'GoogleMap',
   data() {
     return {
       center: {
@@ -44,8 +51,8 @@ export default {
       convenmarkers: [],
       infoWinOpen: false,
       infovalue: {
-        no: "",
-        content: "",
+        no: '',
+        content: '',
         position: this.center,
       },
     };
@@ -113,7 +120,7 @@ export default {
   },
   methods: {
     markerclick(item) {
-      console.log("markerclick");
+      console.log('markerclick');
       this.infovalue = {
         houseno: item.houseno,
         content: item.aptname,
@@ -126,18 +133,18 @@ export default {
       this.infoWinOpen = true;
     },
     infoclick(content) {
-      if (content.houseno != undefined && confirm("즐겨찾기에 추가할까요?")) {
+      if (content.houseno != undefined && confirm('즐겨찾기에 추가할까요?')) {
         http
-          .post("/user/favorite", content.houseno, {
+          .post('/user/favorite', content.houseno, {
             headers: {
-              "access-token": window.localStorage.getItem("access-token"),
+              'access-token': window.localStorage.getItem('access-token'),
             },
           })
           .then(() => {
-            alert("즐겨찾기 등록 성공");
+            alert('즐겨찾기 등록 성공');
           })
           .catch(() => {
-            alert("등록에 실패했습니다.");
+            alert('등록에 실패했습니다.');
           });
       }
     },

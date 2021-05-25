@@ -96,6 +96,7 @@ export default {
     },
   },
   created() {
+    this.$store.dispatch('clearMapData');
     http
       .get('/base/city')
       .then(({ data }) => {
