@@ -4,7 +4,10 @@
 
     <div class="blockclass">
       <pie-chart></pie-chart>
-      <div class="text"><span>남자, 여자 숫자</span></div>
+      <div class="text">
+        <div>남자: {{ statics.manusercount }}명</div>
+        <div>여자: {{ statics.womanusercount }}명</div>
+      </div>
     </div>
     <div class="blockclass">
       <line-chart></line-chart>
@@ -15,21 +18,21 @@
   </div>
 </template>
 <script>
-import { mapGetters } from "vuex";
-import PieChart from "@/components/items/piechart.vue";
-import LineChart from "@/components/items/linechart.vue";
+import { mapGetters } from 'vuex';
+import PieChart from '@/components/items/piechart.vue';
+import LineChart from '@/components/items/linechart.vue';
 
 export default {
-  name: "dashboard",
+  name: 'dashboard',
   components: {
     PieChart,
     LineChart,
   },
   computed: {
-    ...mapGetters(["statics"]),
+    ...mapGetters(['statics']),
   },
   created() {
-    this.$store.dispatch("loadstatics");
+    this.$store.dispatch('loadstatics');
   },
 };
 </script>
