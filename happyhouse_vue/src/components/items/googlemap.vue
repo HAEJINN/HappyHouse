@@ -26,7 +26,7 @@
         :key="'cafe' + index"
         v-for="(m, index) in cafemarkers"
         :position="m.position"
-        :icon="{ url: require('@/assets/cctv.png') }"
+        :icon="{ url: require('@/assets/store.png') }"
         :visible="cafeVisible"
       />
       <GmapMarker
@@ -40,7 +40,7 @@
         :key="'bus' + index"
         v-for="(m, index) in busmarkers"
         :position="m.position"
-        :icon="{ url: require('@/assets/cctv.png') }"
+        :icon="{ url: require('@/assets/store.png') }"
         :visible="busVisible"
       />
       <GmapMarker
@@ -65,6 +65,7 @@
       <input type="checkbox" v-model="pharVisible" /> pharmacy
       <input type="checkbox" v-model="busVisible" />bus
       <input type="checkbox" v-model="trainVisible" /> train
+      <button @click="pinclear()">pinset clear</button>
     </div>
   </div>
 </template>
@@ -274,6 +275,14 @@ export default {
     setCenter(position) {
       this.center = position;
       this.zoom = 18;
+    },
+    pinclear() {
+      this.cctvVisible = false;
+      this.convenVisible = false;
+      this.cafeVisible = false;
+      this.pharVisible = false;
+      this.busVisible = false;
+      this.trainVisible = false;
     },
   },
 };
