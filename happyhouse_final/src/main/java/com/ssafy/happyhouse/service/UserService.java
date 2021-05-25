@@ -21,5 +21,5 @@ public interface UserService {
 	
 	boolean insertuserfavorite(Map<String, String> map);
 	
-	boolean deletuserfavorite(String userid);
+	boolean deletuserfavorite(Map<String, String> map);
 }

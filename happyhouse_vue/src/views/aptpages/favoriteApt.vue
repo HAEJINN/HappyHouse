@@ -8,32 +8,25 @@
 <script>
 import FavoriteList from "@/components/items/favoriteList.vue";
 import GoogleMap from "@/components/items/googlemap.vue";
-import http from "@/util/http-common";
 
 export default {
   name: "favoriteApt",
-  data() {
-    return {
-      flist: [],
-    };
+  computed: {
+    flist() {
+      return this.$store.state.flist;
+    },
+  },
+  watch: {
+    flist() {
+      this.$store.dispatch("loadflist");
+    },
   },
   components: {
     FavoriteList,
     GoogleMap,
   },
   created() {
-    http
-      .get("/user/favorite", {
-        headers: {
-          "access-token": window.localStorage.getItem("access-token"),
-        },
-      })
-      .then(({ data }) => {
-        this.flist = data;
-      })
-      .catch(() => {
-        alert("????");
-      });
+    this.$store.dispatch("loadflist");
   },
 };
 </script>

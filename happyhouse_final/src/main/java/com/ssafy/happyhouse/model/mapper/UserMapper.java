@@ -21,5 +21,5 @@ public interface UserMapper {
 	
 	int insertuserfavorite(Map<String, String> map);
 	
-	int deletuserfavorite(String userid);
+	int deletuserfavorite(Map<String, String> map);
 }

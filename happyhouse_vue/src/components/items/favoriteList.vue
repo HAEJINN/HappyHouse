@@ -21,7 +21,9 @@ export default {
       this.$store.dispatch("loadConvens", this.favorite);
       this.$store.dispatch("setSingleApt", this.favorite);
     },
-    deletefavorite() {},
+    deletefavorite() {
+      this.$store.dispatch("deletefavorite", this.favorite.no);
+    },
   },
 };
 </script>

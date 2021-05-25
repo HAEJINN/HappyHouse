@@ -145,7 +145,7 @@ public class UserController {
 		if(list != null && !list.isEmpty()) {
 			return new ResponseEntity<List<HouseInfoDto>>(list, HttpStatus.OK);
 		} else {
-			return new ResponseEntity(FAIL, HttpStatus.NOT_FOUND);
+			return new ResponseEntity(FAIL, HttpStatus.NO_CONTENT);
 		}
 	}
 	
@@ -170,9 +170,9 @@ public class UserController {
 		}
 	}
 	
-	@ApiOperation(value = "access-token, houseno를 받아서 유저 즐겨찾기 리스트 에서 삭제, 실패시 FAIL 반환", response = String.class)
-	@DeleteMapping(value = "/favorite")
-	public ResponseEntity<?> deleteuserfavorite() throws Exception {
+	@ApiOperation(value = "access-token, houseno를 받아, 해당 유저 즐겨찾기 리스트 삭제, 실패시 FAIL 반환", response = String.class)
+	@DeleteMapping(value = "/favorite/{no}")
+	public ResponseEntity<?> deleteuserfavorite(@PathVariable(value = "no") String no) throws Exception {
 		UserDto user = null;
 		try {
 			user = jwtservice.getUserDto();
@@ -180,8 +180,11 @@ public class UserController {
 			e.printStackTrace();
 			return new ResponseEntity(FAIL, HttpStatus.NOT_ACCEPTABLE);
 		}
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("userid", user.getUserid());
+		map.put("houseno", no);
 		
-		if(service.deletuserfavorite(user.getUserid())) {
+		if(service.deletuserfavorite(map)){
 			return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);
 		} else {
 			return new ResponseEntity(FAIL, HttpStatus.NOT_FOUND);
