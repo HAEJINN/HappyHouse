@@ -1,6 +1,7 @@
 <template>
   <div class="board_wrap">
     <notice-comp></notice-comp>
+    <div class="space"></div>
     <post-comp></post-comp>
   </div>
 </template>
@@ -20,6 +21,16 @@ export default {
 .board_wrap {
   display: flex;
   flex-direction: row;
+  justify-content: center;
+  width: 95%;
+  margin: 0 auto;
   font-size: 1.5em;
+  height: 25%;
+}
+.space {
+  width: 1px;
+  margin: 0 20px;
+  height: 100%;
+  background-color: black;
 }
 </style>

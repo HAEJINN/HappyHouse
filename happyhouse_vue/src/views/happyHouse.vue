@@ -48,7 +48,7 @@ export default {
   display: flex;
   justify-content: center;
   background-color: #ffffff;
-  width: 80%;
+  width: 70%;
   margin: 10px auto 50px;
   border: none;
   border-radius: 15px;

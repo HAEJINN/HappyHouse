@@ -1,7 +1,7 @@
 <!-- 뉴스 크롤링 -->
 <template>
   <div class="news_wrap">
-    <h1>News</h1>
+    <h1 class="title">News</h1>
     <div>
       <news-item v-for="(n, idx) in news" :key="idx" :n="n" />
     </div>
@@ -25,11 +25,15 @@ export default {
 </script>
 <style scoped>
 .news_wrap {
-  width: 100%;
-  padding: 3em;
+  width: 90%;
+  margin: 0 auto 10%;
   font-size: 1.5em;
   text-align: center;
-  background-color: blanchedalmond;
-  margin-bottom: 50px;
+  background-color: #d3d3d3;
+  border-radius: 10px;
+  padding: 1em 0;
+}
+.title {
+  margin: 0 0 0.5em;
 }
 </style>

@@ -15,6 +15,10 @@ export default {
 };
 </script>
 <style scoped>
+.news_item {
+  margin: 12px 0;
+  letter-spacing: 0.1em;
+}
 .news_item:hover {
   cursor: pointer;
   text-decoration: underline;

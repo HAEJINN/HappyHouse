@@ -1,14 +1,16 @@
 <template>
   <div class="notice_wrap">
     <h1 class="notice_title">공지사항</h1>
-    <router-link to="noticeDetail" class="detail_link">더보기</router-link>
-    <table>
+    <div class="btn_div">
+      <router-link to="noticeDetail" class="detail_link">더보기</router-link>
+    </div>
+    <table class="table">
       <thead>
         <tr>
-          <th>글번호</th>
-          <th>글제목</th>
-          <th>작성자</th>
-          <th>작성시간</th>
+          <th class="th1">글번호</th>
+          <th class="th1">글제목</th>
+          <th class="th1">작성자</th>
+          <th class="th2">작성시간</th>
         </tr>
       </thead>
       <tbody>
@@ -35,18 +37,36 @@ export default {
 </script>
 <style scoped>
 .notice_wrap {
-  background-color: blanchedalmond;
-  padding: 1em;
+  /* background-color: blanchedalmond; */
   margin-bottom: 50px;
-  margin-right: 5px;
+  width: calc(50% - 0.5px);
 }
 .notice_title {
   text-align: center;
   font-size: 1.5em;
+  margin: 0;
+}
+.btn_div {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 20px;
 }
 .detail_link {
-  position: relative;
-  bottom: 0;
-  right: 0;
+  text-decoration: none;
+  font-size: 0.8em;
+  color: blue;
+}
+.detail_link:hover {
+  font-weight: bold;
+}
+.table {
+  width: 100%;
+  border-spacing: 0 10px;
+}
+.th1 {
+  width: 20%;
+}
+.th2 {
+  width: 40%;
 }
 </style>

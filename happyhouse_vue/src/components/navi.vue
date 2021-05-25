@@ -1,7 +1,7 @@
 <template>
   <div class="nav_wrap">
     <div class="user_div">
-      <div v-if="userInfo">{{ userInfo.userid }}님 환영합니다</div>
+      <div class="userhello" v-if="userInfo">{{ userInfo.userid }} 님 환영합니다</div>
     </div>
     <div class="menu-btn" @click="open_menu">
       <a class="menu-a" href="#"> <span class="menu-text">menu</span></a>
@@ -36,33 +36,33 @@
   </div>
 </template>
 <script>
-import { mapState } from "vuex";
+import { mapState } from 'vuex';
 export default {
-  name: "navi",
+  name: 'navi',
   computed: {
-    ...mapState(["userInfo", "isLogin"]),
+    ...mapState(['userInfo', 'isLogin']),
   },
   methods: {
     onClickLogout() {
       this.$store
-        .dispatch("LOGOUT")
+        .dispatch('LOGOUT')
         .then(() => {
           // this.$router.push({ name: "" });
-          if (this.$route.path !== "/") this.$router.replace("/");
+          if (this.$route.path !== '/') this.$router.replace('/');
         })
         .catch(() => {
-          console.log("로그아웃 문제!!!");
+          console.log('로그아웃 문제!!!');
         });
     },
     open_menu() {
-      const navi = document.querySelector(".navi");
-      navi.classList.add("navi-visible");
-      navi.classList.remove("navi-invisible");
+      const navi = document.querySelector('.navi');
+      navi.classList.add('navi-visible');
+      navi.classList.remove('navi-invisible');
     },
     close_menu() {
-      const navi = document.querySelector(".navi");
-      navi.classList.add("navi-invisible");
-      navi.classList.remove("navi-visible");
+      const navi = document.querySelector('.navi');
+      navi.classList.add('navi-invisible');
+      navi.classList.remove('navi-visible');
     },
     go_next_page(pagelink) {
       this.close_menu();
@@ -105,7 +105,7 @@ export default {
 }
 
 .menu-a::before {
-  content: "";
+  content: '';
   display: block;
   width: 100%;
   height: 100%;
@@ -145,7 +145,7 @@ export default {
 .close-btn {
   display: block;
   position: absolute;
-  background-image: url("../assets/close-b.png");
+  background-image: url('../assets/close-b.png');
   background-size: cover;
   background-position: center center;
   width: 3em;
@@ -156,7 +156,7 @@ export default {
 }
 
 .close-btn:hover {
-  background-image: url("../assets/close-p.png");
+  background-image: url('../assets/close-p.png');
 }
 
 .navi-title {
@@ -194,5 +194,8 @@ export default {
 }
 .navi-list li:last-child::after {
   display: none;
+}
+.userhello {
+  font-size: 1.2em;
 }
 </style>

@@ -1,11 +1,13 @@
 <template>
-  <tr>
-    <td>{{ notice.no }}</td>
-    <td>
-      <router-link :to="`noticeDesc?no=${notice.no}`">{{ notice.title }}</router-link>
+  <tr class="tr">
+    <td class="td1">{{ notice.no }}</td>
+    <td class="td1">
+      <router-link :to="`noticeDesc?no=${notice.no}`" class="mvlink">{{
+        notice.title
+      }}</router-link>
     </td>
-    <td>{{ notice.userid }}</td>
-    <td>{{ notice.timestamp }}</td>
+    <td class="td1">{{ notice.userid }}</td>
+    <td class="td2">{{ notice.timestamp }}</td>
   </tr>
 </template>
 
@@ -16,3 +18,22 @@ export default {
 };
 </script>
 <style scoped></style>
+<style scoped>
+.tr {
+  font-size: 0.8em;
+  text-align: center;
+}
+.td1 {
+  width: 20%;
+}
+.td2 {
+  width: 40%;
+}
+.mvlink {
+  text-decoration: none;
+  color: blue;
+}
+.mvlink:hover {
+  font-size: 110%;
+}
+</style>
