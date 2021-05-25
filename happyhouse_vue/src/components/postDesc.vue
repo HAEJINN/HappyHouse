@@ -22,8 +22,9 @@ export default {
     modify() {
       this.$router.push('/happyhouse/updatePost');
     },
-    deleteP() {
-      this.$store.dispatch('deleteP', this.$route.query.no);
+    async deleteP() {
+      await this.$store.dispatch('deleteP', this.$route.query.no);
+      this.$router.push('/happyhouse/postDetail');
     },
   },
 };

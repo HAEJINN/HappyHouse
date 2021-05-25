@@ -5,7 +5,7 @@
     <p>{{ notice.timestamp }}</p>
     <p>{{ notice.content }}</p>
     <button v-if="userInfo.userid == 'admin'" @click="modify">수정</button>
-    <button v-if="userInfo.userid == 'admin'" @click="deleteP">삭제</button>
+    <button v-if="userInfo.userid == 'admin'" @click="deleteN">삭제</button>
   </div>
 </template>
 <script>
@@ -22,8 +22,9 @@ export default {
     modify() {
       this.$router.push('/happyhouse/updateNotice');
     },
-    deleteP() {
-      // this.$store.dispatch('deleteN', this.$route.query.no);
+    async deleteN() {
+      await this.$store.dispatch('deleteN', this.$route.query.no);
+      this.$router.push('/happyhouse/noticeDetail');
     },
   },
 };
