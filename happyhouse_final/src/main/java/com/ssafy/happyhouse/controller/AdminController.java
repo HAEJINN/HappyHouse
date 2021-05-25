@@ -22,6 +22,7 @@ import com.ssafy.happyhouse.model.BoardDto;
 import com.ssafy.happyhouse.model.UserDto;
 import com.ssafy.happyhouse.service.AdminService;
 import com.ssafy.happyhouse.service.BoardService;
+import com.ssafy.happyhouse.service.JwtService;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -37,6 +38,9 @@ public class AdminController {
 	
 	@Autowired
 	BoardService boardservice;
+	
+	@Autowired
+	JwtService jwtservice;
 	
 	final String SUCCESS = "SUCCESS";
 	final String FAIL = "FAIL";
@@ -54,7 +58,7 @@ public class AdminController {
 		if(map.size() >= 4){
 			return new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
 		} else {
-			return new ResponseEntity(FAIL, HttpStatus.NOT_FOUND);
+			return new ResponseEntity(FAIL, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 	
@@ -68,7 +72,7 @@ public class AdminController {
 		if(list != null && !list.isEmpty()) {
 			return new ResponseEntity<List<BoardDto>>(list, HttpStatus.OK);
 		} else {
-			return new ResponseEntity(FAIL, HttpStatus.NOT_FOUND);
+			return new ResponseEntity(FAIL, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 	
@@ -82,7 +86,7 @@ public class AdminController {
 		if(board != null) {
 			return new ResponseEntity<BoardDto>(board, HttpStatus.OK);
 		} else {
-			return new ResponseEntity(FAIL, HttpStatus.NOT_FOUND);
+			return new ResponseEntity(FAIL, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 	
@@ -94,7 +98,7 @@ public class AdminController {
 		if(boardservice.registboard(map)) {
 			return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);
 		} else {
-			return new ResponseEntity(FAIL, HttpStatus.NOT_FOUND);
+			return new ResponseEntity(FAIL, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 	
@@ -106,7 +110,7 @@ public class AdminController {
 		if(boardservice.modifyboard(map)) {
 			return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);
 		} else {
-			return new ResponseEntity(FAIL, HttpStatus.NOT_FOUND);
+			return new ResponseEntity(FAIL, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 	
@@ -120,7 +124,33 @@ public class AdminController {
 		if(boardservice.deleteboard(map)) {
 			return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);
 		} else {
-			return new ResponseEntity(FAIL, HttpStatus.NOT_FOUND);
+			return new ResponseEntity(FAIL, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	
+	@ApiOperation(value = "access-token을 받아서 admin 검사, admin 제외 user list 반환, 실패시 FAIL 반환", response = UserDto.class)
+	@GetMapping(value = {"/user"})
+	public ResponseEntity<?> alluserlist() throws Exception {
+		
+		if(jwtservice.getUserDto().getUserid().equals("admin")) {
+			List<UserDto> list = adminservice.alluserlist();
+			
+			if(list != null && !list.isEmpty()) {
+				return new ResponseEntity<List<UserDto>>(list, HttpStatus.OK);
+			} else {
+				return new ResponseEntity(FAIL, HttpStatus.INTERNAL_SERVER_ERROR);
+			}
+		}
+		return new ResponseEntity(FAIL, HttpStatus.INTERNAL_SERVER_ERROR);
+	}
+	
+	@ApiOperation(value = "access-token을 받아서 정보 삭제 성공시 SUCCESS 반환, 실패시 FAIL 반환", response = String.class)
+	@DeleteMapping(value = "/user/{userid}")
+	public ResponseEntity<?> delete(@PathVariable(value = "userid")String userid) throws Exception {
+		if(jwtservice.getUserDto().getUserid().equals("admin") && adminservice.deleteuser(userid)) {
+			return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);
+		} else {
+			return new ResponseEntity(FAIL, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 }

@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.ssafy.happyhouse.model.UserDto;
 import com.ssafy.happyhouse.model.VisitDto;
 import com.ssafy.happyhouse.model.mapper.AdminMapper;
 
@@ -25,7 +26,7 @@ public class AdminServiceImpl implements AdminService {
 	public List<VisitDto> weekvisiterlist() {
 		return mapper.weekvisiterlist();
 	}
-	
+
 	@Override
 	public int todayvisiter() {
 		return mapper.todayvisiter();
@@ -44,6 +45,18 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public int womanvisitcount() {
 		return mapper.womanvisitcount();
+	}
+
+	@Override
+	public List<UserDto> alluserlist() {
+		return mapper.alluserlist();
+	}
+
+	@Override
+	public boolean deleteuser(String userid) {
+		if (0 < mapper.deleteuser(userid))
+			return true;
+		return false;
 	}
 
 }

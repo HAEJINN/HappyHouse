@@ -32,5 +32,14 @@
 		SELECT COUNT(*) FROM user WHERE gender = "여자"  
 	</select>
 	
+	<select id="alluserlist" resultType="UserDto">
+		SELECT userid, username, email, phonenumber, gender 
+		FROM user 
+		WHERE userid != "admin";
+	</select>
+	
+	<delete id="deleteuser" parameterType="String">
+		DELETE FROM user WHERE userid = #{userid}
+	</delete>
 	
 </mapper>

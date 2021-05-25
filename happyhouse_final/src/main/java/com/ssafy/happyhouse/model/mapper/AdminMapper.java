@@ -2,6 +2,7 @@ package com.ssafy.happyhouse.model.mapper;
 
 import java.util.List;
 
+import com.ssafy.happyhouse.model.UserDto;
 import com.ssafy.happyhouse.model.VisitDto;
 
 public interface AdminMapper {
@@ -16,4 +17,8 @@ public interface AdminMapper {
 	int manvisitcount();
 	
 	int womanvisitcount();
+	
+	List<UserDto> alluserlist();
+	
+	int deleteuser(String userid);
 }
