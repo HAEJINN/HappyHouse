@@ -10,6 +10,7 @@
         :icon="{ url: require('@/assets/marker.png') }"
       />
       <!-- :icon="{url: require('@/assets/LogoMakr-4pVzaR.png'),}" -->
+      <!-- :visible="false" -->
       <GmapMarker
         :key="'cctv' + index"
         v-for="(m, index) in cctvmarkers"
@@ -36,6 +37,7 @@
 <script>
 import take from 'lodash/take';
 import http from '@/util/http-common';
+import { mapGetters } from 'vuex';
 
 export default {
   name: 'GoogleMap',
@@ -58,6 +60,7 @@ export default {
     };
   },
   computed: {
+    ...mapGetters(['userInfo']),
     data() {
       return this.$store.state.results;
     },
@@ -133,19 +136,21 @@ export default {
       this.infoWinOpen = true;
     },
     infoclick(content) {
-      if (content.houseno != undefined && confirm('즐겨찾기에 추가할까요?')) {
-        http
-          .post('/user/favorite', content.houseno, {
-            headers: {
-              'access-token': window.localStorage.getItem('access-token'),
-            },
-          })
-          .then(() => {
-            alert('즐겨찾기 등록 성공');
-          })
-          .catch(() => {
-            alert('등록에 실패했습니다.');
-          });
+      if (this.userInfo.userid != 'admin') {
+        if (content.houseno != undefined && confirm('즐겨찾기에 추가할까요?')) {
+          http
+            .post('/user/favorite', content.houseno, {
+              headers: {
+                'access-token': window.localStorage.getItem('access-token'),
+              },
+            })
+            .then(() => {
+              alert('즐겨찾기 등록 성공');
+            })
+            .catch(() => {
+              alert('등록에 실패했습니다.');
+            });
+        }
       }
     },
     clearMarkers() {
