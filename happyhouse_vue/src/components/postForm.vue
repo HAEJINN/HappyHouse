@@ -1,8 +1,10 @@
 <template>
-  <div>
-    <div>
+  <div class="wrap">
+    <div class="title">
       <h1 v-if="type == 'update'">글 수정</h1>
       <h1 v-else>글 작성</h1>
+    </div>
+    <div class="formwrap">
       <div>
         <label for="title">제목</label>
         <input type="text" id="title" name="title" v-model="title" />
@@ -95,3 +97,4 @@ export default {
   },
 };
 </script>
+<style scoped></style>
