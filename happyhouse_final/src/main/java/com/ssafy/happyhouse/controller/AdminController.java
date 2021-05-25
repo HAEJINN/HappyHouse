@@ -46,6 +46,7 @@ public class AdminController {
 	public ResponseEntity<?> dashboardstatic() throws Exception {
 		Map<String, Integer> map = new HashMap<String, Integer>();
 		map.put("todayvisituser", adminservice.todayvisiter());
+		map.put("weekvisiterlist", adminservice.weekvisiterlist());
 		map.put("monthvisituser", adminservice.monthvisiter());
 		map.put("manvisitcount", adminservice.manvisitcount());
 		map.put("womanvisitcount", adminservice.womanvisitcount());

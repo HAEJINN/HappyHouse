@@ -8,6 +8,14 @@
 		INSERT INTO visit VALUES(#{userid}, CURRENT_TIMESTAMP)
 	</insert>
 
+	<select id="weekvisiterlist" resultType="int">
+		SELECT count(*) 
+		FROM visit 
+		WHERE time BETWEEN DATE_ADD(NOW(),INTERVAL -1 WEEK ) 
+		AND NOW() group by day(time) 
+		order by day(time);
+	</select>
+
 	<select id="todayvisiter" resultType="int">
 		SELECT COUNT(*) FROM visit WHERE DATE_FORMAT(time, '%Y-%m-%d') = CURDATE()
 	</select>

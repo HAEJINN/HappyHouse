@@ -19,6 +19,11 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
+	public int weekvisiterlist() {
+		return mapper.weekvisiterlist();
+	}
+	
+	@Override
 	public int todayvisiter() {
 		return mapper.todayvisiter();
 	}
@@ -37,4 +42,5 @@ public class AdminServiceImpl implements AdminService {
 	public int womanvisitcount() {
 		return mapper.womanvisitcount();
 	}
+
 }
