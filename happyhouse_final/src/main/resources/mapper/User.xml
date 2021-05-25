@@ -34,7 +34,7 @@
 		select d.no, i.aptname, lat, lng 
 		from houseinfo as i, 
 		(select aptname, no from housedeal where no in 
-		(select houseno from favorite where userid = "ssafy")) as d
+		(select houseno from favorite where userid = #{userid})) as d
 		where i.aptname = d.aptname
 		group by aptname
 	</select>
