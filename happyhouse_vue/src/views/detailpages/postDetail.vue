@@ -94,7 +94,7 @@ export default {
 .th1,
 .th2,
 .th3 {
-  background-color: #fbe3fd;
+  background-color: #d3d3d3;
   padding: 10px 0;
 }
 .mvlink {

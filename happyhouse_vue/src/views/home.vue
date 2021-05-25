@@ -4,7 +4,6 @@
     <div></div>
     <div class="main_cover">
       <vue-typer class="main_title" text="HAPPY HOUSE" erase-style="clear"></vue-typer>
-      <h1 class="main_title">HAPPY HOUSE</h1>
       <div class="main_btns">
         <router-link to="/login" class="login_btn">로그인</router-link>
         <router-link to="/regist" class="regist_btn">회원가입</router-link>
@@ -29,12 +28,12 @@ export default {};
 .main_wrap::after {
   display: block;
   position: absolute;
-  content: "";
+  content: '';
   width: 100%;
   height: 100%;
   top: 0;
   left: 0;
-  background-image: url("../../src/assets/main_house.jpg");
+  background-image: url('../../src/assets/main_house.jpg');
   background-size: cover;
   opacity: 0.8;
   z-index: -100;
@@ -56,7 +55,7 @@ export default {};
 .main_cover::after {
   display: block;
   position: absolute;
-  content: "";
+  content: '';
   width: 100%;
   height: 100%;
   top: 0;
@@ -91,5 +90,10 @@ export default {};
   border: none;
   background-color: #404040;
   transform: scale(1.1);
+}
+</style>
+<style>
+.vue-typer .custom.char.typed {
+  color: white;
 }
 </style>
