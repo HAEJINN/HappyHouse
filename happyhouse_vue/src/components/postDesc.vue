@@ -15,32 +15,36 @@
       </div>
     </div>
     <did class="btns">
-      <button v-if="userInfo.userid == post.userid" @click="modify">수정</button>
-      <button v-if="userInfo.userid == post.userid" @click="deleteP">삭제</button>
+      <button v-if="userInfo.userid == post.userid" @click="modify">
+        수정
+      </button>
+      <button v-if="userInfo.userid == post.userid" @click="deleteP">
+        삭제
+      </button>
       <button @click="mvlist">목록</button>
     </did>
   </div>
 </template>
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters } from "vuex";
 export default {
-  name: 'PostDesc',
+  name: "PostDesc",
   computed: {
-    ...mapGetters(['userInfo', 'post']),
+    ...mapGetters(["userInfo", "post"]),
   },
   created() {
-    this.$store.dispatch('searchP', this.$route.query.no);
+    this.$store.dispatch("searchP", this.$route.query.no);
   },
   methods: {
     modify() {
-      this.$router.push('/happyhouse/updatePost');
+      this.$router.push("/happyhouse/updatePost");
     },
     deleteP() {
-      this.$store.dispatch('deleteP', this.$route.query.no);
-      this.$router.push('/happyhouse/postDetail');
+      this.$store.dispatch("deleteP", this.$route.query.no);
+      this.$router.push("/happyhouse/postDetail");
     },
     mvlist() {
-      this.$router.push('/happyhouse/postDetail');
+      this.$router.push("/happyhouse/postDetail");
     },
   },
 };
@@ -48,7 +52,7 @@ export default {
 <style scoped>
 .wrap {
   width: 100%;
-  height: 80vh;
+  height: 100vh;
 }
 .title_wrap {
   width: 40%;
@@ -88,6 +92,8 @@ export default {
   justify-content: center;
   align-items: center;
   font-size: 3em;
+  font-size: 1.5em;
+  margin: 0 2em;
 }
 .btns {
   display: flex;

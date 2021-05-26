@@ -7,10 +7,10 @@
 </template>
 
 <script>
-import NoticeComp from '@/views/mainpages/noticeComp.vue';
-import PostComp from '@/views/mainpages/postComp.vue';
+import NoticeComp from "@/views/mainpages/noticeComp.vue";
+import PostComp from "@/views/mainpages/postComp.vue";
 export default {
-  name: 'boardComp',
+  name: "boardComp",
   components: {
     NoticeComp,
     PostComp,

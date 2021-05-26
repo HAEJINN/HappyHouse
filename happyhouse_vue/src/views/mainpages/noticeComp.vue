@@ -8,30 +8,34 @@
       <thead>
         <tr>
           <th class="th1">글번호</th>
-          <th class="th1">글제목</th>
+          <th class="th2">글제목</th>
           <th class="th1">작성자</th>
-          <th class="th2">작성시간</th>
+          <!-- <th class="th2">작성시간</th> -->
         </tr>
       </thead>
       <tbody>
-        <notice-item v-for="(notice, idx) in notices" :key="idx" :notice="notice" />
+        <notice-item
+          v-for="(notice, idx) in notices"
+          :key="idx"
+          :notice="notice"
+        />
       </tbody>
     </table>
   </div>
 </template>
 <script>
-import NoticeItem from '@/components/items/noticeItem.vue';
+import NoticeItem from "@/components/items/noticeItem.vue";
 
-import { mapGetters } from 'vuex';
+import { mapGetters } from "vuex";
 export default {
-  name: 'NoticeComp',
+  name: "NoticeComp",
   components: { NoticeItem },
 
   computed: {
-    ...mapGetters(['notices']),
+    ...mapGetters(["notices"]),
   },
   created() {
-    this.$store.dispatch('getNotices');
+    this.$store.dispatch("getNotices");
   },
 };
 </script>
@@ -62,11 +66,12 @@ export default {
 .table {
   width: 100%;
   border-spacing: 0 10px;
+  table-layout: fixed;
 }
 .th1 {
   width: 20%;
 }
 .th2 {
-  width: 40%;
+  width: 60%;
 }
 </style>

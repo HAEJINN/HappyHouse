@@ -8,9 +8,9 @@
       <thead>
         <tr class="tr">
           <th class="th1">글번호</th>
-          <th class="th1">글제목</th>
+          <th class="th2">글제목</th>
           <th class="th1">작성자</th>
-          <th class="th2">작성시간</th>
+          <!-- <th class="th2">작성시간</th> -->
         </tr>
       </thead>
       <tbody>
@@ -20,18 +20,18 @@
   </div>
 </template>
 <script>
-import PostItem from '@/components/items/postItem.vue';
+import PostItem from "@/components/items/postItem.vue";
 
-import { mapGetters } from 'vuex';
+import { mapGetters } from "vuex";
 export default {
-  name: 'PostComp',
+  name: "PostComp",
   components: { PostItem },
 
   computed: {
-    ...mapGetters(['posts']),
+    ...mapGetters(["posts"]),
   },
   created() {
-    this.$store.dispatch('getPosts');
+    this.$store.dispatch("getPosts");
   },
 };
 </script>
@@ -62,11 +62,13 @@ export default {
 .table {
   width: 100%;
   border-spacing: 0 10px;
+  table-layout: fixed;
 }
 .th1 {
+  /* width: 20%; */
   width: 20%;
 }
 .th2 {
-  width: 40%;
+  width: 60%;
 }
 </style>

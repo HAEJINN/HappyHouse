@@ -22,25 +22,25 @@
   </div>
 </template>
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters } from "vuex";
 export default {
-  name: 'NoticeDesc',
+  name: "NoticeDesc",
   computed: {
-    ...mapGetters(['userInfo', 'notice']),
+    ...mapGetters(["userInfo", "notice"]),
   },
   created() {
-    this.$store.dispatch('searchN', this.$route.query.no);
+    this.$store.dispatch("searchN", this.$route.query.no);
   },
   methods: {
     modify() {
-      this.$router.push('/happyhouse/updateNotice');
+      this.$router.push("/happyhouse/updateNotice");
     },
     deleteN() {
-      this.$store.dispatch('deleteN', this.$route.query.no);
-      this.$router.push('/happyhouse/noticeDetail');
+      this.$store.dispatch("deleteN", this.$route.query.no);
+      this.$router.push("/happyhouse/noticeDetail");
     },
     mvlist() {
-      this.$router.push('/happyhouse/noticeDetail');
+      this.$router.push("/happyhouse/noticeDetail");
     },
   },
 };
@@ -48,7 +48,7 @@ export default {
 <style scoped>
 .wrap {
   width: 100%;
-  height: 80vh;
+  height: 100vh;
 }
 .title_wrap {
   width: 40%;
@@ -87,7 +87,8 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 3em;
+  font-size: 1.5em;
+  margin: 0 2em;
 }
 .btns {
   display: flex;
