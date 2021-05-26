@@ -1,13 +1,13 @@
 <template>
   <div id="googlemap">
-    <div v-if="type == 'favorite'">
+    <div v-if="type == 'favorite'" class="favo">
       <input type="checkbox" v-model="cctvVisible" />cctv
-      <input type="checkbox" v-model="convenVisible" /> conven
-      <input type="checkbox" v-model="cafeVisible" />cafe
-      <input type="checkbox" v-model="pharVisible" /> pharmacy
-      <input type="checkbox" v-model="busVisible" />bus
-      <input type="checkbox" v-model="trainVisible" /> train
-      <button @click="pinclear()">pinset clear</button>
+      <input type="checkbox" v-model="convenVisible" /> 편의점
+      <input type="checkbox" v-model="cafeVisible" />카페
+      <input type="checkbox" v-model="pharVisible" /> 약국
+      <input type="checkbox" v-model="busVisible" />버스정류장
+      <input type="checkbox" v-model="trainVisible" /> 지하철역
+      <button @click="pinclear()">clear</button>
     </div>
     <GmapMap ref="mapRef" :center="center" :zoom="zoom" style="width: 70vw; height: 70vh">
       <GmapMarker
@@ -287,3 +287,16 @@ export default {
   },
 };
 </script>
+<style scoped>
+.favo {
+  display: flex;
+  justify-content: center;
+  margin: 30px 0;
+}
+.favo input {
+  margin: 0 5px;
+}
+.favo button {
+  margin: 0 5px;
+}
+</style>

@@ -68,13 +68,21 @@ export default {
 <style scoped>
 h1 {
   text-align: center;
+  font-size: 2.8em;
+  margin-bottom: 1.2em;
 }
 .myPage {
   width: 100%;
   height: 80vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 .tr {
   display: flex;
+  padding: 10px;
+  font-size: 1.5em;
 }
 .th {
   display: block;
@@ -83,10 +91,19 @@ h1 {
 .td {
   display: block;
   width: 50%;
+  text-align: center;
 }
 .table {
   display: block;
-  width: 90%;
+  width: 60%;
   margin: 0 auto;
+}
+.text-center {
+  margin-top: 50px;
+}
+.text-center a button,
+.text-center button {
+  font-size: 1.2em;
+  margin: 0 0.5em;
 }
 </style>
