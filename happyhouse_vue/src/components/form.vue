@@ -44,31 +44,31 @@
   </div>
 </template>
 <script>
-import http from '@/util/http-common';
-import { mapState } from 'vuex';
+import http from "@/util/http-common";
+import { mapState } from "vuex";
 
 export default {
-  name: 'registForm',
+  name: "registForm",
   props: {
     type: { type: String },
   },
   computed: {
-    ...mapState(['userInfo', 'isLogin']),
+    ...mapState(["userInfo", "isLogin"]),
   },
   data() {
     return {
-      types: ['남자', '여자'],
-      userid: '',
-      username: '',
-      userpwd: '',
-      email: '',
-      phonenumber: '',
-      gender: '',
+      types: ["남자", "여자"],
+      userid: "",
+      username: "",
+      userpwd: "",
+      email: "",
+      phonenumber: "",
+      gender: "",
     };
   },
   created() {
-    if (this.type === 'update') {
-      this.$store.dispatch('GET_MEMBER_INFO');
+    if (this.type === "update") {
+      this.$store.dispatch("GET_MEMBER_INFO");
       // console.log(this.userInfo);
       // http.get('/user/detail').then(({ response }) => {
       this.userid = this.userInfo.userid;
@@ -84,7 +84,7 @@ export default {
   methods: {
     regist() {
       http
-        .post('/user/', {
+        .post("/user/", {
           userid: this.userid,
           username: this.username,
           userpwd: this.userpwd,
@@ -94,48 +94,49 @@ export default {
         })
         .then(({ data }) => {
           console.log(data);
-          let msg = '가입시 문제가 발생했습니다.';
-          if (data === 'SUCCESS') {
-            msg = '가입이 완료되었습니다.';
+          let msg = "가입시 문제가 발생했습니다.";
+          if (data === "SUCCESS") {
+            msg = "가입이 완료되었습니다.";
           }
           alert(msg);
           this.mvMain();
         })
         .catch(() => {
-          alert('가입시 에러가 발생했습니다.');
+          alert("가입시 에러가 발생했습니다.");
           this.mvMain();
         });
     },
     modify() {
+      var updateuserinfo = {
+        userid: this.userid,
+        username: this.username,
+        userpwd: this.userpwd,
+        email: this.email,
+        phonenumber: this.phonenumber,
+        gender: this.gender,
+      };
+
       http
-        .put('/user/update', {
-          userid: this.userid,
-          username: this.username,
-          userpwd: this.userpwd,
-          email: this.email,
-          phonenumber: this.phonenumber,
-          gender: this.gender,
-        })
+        .put("/user/update", updateuserinfo)
         .then(({ data }) => {
-          console.log(data);
-          let msg = '수정 처리시 문제가 발생했습니다.';
-          if (data.message === 'SUCCESS') {
-            msg = '수정이 완료되었습니다.';
-            let token = data['access-token'];
-            localStorage.setItem('access-token', token);
-            this.$store.dispatch('GET_MEMBER_INFO');
+          this.$store.commit("setUserInfo", updateuserinfo);
+          let msg = "수정 처리시 문제가 발생했습니다.";
+          if (data === "SUCCESS") {
+            msg = "수정이 완료되었습니다.";
+            let token = data["access-token"];
+            localStorage.setItem("access-token", token);
+            this.$store.dispatch("GET_MEMBER_INFO");
           }
           alert(msg);
-
-          this.$router.push('/happyhouse/myPage');
+          this.$router.push("/happyhouse/myPage");
         })
         .catch(() => {
-          alert('수정 처리시 에러가 발생했습니다.');
-          this.$router.push('/happyhouse/myPage');
+          alert("수정 처리시 에러가 발생했습니다.");
+          this.$router.push("/happyhouse/myPage");
         });
     },
     mvMain() {
-      this.$router.push('/');
+      this.$router.push("/");
     },
   },
 };
@@ -164,7 +165,7 @@ export default {
 .regist_form::after {
   display: block;
   position: absolute;
-  content: '';
+  content: "";
   width: 100%;
   height: 100%;
   top: 0;
