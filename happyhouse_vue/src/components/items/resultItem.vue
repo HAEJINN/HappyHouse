@@ -1,9 +1,9 @@
 <template>
   <div class="wrap">
-    <span>{{ result.aptname }} | </span>
-    <span> {{ result.buildyear }} | </span>
-    <span> {{ result.area }} | </span>
-    <span> {{ result.jibun }} | </span>
+    <span> {{ result.aptname }}</span>
+    <span> {{ result.buildyear }}</span>
+    <span> {{ result.area }}</span>
+    <!-- <span> {{ result.jibun }} | </span> -->
     <span> {{ result.dealamount }}</span>
   </div>
 </template>
@@ -22,5 +22,8 @@ export default {
   width: 100%;
   font-size: 1.2em;
   margin: 0.2em;
+}
+.wrap span {
+  margin: 0 0.2em;
 }
 </style>
