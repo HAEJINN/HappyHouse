@@ -3,11 +3,11 @@
     <div class="space"><span>Static DashBoard</span></div>
 
     <div class="blockclass">
-      <pie-chart></pie-chart>
-      <div class="text">
+      <pie-chart class="pie"></pie-chart>
+      <!-- <div class="text">
         <div>남자: {{ statics.manusercount }}명</div>
         <div>여자: {{ statics.womanusercount }}명</div>
-      </div>
+      </div> -->
     </div>
     <div class="blockclass">
       <line-chart></line-chart>
@@ -18,37 +18,30 @@
   </div>
 </template>
 <script>
-import { mapGetters } from 'vuex';
-import PieChart from '@/components/items/piechart.vue';
-import LineChart from '@/components/items/linechart.vue';
+import { mapGetters } from "vuex";
+import PieChart from "@/components/items/piechart.vue";
+import LineChart from "@/components/items/linechart.vue";
 
 export default {
-  name: 'dashboard',
+  name: "dashboard",
   components: {
     PieChart,
     LineChart,
   },
   computed: {
-    ...mapGetters(['statics']),
+    ...mapGetters(["statics"]),
   },
   created() {
-    this.$store.dispatch('loadstatics');
+    this.$store.dispatch("loadstatics");
   },
 };
 </script>
 <style scoped>
-pie-chart,
-line-chart {
-  width: 50%;
-}
-.text {
-  width: 50%;
-}
-
 .blockclass {
   display: flex;
+  justify-content: center;
+  align-items: center;
 }
-
 .space {
   display: flex;
   justify-content: center;
@@ -57,5 +50,8 @@ line-chart {
   height: 100px;
   margin: 0 auto;
   border-bottom: 1px solid black;
+}
+.pie {
+  width: 100%;
 }
 </style>

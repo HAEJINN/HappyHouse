@@ -4,22 +4,22 @@
   </div>
 </template>
 <script>
-import { mapGetters } from 'vuex';
-import bb, { pie } from 'billboard.js';
+import { mapGetters } from "vuex";
+import bb, { pie } from "billboard.js";
 
 export default {
-  name: 'piechart1',
+  name: "piechart1",
   data() {
     return {
       chart: null,
       datalist: [
-        ['남자', 0],
-        ['여자', 0],
+        ["남자", 0],
+        ["여자", 0],
       ],
     };
   },
   computed: {
-    ...mapGetters(['statics']),
+    ...mapGetters(["statics"]),
   },
   watch: {
     statics() {
@@ -31,13 +31,13 @@ export default {
           },
           data: {
             columns: [
-              ['남자', this.statics.manusercount],
-              ['여자', this.statics.womanusercount],
+              ["남자", this.statics.manusercount],
+              ["여자", this.statics.womanusercount],
             ],
             type: pie(),
           },
           legend: {
-            position: 'right',
+            position: "right",
             equally: true,
             item: {
               tile: {
@@ -47,15 +47,15 @@ export default {
             },
           },
           color: {
-            pattern: ['#1f77b4', '#aec7e8'], // color code
+            pattern: ["#1f77b4", "#aec7e8"], // color code
           },
-          bindto: '#pieChart',
+          bindto: "#pieChart",
         });
       } else {
         this.chart.load({
           columns: [
-            ['남자', this.statics.manusercount],
-            ['여자', this.statics.womanusercount],
+            ["남자", this.statics.manusercount],
+            ["여자", this.statics.womanusercount],
           ],
         });
       }
@@ -67,5 +67,8 @@ export default {
 <style>
 .bb-legend-item > text {
   font-size: 20px;
+}
+.bb svg {
+  margin: 0 auto;
 }
 </style>
