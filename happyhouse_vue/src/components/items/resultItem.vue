@@ -19,6 +19,8 @@ export default {
 </script>
 <style scoped>
 .wrap {
+  display: flex;
+  justify-content: center;
   width: 100%;
   font-size: 1.2em;
   margin: 0.2em;
