@@ -52,5 +52,6 @@ export default {
   margin: 10px auto 50px;
   border: none;
   border-radius: 15px;
+  overflow: hidden;
 }
 </style>

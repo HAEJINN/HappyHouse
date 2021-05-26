@@ -29,6 +29,7 @@ export default {
 <style scoped>
 .wrap {
   text-align: center;
+  width: 100%;
 }
 .results {
   width: 100%;

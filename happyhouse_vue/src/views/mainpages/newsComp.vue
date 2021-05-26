@@ -28,7 +28,7 @@ export default {
 <style scoped>
 .news_wrap {
   width: 90%;
-  margin: 0 auto 10%;
+  margin: 0 auto 5%;
   font-size: 1.5em;
   text-align: center;
   /* background-color: #d3d3d3; */

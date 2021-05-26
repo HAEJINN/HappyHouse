@@ -34,7 +34,7 @@
           <div class="nav_link" @click="go_next_page('/happyhouse/myPage')">내정보</div>
         </li>
         <li>
-          <button @click.prevent="onClickLogout" v-if="isLogin">로그아웃</button>
+          <button @click.prevent="onClickLogout" v-if="isLogin" class="logout">로그아웃</button>
         </li>
       </ul>
     </nav>
@@ -161,7 +161,8 @@ export default {
 }
 
 .close-btn:hover {
-  background-image: url('../assets/close-p.png');
+  /* background-image: url('../assets/close-b.png'); */
+  transform: scale(1.1);
 }
 
 .navi-title {
@@ -182,7 +183,9 @@ export default {
   padding: 1em;
 }
 .navi-list li:hover {
-  color: #db97d6;
+  color: #373737;
+  cursor: pointer;
+  font-size: 105%;
 }
 
 /* .navi-list li::after {
@@ -202,5 +205,12 @@ export default {
 }
 .userhello {
   font-size: 1.2em;
+}
+.logout {
+  margin-top: 0.5em;
+  font-size: 1.2em;
+}
+.logout:hover {
+  cursor: pointer;
 }
 </style>

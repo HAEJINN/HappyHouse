@@ -63,7 +63,7 @@ export default {
   font-size: 1.2em;
   width: 90%;
   margin: 0 auto;
-  border-spacing: 0 15px;
+  border-spacing: 0 25px;
 }
 .btndiv {
   display: flex;
@@ -102,6 +102,6 @@ export default {
   color: blue;
 }
 .mvlink:hover {
-  font-size: 110%;
+  font-weight: bold;
 }
 </style>

@@ -1,30 +1,30 @@
 <template>
   <div class="myPage">
     <h1>내정보</h1>
-    <table>
-      <tr>
-        <th>아이디</th>
-        <td>{{ userInfo.userid }}</td>
+    <table class="table">
+      <tr class="tr">
+        <th class="th">아이디</th>
+        <td class="td">{{ userInfo.userid }}</td>
       </tr>
-      <tr>
-        <th>이름</th>
-        <td>{{ userInfo.username }}</td>
+      <tr class="tr">
+        <th class="th">이름</th>
+        <td class="td">{{ userInfo.username }}</td>
       </tr>
-      <tr>
-        <th>비밀번호</th>
-        <td>{{ userInfo.userpwd }}</td>
+      <tr class="tr">
+        <th class="th">비밀번호</th>
+        <td class="td">{{ userInfo.userpwd }}</td>
       </tr>
-      <tr>
-        <th>이메일</th>
-        <td>{{ userInfo.email }}</td>
+      <tr class="tr">
+        <th class="th">이메일</th>
+        <td class="td">{{ userInfo.email }}</td>
       </tr>
-      <tr>
-        <th>전화번호</th>
-        <td>{{ userInfo.phonenumber }}</td>
+      <tr class="tr">
+        <th class="th">전화번호</th>
+        <td class="td">{{ userInfo.phonenumber }}</td>
       </tr>
-      <tr>
-        <th>성별</th>
-        <td>{{ userInfo.gender }}</td>
+      <tr class="tr">
+        <th class="th">성별</th>
+        <td class="td">{{ userInfo.gender }}</td>
       </tr>
     </table>
     <div class="text-center">
@@ -66,8 +66,27 @@ export default {
 };
 </script>
 <style scoped>
+h1 {
+  text-align: center;
+}
 .myPage {
   width: 100%;
-  height: 95vh;
+  height: 80vh;
+}
+.tr {
+  display: flex;
+}
+.th {
+  display: block;
+  width: 50%;
+}
+.td {
+  display: block;
+  width: 50%;
+}
+.table {
+  display: block;
+  width: 90%;
+  margin: 0 auto;
 }
 </style>

@@ -16,7 +16,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="(notice, idx) in notices" :key="idx">
+        <tr v-for="(notice, idx) in notices" :key="idx" class="trs">
           <td class="td1">{{ notice.no }}</td>
           <td class="td1">
             <router-link :to="`noticeDesc?no=${notice.no}`" class="mvlink">{{
@@ -51,7 +51,7 @@ export default {
 </script>
 <style scoped>
 .wrap {
-  height: 80vh;
+  height: 100vh;
   width: 100%;
 }
 .title {
@@ -63,12 +63,13 @@ export default {
   font-size: 1.2em;
   width: 90%;
   margin: 0 auto;
-  border-spacing: 0 15px;
+  border-spacing: 0 20px;
+  table-layout: fixed;
 }
 .btndiv {
   display: flex;
   justify-content: flex-end;
-  margin-bottom: 1em;
+  margin-bottom: 0.5em;
 }
 .btndiv button {
   width: 5em;
@@ -80,16 +81,22 @@ export default {
 .td1 {
   width: 15%;
   text-align: center;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 .th2,
 .td2 {
   width: 20%;
   text-align: center;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 .th3,
 .td3 {
   width: 35%;
   text-align: center;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 .th1,
 .th2,
@@ -102,6 +109,6 @@ export default {
   color: blue;
 }
 .mvlink:hover {
-  font-size: 110%;
+  font-weight: bold;
 }
 </style>

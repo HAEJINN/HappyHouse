@@ -15,36 +15,32 @@
       </div>
     </div>
     <did class="btns">
-      <button v-if="userInfo.userid == post.userid" @click="modify">
-        수정
-      </button>
-      <button v-if="userInfo.userid == post.userid" @click="deleteP">
-        삭제
-      </button>
+      <button v-if="userInfo.userid == post.userid" @click="modify">수정</button>
+      <button v-if="userInfo.userid == post.userid" @click="deleteP">삭제</button>
       <button @click="mvlist">목록</button>
     </did>
   </div>
 </template>
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters } from 'vuex';
 export default {
-  name: "PostDesc",
+  name: 'PostDesc',
   computed: {
-    ...mapGetters(["userInfo", "post"]),
+    ...mapGetters(['userInfo', 'post']),
   },
   created() {
-    this.$store.dispatch("searchP", this.$route.query.no);
+    this.$store.dispatch('searchP', this.$route.query.no);
   },
   methods: {
     modify() {
-      this.$router.push("/happyhouse/updatePost");
+      this.$router.push('/happyhouse/updatePost');
     },
     deleteP() {
-      this.$store.dispatch("deleteP", this.$route.query.no);
-      this.$router.push("/happyhouse/postDetail");
+      this.$store.dispatch('deleteP', this.$route.query.no);
+      this.$router.push('/happyhouse/postDetail');
     },
     mvlist() {
-      this.$router.push("/happyhouse/postDetail");
+      this.$router.push('/happyhouse/postDetail');
     },
   },
 };
@@ -70,7 +66,7 @@ export default {
 }
 .writer p {
   margin: 0;
-  font-size: 2em;
+  font-size: 1.5em;
   margin-right: 5em;
 }
 .contentwrap {
@@ -92,7 +88,7 @@ export default {
   justify-content: center;
   align-items: center;
   font-size: 3em;
-  font-size: 1.5em;
+  font-size: 2em;
   margin: 0 2em;
 }
 .btns {
