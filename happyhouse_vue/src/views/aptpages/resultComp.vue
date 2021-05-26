@@ -32,8 +32,10 @@ export default {
   width: 100%;
 }
 .results {
-  width: 100%;
-  margin-top: 30px;
+  width: 60%;
+  margin: 5em auto;
+  max-height: 35vh;
+  overflow: auto;
 }
 .title {
   width: 100%;

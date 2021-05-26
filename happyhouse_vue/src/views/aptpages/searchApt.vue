@@ -1,7 +1,7 @@
 d
 <!-- 시군구검색, 아파트이름(or동이름)검색 -->
 <template>
-  <div>
+  <div class="test">
     <div class="select_wrap">
       <input
         type="radio"
