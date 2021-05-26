@@ -14,10 +14,10 @@
   </div>
 </template>
 <script>
-import GoogleMap from '@/components/items/googlemap.vue';
-import ResultItem from '@/components/items/resultItem.vue';
+import GoogleMap from "@/components/items/googlemap.vue";
+import ResultItem from "@/components/items/resultItem.vue";
 export default {
-  name: 'ResultComp',
+  name: "ResultComp",
   components: { GoogleMap, ResultItem },
   computed: {
     results() {
@@ -30,6 +30,7 @@ export default {
 .wrap {
   text-align: center;
   width: 100%;
+  display: flex;
 }
 .results {
   width: 60%;

@@ -9,7 +9,12 @@
       <input type="checkbox" v-model="trainVisible" /> 지하철역
       <button @click="pinclear()">clear</button>
     </div>
-    <GmapMap ref="mapRef" :center="center" :zoom="zoom" style="width: 70vw; height: 70vh">
+    <GmapMap
+      ref="mapRef"
+      :center="center"
+      :zoom="zoom"
+      :class="{ googlemapsize: type != 'favorite', favoritemapsize: type == 'favorite' }"
+    >
       <GmapMarker
         :key="index"
         v-for="(m, index) in markers"
@@ -71,13 +76,13 @@
 </template>
 
 <script>
-import take from 'lodash/take';
-import http from '@/util/http-common';
-import { mapGetters } from 'vuex';
+import take from "lodash/take";
+import http from "@/util/http-common";
+import { mapGetters } from "vuex";
 
 export default {
-  name: 'GoogleMap',
-  props: ['type'],
+  name: "GoogleMap",
+  props: ["type"],
   data() {
     return {
       center: {
@@ -100,14 +105,14 @@ export default {
       trainVisible: false,
       infoWinOpen: false,
       infovalue: {
-        no: '',
-        content: '',
+        no: "",
+        content: "",
         position: this.center,
       },
     };
   },
   computed: {
-    ...mapGetters(['userInfo']),
+    ...mapGetters(["userInfo"]),
     data() {
       return this.$store.state.results;
     },
@@ -246,19 +251,19 @@ export default {
       this.infoWinOpen = true;
     },
     infoclick(content) {
-      if (this.userInfo.userid != 'admin') {
-        if (content.houseno != undefined && confirm('즐겨찾기에 추가할까요?')) {
+      if (this.userInfo.userid != "admin") {
+        if (content.houseno != undefined && confirm("즐겨찾기에 추가할까요?")) {
           http
-            .post('/user/favorite', content.houseno, {
+            .post("/user/favorite", content.houseno, {
               headers: {
-                'access-token': window.localStorage.getItem('access-token'),
+                "access-token": window.localStorage.getItem("access-token"),
               },
             })
             .then(() => {
-              alert('즐겨찾기 등록 성공');
+              alert("즐겨찾기 등록 성공");
             })
             .catch(() => {
-              alert('등록에 실패했습니다.');
+              alert("등록에 실패했습니다.");
             });
         }
       }
@@ -298,5 +303,25 @@ export default {
 }
 .favo button {
   margin: 0 5px;
+}
+</style>
+
+<style>
+.googlemapsize {
+  width: 35vw;
+  height: 35vh;
+}
+.googlemapsize .vue-map-container {
+  width: 50%;
+  height: 50%;
+}
+
+.favoritemapsize {
+  width: 70vw;
+  height: 70vh;
+}
+.favoritemapsize .vue-map-container {
+  width: 100%;
+  height: 100%;
 }
 </style>
