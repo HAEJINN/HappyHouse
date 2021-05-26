@@ -1,8 +1,16 @@
 <template>
-  <div>
-    <h1>resultComp</h1>
+  <div class="wrap">
     <google-map />
-    <result-item v-for="(result, idx) in results" :key="idx" :result="result"></result-item>
+    <div class="results">
+      <div class="title">
+        <span>이름 | </span>
+        <span> 준공년도 | </span>
+        <span> 면적 | </span>
+        <span> 지번 | </span>
+        <span> 거래가</span>
+      </div>
+      <result-item v-for="(result, idx) in results" :key="idx" :result="result"></result-item>
+    </div>
   </div>
 </template>
 <script>
@@ -18,3 +26,17 @@ export default {
   },
 };
 </script>
+<style scoped>
+.wrap {
+  text-align: center;
+}
+.results {
+  width: 100%;
+  margin-top: 30px;
+}
+.title {
+  width: 100%;
+  font-size: 1.5em;
+  margin-bottom: 1em;
+}
+</style>

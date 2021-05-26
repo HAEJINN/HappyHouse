@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="wrap">
     <update-form type="update" />
   </div>
 </template>
@@ -13,3 +13,9 @@ export default {
   },
 };
 </script>
+<style scoped>
+.wrap {
+  width: 100%;
+  height: 80vh;
+}
+</style>
