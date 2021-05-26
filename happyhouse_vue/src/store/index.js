@@ -292,7 +292,7 @@ export default new Vuex.Store({
           context.commit("setCctvs", data);
         })
         .catch(() => {
-          alert("근처에 cctv가 없습니다.");
+          alert("1km 이내에 cctv가 없습니다.");
         });
     },
     loadConvens(context, favorite) {
@@ -305,7 +305,7 @@ export default new Vuex.Store({
           context.commit("setConvens", data);
         })
         .catch(() => {
-          alert("근처에 편의점이 없습니다.");
+          alert("1km 이내에 편의점이 없습니다.");
         });
     },
     loadCafes(context, favorite) {
@@ -318,7 +318,7 @@ export default new Vuex.Store({
           context.commit("setCafes", data);
         })
         .catch(() => {
-          alert("근처에 카페가 없습니다.");
+          alert("1km 이내에 카페가 없습니다.");
         });
     },
     loadPhars(context, favorite) {
@@ -331,7 +331,7 @@ export default new Vuex.Store({
           context.commit("setPhars", data);
         })
         .catch(() => {
-          alert("근처에 약국이 없습니다.");
+          alert("1km 이내에 약국이 없습니다.");
         });
     },
     loadBuss(context, favorite) {
@@ -344,7 +344,7 @@ export default new Vuex.Store({
           context.commit("setBuss", data);
         })
         .catch(() => {
-          alert("근처에 버스정류장이 없습니다.");
+          alert("1km 이내에 버스정류장이 없습니다.");
         });
     },
     loadTrains(context, favorite) {
@@ -357,7 +357,7 @@ export default new Vuex.Store({
           context.commit("setTrains", data);
         })
         .catch(() => {
-          alert("근처에 지하철역이 없습니다.");
+          alert("1km 이내에 지하철역이 없습니다.");
         });
     },
     clearMapData(context) {
