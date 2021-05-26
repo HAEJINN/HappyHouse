@@ -26,28 +26,28 @@
         :key="'cafe' + index"
         v-for="(m, index) in cafemarkers"
         :position="m.position"
-        :icon="{ url: require('@/assets/store.png') }"
+        :icon="{ url: require('@/assets/cafe.png') }"
         :visible="cafeVisible"
       />
       <GmapMarker
         :key="'phar' + index"
         v-for="(m, index) in pharmarkers"
         :position="m.position"
-        :icon="{ url: require('@/assets/store.png') }"
+        :icon="{ url: require('@/assets/phar.png') }"
         :visible="pharVisible"
       />
       <GmapMarker
         :key="'bus' + index"
         v-for="(m, index) in busmarkers"
         :position="m.position"
-        :icon="{ url: require('@/assets/store.png') }"
+        :icon="{ url: require('@/assets/bus.png') }"
         :visible="busVisible"
       />
       <GmapMarker
         :key="'train' + index"
         v-for="(m, index) in trainmarkers"
         :position="m.position"
-        :icon="{ url: require('@/assets/store.png') }"
+        :icon="{ url: require('@/assets/train.png') }"
         :visible="trainVisible"
       />
       <GmapInfoWindow
