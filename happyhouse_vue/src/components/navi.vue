@@ -1,5 +1,7 @@
 <template>
   <div class="nav_wrap">
+    <div class="home" @click="mvhome"></div>
+    <!-- <div class="home" @click="mvhome">???제목???</div> -->
     <div class="user_div">
       <vue-typer
         class="userhello"
@@ -73,16 +75,40 @@ export default {
       this.close_menu();
       this.$router.push(pagelink);
     },
+    mvhome() {
+      this.$router.push('/happyhouse/main');
+    },
   },
 };
 </script>
 <style scoped>
+.home {
+  position: fixed;
+  background-image: url('../assets/home-w.png');
+  width: 40px;
+  height: 40px;
+  top: 15px;
+  left: 88px;
+  background-size: cover;
+}
+/* .home {
+  position: absolute;
+  left: 44%;
+  top: 10px;
+  font-size: 2.5em;
+  color: white;
+}
+*/
+.home:hover {
+  cursor: pointer;
+}
 .nav_wrap {
   width: 100%;
   display: flex;
   justify-content: flex-start;
   height: 8%;
   padding: 15px 0;
+  position: relative;
 }
 .user_div {
   display: flex;
