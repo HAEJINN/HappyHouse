@@ -1,4 +1,3 @@
-d
 <!-- 시군구검색, 아파트이름(or동이름)검색 -->
 <template>
   <div class="test">
@@ -118,6 +117,7 @@ export default {
       this.city = '';
       this.gugun = '';
       this.dong = '';
+      this.$store.state.results = [];
     },
     searchAptName() {
       this.isShow = true;
@@ -214,5 +214,9 @@ p {
   font-size: 1.2em;
   color: grey;
   text-align: center;
+}
+.test {
+  width: 100%;
+  min-height: 80vh;
 }
 </style>

@@ -6,7 +6,7 @@
         <span>이름 | </span>
         <span> 준공년도 | </span>
         <span> 면적 | </span>
-        <span> 지번 | </span>
+        <!-- <span> 지번 | </span> -->
         <span> 거래가</span>
       </div>
       <result-item v-for="(result, idx) in results" :key="idx" :result="result"></result-item>
@@ -14,10 +14,10 @@
   </div>
 </template>
 <script>
-import GoogleMap from "@/components/items/googlemap.vue";
-import ResultItem from "@/components/items/resultItem.vue";
+import GoogleMap from '@/components/items/googlemap.vue';
+import ResultItem from '@/components/items/resultItem.vue';
 export default {
-  name: "ResultComp",
+  name: 'ResultComp',
   components: { GoogleMap, ResultItem },
   computed: {
     results() {
@@ -29,8 +29,10 @@ export default {
 <style scoped>
 .wrap {
   text-align: center;
-  width: 100%;
+  width: 90%;
+  margin: 0 auto;
   display: flex;
+  margin-bottom: 20px;
 }
 .results {
   width: 60%;
