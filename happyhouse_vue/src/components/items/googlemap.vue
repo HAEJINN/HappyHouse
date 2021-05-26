@@ -40,21 +40,21 @@
         :key="'cafe' + index"
         v-for="(m, index) in cafemarkers"
         :position="m.position"
-        :icon="{ url: require('@/assets/cafe.png') }"
+        :icon="{ url: require('@/assets/cafeee.png') }"
         :visible="cafeVisible"
       />
       <GmapMarker
         :key="'phar' + index"
         v-for="(m, index) in pharmarkers"
         :position="m.position"
-        :icon="{ url: require('@/assets/phar.png') }"
+        :icon="{ url: require('@/assets/pill.png') }"
         :visible="pharVisible"
       />
       <GmapMarker
         :key="'bus' + index"
         v-for="(m, index) in busmarkers"
         :position="m.position"
-        :icon="{ url: require('@/assets/bus.png') }"
+        :icon="{ url: require('@/assets/buss.png') }"
         :visible="busVisible"
       />
       <GmapMarker
