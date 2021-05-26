@@ -1,8 +1,10 @@
 <template>
-  <div>
-    <div>
+  <div class="wrap">
+    <div class="title">
       <h1 v-if="type == 'update'">글 수정</h1>
       <h1 v-else>글 작성</h1>
+    </div>
+    <div class="formwrap">
       <div>
         <label for="title">제목</label>
         <input type="text" id="title" name="title" v-model="title" />
@@ -15,8 +17,8 @@
         <label for="content">내용</label>
         <textarea type="text" id="content" name="content" v-model="content" />
       </div>
-      <button v-if="type == 'update'" @click="modify">수정</button>
-      <button v-else @click="write">작성</button>
+      <button v-if="type == 'update'" @click="modify" class="btn">수정</button>
+      <button v-else @click="write" class="btn">작성</button>
     </div>
   </div>
 </template>
@@ -95,3 +97,60 @@ export default {
   },
 };
 </script>
+<style scoped>
+.wrap {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  height: 80vh;
+}
+.title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 15%;
+  font-size: 1.5em;
+  margin-bottom: 1em;
+}
+.formwrap {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  height: 50%;
+}
+.formwrap div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 20%;
+  width: 40%;
+}
+.formwrap div label {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 15%;
+  font-size: 1.2em;
+}
+.formwrap div input,
+.formwrap div textarea {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 85%;
+  height: 4em;
+  padding: 1em;
+  font-size: 1.1em;
+}
+.formwrap div textarea {
+  height: 5em;
+}
+.btn {
+  font-size: 1.2em;
+  width: 3em;
+  height: 2em;
+  margin-top: 1em;
+}
+</style>
